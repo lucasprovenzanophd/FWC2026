@@ -1338,7 +1338,18 @@ function wrapText(ctx, text, x, y, maxWidth, lineHeight, maxLines) {
 }
 
 function getGroupedStickersText(stateVal) {
-    const groups = [];
+    // Define group order: A-L then Especial
+    const groupOrder = [
+        'Grupo A', 'Grupo B', 'Grupo C', 'Grupo D',
+        'Grupo E', 'Grupo F', 'Grupo G', 'Grupo H',
+        'Grupo I', 'Grupo J', 'Grupo K', 'Grupo L',
+        'Especial'
+    ];
+
+    // Build a map: groupName → list of formatted team strings
+    const groupMap = {};
+    groupOrder.forEach(g => { groupMap[g] = []; });
+
     for (let tIndex = 0; tIndex < teams.length; tIndex++) {
         const team = teams[tIndex];
         const teamStickers = [];
@@ -1351,21 +1362,37 @@ function getGroupedStickersText(stateVal) {
         if (teamStickers.length > 0) {
             const code = team.code || '???';
             const emoji = team.emoji;
-            groups.push(`${emoji} ${code}: ${teamStickers.join(', ')}`);
+            const groupKey = team.group || 'Especial';
+            if (!groupMap[groupKey]) groupMap[groupKey] = [];
+            groupMap[groupKey].push(`${emoji}${code}:${teamStickers.join(',')}`);
         }
     }
-    return groups.join('  •  ');
+
+    // Flatten groups into sections separated by group label
+    const parts = [];
+    groupOrder.forEach(g => {
+        if (groupMap[g] && groupMap[g].length > 0) {
+            // Short group label: 'A', 'B'... or 'FWC'
+            const label = g === 'Especial' ? '[FWC]' : '[' + g.replace('Grupo ', '') + ']';
+            parts.push(label + ' ' + groupMap[g].join('  '));
+        }
+    });
+    return parts.join('   ');
 }
 
 function openShareImageModal() {
-    try {
-        generateShareImage();
-    } catch (err) {
-        console.error("Error generating image:", err);
-    }
     if (dlgShareImage) {
         dlgShareImage.showModal();
     }
+    // Wait for custom fonts (Outfit, Inter) to be fully loaded before drawing
+    // to avoid blank or mis-measured canvas text.
+    document.fonts.ready.then(() => {
+        try {
+            generateShareImage();
+        } catch (err) {
+            console.error("Error generating image:", err);
+        }
+    });
 }
 
 function generateShareImage() {
@@ -1540,26 +1567,12 @@ function generateShareImage() {
         }
     }
     
+    // Subtle bottom glow line only — no URL footer text
     ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
     ctx.beginPath();
     ctx.moveTo(80, 1265);
     ctx.lineTo(1000, 1265);
     ctx.stroke();
-    
-    ctx.fillStyle = '#718096';
-    ctx.font = "600 16px Inter, sans-serif";
-    ctx.textAlign = 'center';
-    
-    const pageURL = window.location.origin + window.location.pathname;
-    const footerText = activeLang === 'es' 
-        ? `Sigue mi progreso en tiempo real: ${pageURL}`
-        : (activeLang === 'pt' 
-            ? `Acompanhe meu progresso em tempo real: ${pageURL}`
-            : (activeLang === 'it' 
-                ? `Segui i miei progressi in tempo reale: ${pageURL}`
-                : `Follow my progress in real-time: ${pageURL}`));
-    
-    wrapText(ctx, footerText, 540, 1295, 900, 22, 2);
     ctx.textAlign = 'left';
     
     try {
