@@ -3,6 +3,7 @@
     
     --bg-main: #f4f6fc;
     --bg-card: rgba(255, 255, 255, 0.7);
+    --bg-card-rgb: 255, 255, 255;
     --bg-card-hover: rgba(255, 255, 255, 0.85);
     --border-card: rgba(255, 255, 255, 0.4);
     
@@ -42,6 +43,7 @@
     :root {
         --bg-main: #0b0e14;
         --bg-card: rgba(20, 26, 38, 0.6);
+        --bg-card-rgb: 20, 26, 38;
         --bg-card-hover: rgba(20, 26, 38, 0.75);
         --border-card: rgba(255, 255, 255, 0.06);
         
@@ -79,6 +81,7 @@
 [data-theme="light"] {
     --bg-main: #f4f6fc;
     --bg-card: rgba(255, 255, 255, 0.7);
+    --bg-card-rgb: 255, 255, 255;
     --bg-card-hover: rgba(255, 255, 255, 0.85);
     --border-card: rgba(255, 255, 255, 0.4);
     --text-primary: #1a202c;
@@ -106,6 +109,7 @@
 [data-theme="dark"] {
     --bg-main: #0b0e14;
     --bg-card: rgba(20, 26, 38, 0.6);
+    --bg-card-rgb: 20, 26, 38;
     --bg-card-hover: rgba(20, 26, 38, 0.75);
     --border-card: rgba(255, 255, 255, 0.06);
     --text-primary: #f7fafc;
@@ -207,7 +211,7 @@ h1, h2, h3, h4, h5, h6 {
 
 
 .app-header {
-    background: rgba(var(--bg-card), 0.35);
+    background: rgba(var(--bg-card-rgb), 0.8);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border-card);
@@ -439,7 +443,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .stat-card {
-    background: rgba(var(--bg-card), 0.2);
+    background: rgba(var(--bg-card-rgb), 0.2);
     border: 1px solid var(--border-card);
     border-radius: 16px;
     padding: 16px;
@@ -607,7 +611,7 @@ h1, h2, h3, h4, h5, h6 {
     justify-content: center;
     border-radius: 10px;
     border: 1px solid transparent;
-    background-color: rgba(var(--bg-card), 0.15);
+    background-color: rgba(var(--bg-card-rgb), 0.15);
     color: var(--text-secondary);
     font-family: 'Outfit', sans-serif;
     font-weight: 600;
