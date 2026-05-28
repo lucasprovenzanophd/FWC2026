@@ -137,21 +137,7 @@
 
         <section class="actions-section glass-card">
             <div class="actions-grid">
-                <div class="action-card">
-                    <div class="action-header">
-                        <div class="action-icon-wrapper text-blue">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="22" height="22">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" />
-                            </svg>
-                        </div>
-                        <h3 data-i18n="actionShareTitle">Copiar Enlace</h3>
-                    </div>
-                    <p class="action-desc" data-i18n="actionShareDesc">Copia la dirección URL de tu progreso para compartir con amigos.</p>
-                    <button id="btn-share" class="btn btn-secondary btn-full">
-                        <span data-i18n="btnShare">Copiar Enlace del Álbum</span>
-                    </button>
-                </div>
-                
+
                 <div class="action-card featured">
                     <div class="action-header">
                         <div class="action-icon-wrapper text-green">
@@ -253,6 +239,12 @@
             </div>
             
             <div class="modal-body">
+                <div class="compare-share-section" style="margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--border-card);">
+                    <p class="modal-instruction" data-i18n="compareShareInstruction">Primero, copia tu código de compartir para enviárselo a tu amigo:</p>
+                    <button id="btn-share" class="btn btn-secondary btn-full">
+                        <span data-i18n="btnShare">Copiar Código de Compartir</span>
+                    </button>
+                </div>
                 <p class="modal-instruction" data-i18n="compareInstruction">Pega aquí el enlace del tracker de tu amigo para calcular automáticamente qué figuritas pueden intercambiar:</p>
                 <div class="compare-input-group">
                     <input type="text" id="friend-link-input" data-i18n-placeholder="friendLinkPlaceholder" placeholder="Enlace del tracker de tu amigo..." aria-label="Enlace del tracker de tu amigo">
