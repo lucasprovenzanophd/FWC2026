@@ -563,6 +563,16 @@ let comparedFriendName = '';
 let comparedFriendTimestamp = 0;
 
 function init() {
+    // Offset body for fixed header
+    const appHeader = document.querySelector('.app-header');
+    if (appHeader) {
+        const setHeaderOffset = () => {
+            document.body.style.paddingTop = appHeader.offsetHeight + 'px';
+        };
+        setHeaderOffset();
+        new ResizeObserver(setHeaderOffset).observe(appHeader);
+    }
+
     setupTheme();
     setupLanguage();
     loadState();

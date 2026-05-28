@@ -215,8 +215,9 @@ h1, h2, h3, h4, h5, h6 {
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border-card);
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
     z-index: 100;
     width: 100%;
 }
