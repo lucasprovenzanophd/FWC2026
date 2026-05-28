@@ -239,16 +239,22 @@
             </div>
             
             <div class="modal-body">
-                <div class="compare-share-section" style="margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--border-card);">
-                    <p class="modal-instruction" data-i18n="compareShareInstruction">Primero, copia tu código de compartir para enviárselo a tu amigo:</p>
+                <p class="modal-instruction" data-i18n="compareIntro">Puedes copiar tu código de compartir para enviárselo a tu amigo, o pegar el código que recibiste para calcular el intercambio:</p>
+                
+                <div class="compare-share-section" style="margin-top: 16px; margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--border-card);">
+                    <h4 style="margin-bottom: 8px; font-size: 14px; font-weight: 600;" data-i18n="compareOptionA">Opción A: Copiar mi código para enviar</h4>
                     <button id="btn-share" class="btn btn-secondary btn-full">
                         <span data-i18n="btnShare">Copiar Código de Compartir</span>
                     </button>
                 </div>
-                <p class="modal-instruction" data-i18n="compareInstruction">Pega aquí el enlace del tracker de tu amigo para calcular automáticamente qué figuritas pueden intercambiar:</p>
-                <div class="compare-input-group">
-                    <input type="text" id="friend-link-input" data-i18n-placeholder="friendLinkPlaceholder" placeholder="Enlace del tracker de tu amigo..." aria-label="Enlace del tracker de tu amigo">
-                    <button id="btn-do-compare" class="btn btn-primary" data-i18n="btnDoCompareText">Comparar</button>
+                
+                <div class="compare-paste-section">
+                    <h4 style="margin-bottom: 8px; font-size: 14px; font-weight: 600;" data-i18n="compareOptionB">Opción B: Pegar código recibido para comparar</h4>
+                    <div class="compare-input-group" style="margin-bottom: 12px;">
+                        <input type="text" id="friend-link-input" data-i18n-placeholder="friendLinkPlaceholder" placeholder="Código o enlace de tu amigo..." aria-label="Código de tu amigo">
+                        <button id="btn-do-compare" class="btn btn-primary" data-i18n="btnDoCompareText">Comparar</button>
+                    </div>
+                    <p id="compare-validation-msg" class="validation-error-msg" style="display: none; font-size: 12px; color: #ef4444; margin-top: 4px; margin-bottom: 16px;"></p>
                 </div>
 
                 <div id="compare-friend-meta" class="compare-friend-meta" style="display: none;"></div>

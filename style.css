@@ -957,6 +957,16 @@ h1, h2, h3, h4, h5, h6 {
     background-color: var(--bg-card);
 }
 
+.compare-input-group input.is-invalid {
+    border-color: #ef4444;
+    background-color: rgba(239, 68, 68, 0.03);
+}
+
+.compare-input-group input.is-valid {
+    border-color: #10b981;
+    background-color: rgba(16, 185, 129, 0.03);
+}
+
 .compare-results {
     border-top: 1px solid var(--border-card);
     padding-top: 24px;

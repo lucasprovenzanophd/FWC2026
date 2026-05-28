@@ -81,9 +81,12 @@ const translations = {
         step3Title: "Intercambio inteligente",
         step3Desc: "Copia el código de tu progreso con el botón 'Copiar Código'. Con el botón 'Intercambiar', pega el código de tu amigo para ver qué figuritas pueden cambiarse.",
         compareTitle: "Intercambiar con Amigos",
-        compareInstruction: "Pega aquí el código del tracker de tu amigo para calcular automáticamente qué figuritas pueden intercambiar:",
-        compareShareInstruction: "Primero, copia tu código de compartir para enviárselo a tu amigo:",
-        friendLinkPlaceholder: "Código de tracker de tu amigo...",
+        compareIntro: "Puedes copiar tu código de compartir para enviárselo a tu amigo, o pegar el código que recibiste para calcular el intercambio:",
+        compareOptionA: "Opción A: Copiar mi código para enviar",
+        compareOptionB: "Opción B: Pegar código recibido para comparar",
+        compareInstruction: "Pegar código del tracker de tu amigo:",
+        compareShareInstruction: "Copiar mi código de compartir:",
+        friendLinkPlaceholder: "Código o enlace de tu amigo...",
         btnDoCompareText: "Comparar",
         friendGivesTitle: "Tu amigo te da",
         friendGivesSubtitle: "Figuritas que tu amigo tiene repetidas (State 2) y a ti te faltan (State 0):",
@@ -183,9 +186,12 @@ const translations = {
         step3Title: "Smart Trading",
         step3Desc: "Copy your progress code using the 'Copy Code' button. Click the 'Trade' button and paste your friend's code to see which stickers you can swap.",
         compareTitle: "Trade with Friends",
-        compareInstruction: "Paste your friend's tracker code here to automatically calculate which stickers you can swap:",
-        compareShareInstruction: "First, copy your share code to send it to your friend:",
-        friendLinkPlaceholder: "Friend's tracker code...",
+        compareIntro: "You can copy your share code to send it to your friend, or paste the code you received to calculate the trade:",
+        compareOptionA: "Option A: Copy my code to send",
+        compareOptionB: "Option B: Paste received code to compare",
+        compareInstruction: "Paste friend's tracker code:",
+        compareShareInstruction: "Copy my share code:",
+        friendLinkPlaceholder: "Friend's code or link...",
         btnDoCompareText: "Compare",
         friendGivesTitle: "Your friend gives you",
         friendGivesSubtitle: "Stickers your friend has duplicated (State 2) and you are missing (State 0):",
@@ -285,9 +291,13 @@ const translations = {
         step3Title: "Troca inteligente",
         step3Desc: "Copie o código do seu progresso usando o botão 'Copiar Código'. Clique no botão 'Trocar' e cole o código do seu amigo para ver quais figurinhas podem ser trocadas.",
         compareTitle: "Trocar com Amigos",
-        compareInstruction: "Cole aqui o código do tracker do seu amigo para calcular automaticamente quais figurinhas vocês podem trocar:",
-        compareShareInstruction: "Primeiro, copie o seu código de compartilhamento para enviar ao seu amigo:",
-        friendLinkPlaceholder: "Código do tracker do seu amigo...",
+        compareIntro: "Você pode copiar seu código de compartilhamento para enviar ao seu amigo, ou colar o código recebido para calcular a troca:",
+        compareOptionA: "Opção A: Copiar meu código para enviar",
+        compareOptionB: "Opção B: Colar código recebido para comparar",
+        compareInstruction: "Colar código do tracker do seu amigo:",
+        compareShareInstruction: "Copiar meu código de compartilhamento:",
+        compareValidationMsg: "O código não parece ser válido.",
+        friendLinkPlaceholder: "Código ou link do seu amigo...",
         btnDoCompareText: "Comparar",
         friendGivesTitle: "Seu amigo te dá",
         friendGivesSubtitle: "Figurinhas que seu amigo tem repetidas (State 2) e você está precisando (State 0):",
@@ -387,9 +397,12 @@ const translations = {
         step3Title: "Scambio intelligente",
         step3Desc: "Copia il codice dei tuoi progressi usando il pulsante 'Copia Codice'. Clicca sul pulsante 'Scambia' e incolla il codice del tuo amico per vedere quali figurine potete scambiarvi.",
         compareTitle: "Scambia con gli Amici",
-        compareInstruction: "Incolla qui il codice del tracker del tuo amico per calcolare automaticamente quali figurine potete scambiarvi:",
-        compareShareInstruction: "Prima copia il tuo codice di condivisione da inviare al tuo amico:",
-        friendLinkPlaceholder: "Codice del tracker del tuo amico...",
+        compareIntro: "Puoi copiare il tuo codice di condivisione da inviare al tuo amico, o incollare il codice ricevuto per calcolare lo scambio:",
+        compareOptionA: "Opzione A: Copia il mio codice da inviare",
+        compareOptionB: "Opzione B: Incolla il codice ricevuto per confrontare",
+        compareInstruction: "Incolla il codice del tracker del tuo amico:",
+        compareShareInstruction: "Copia il mio codice di condivisione:",
+        friendLinkPlaceholder: "Codice o link del tuo amico...",
         btnDoCompareText: "Confronta",
         friendGivesTitle: "Il tuo amico ti dà",
         friendGivesSubtitle: "Figurine che il tuo amico ha doppie (Stato 2) e a te mancano (Stato 0):",
@@ -518,6 +531,7 @@ const toast = document.getElementById('toast');
 const usernameInput = document.getElementById('username-input');
 const lastUpdateValue = document.getElementById('last-update-value');
 const compareFriendMeta = document.getElementById('compare-friend-meta');
+const compareValidationMsg = document.getElementById('compare-validation-msg');
 const btnShareImage = document.getElementById('btn-share-image-dashboard');
 const btnShowImageGenerator = document.getElementById('btn-show-image-generator');
 const dlgShareImage = document.getElementById('dlg-share-image');
@@ -1146,6 +1160,8 @@ function setupEventListeners() {
 
     btnCompare.addEventListener('click', () => {
         friendLinkInput.value = '';
+        friendLinkInput.classList.remove('is-invalid', 'is-valid');
+        if (compareValidationMsg) compareValidationMsg.style.display = 'none';
         compareResults.style.display = 'none';
         compareFriendMeta.style.display = 'none';
         
@@ -1158,6 +1174,34 @@ function setupEventListeners() {
     });
     btnCloseCompare.addEventListener('click', () => dlgCompare.close());
     btnDoCompare.addEventListener('click', compareStates);
+
+    friendLinkInput.addEventListener('input', () => {
+        const value = friendLinkInput.value.trim();
+        if (!value) {
+            friendLinkInput.classList.remove('is-invalid', 'is-valid');
+            if (compareValidationMsg) compareValidationMsg.style.display = 'none';
+            return;
+        }
+        
+        let hashPart = value;
+        if (value.includes('#')) hashPart = value.split('#')[1];
+        const parts = hashPart.split(/[?&]/);
+        const friendStateHash = parts[0];
+        
+        const isValid = (friendStateHash.length === 262 && /^[A-Za-z0-9\-_]{262}$/.test(friendStateHash));
+        if (isValid) {
+            friendLinkInput.classList.remove('is-invalid');
+            friendLinkInput.classList.add('is-valid');
+            if (compareValidationMsg) compareValidationMsg.style.display = 'none';
+        } else {
+            friendLinkInput.classList.remove('is-valid');
+            friendLinkInput.classList.add('is-invalid');
+            if (compareValidationMsg) {
+                compareValidationMsg.textContent = translations[activeLang].compareInvalidLink;
+                compareValidationMsg.style.display = 'block';
+            }
+        }
+    });
 
     btnExportImport.addEventListener('click', () => {
         exportTextarea.value = JSON.stringify({
