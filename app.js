@@ -45,7 +45,12 @@ const teams = [
     { originalIndex: 43, code: 'COL', emoji: '🇨🇴', group: 'Grupo K', names: { es: 'Colombia', en: 'Colombia', pt: 'Colômbia', it: 'Colombia' } },
     { originalIndex: 44, code: 'ENG', emoji: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', group: 'Grupo L', names: { es: 'Inglaterra', en: 'England', pt: 'Inglaterra', it: 'Inghilterra' } },
     { originalIndex: 45, code: 'CRO', emoji: '🇭🇷', group: 'Grupo L', names: { es: 'Croacia', en: 'Croatia', pt: 'Croácia', it: 'Croazia' } },
-    { originalIndex: 46, code: 'GHA', emoji: '🇬🇭', group: 'Grupo L', names: { es: 'Ghanconst translations = {
+    { originalIndex: 46, code: 'GHA', emoji: '🇬🇭', group: 'Grupo L', names: { es: 'Ghana', en: 'Ghana', pt: 'Gana', it: 'Ghana' } },
+    { originalIndex: 47, code: 'PAN', emoji: '🇵🇦', group: 'Grupo L', names: { es: 'Panamá', en: 'Panama', pt: 'Panamá', it: 'Panama' } },
+    { originalIndex: 48, code: 'FWC', emoji: '⚽', group: 'Especial', names: { es: 'Sección FWC', en: 'FWC Section', pt: 'Seção FWC', it: 'Sezione FWC' } }
+];
+
+const translations = {
     es: {
         title: "Fifa World Cup 2026",
         subtitle: "TRACKER DE FIGURITAS",
@@ -135,6 +140,9 @@ const teams = [
         shareTradeImageInstruction: "Aquí tienes la imagen con el resumen del intercambio. Haz clic derecho (o mantén presionado en el celular) para descargarla o copiarla:",
         btnCompareImage: "Generar Imagen de Intercambio",
         albumTypeLabel: "Lectura Local",
+        yourCollectionLabel: "Tu Colección",
+        userLabel: "Tú",
+        friendLabel: "Tu amigo",
         incomingCompareTitle: "Comparar Álbum Recibido",
         incomingCompareInstruction: "Has ingresado al sitio con un código de álbum compartido que difiere de tu progreso local. Compara los datos y elige cuál conservar:",
         incomingCompareLabelLocal: "Tú (Local)",
@@ -142,9 +150,7 @@ const teams = [
         btnIncomingOverwrite: "Sobrescribir con el Enlace",
         btnIncomingKeep: "Mantener mi Álbum Local",
         toastIncomingOverwriteSuccess: "¡Álbum sobrescrito con éxito!",
-        toastIncomingKeepSuccess: "Se mantuvo el álbum local y se descartó el recibido.",
-        yourCollectionLabel: "Tu Colección",
-        userLabel: "Tú"
+        toastIncomingKeepSuccess: "Has conservado tu progreso local."
     },
     en: {
         title: "Fifa World Cup 2026",
@@ -235,16 +241,17 @@ const teams = [
         shareTradeImageInstruction: "Here is the image with your trade summary. Right-click or long-press on mobile to save or copy it:",
         btnCompareImage: "Generate Trade Image",
         albumTypeLabel: "Local Read",
+        yourCollectionLabel: "Your Collection",
+        userLabel: "You",
+        friendLabel: "Your friend",
         incomingCompareTitle: "Compare Received Album",
         incomingCompareInstruction: "You have entered the site with a shared album code that differs from your local progress. Compare the data and choose which to keep:",
         incomingCompareLabelLocal: "You (Local)",
         incomingCompareLabelIncoming: "Received",
-        btnIncomingOverwrite: "Overwrite with Received",
+        btnIncomingOverwrite: "Overwrite with Link",
         btnIncomingKeep: "Keep My Local Album",
         toastIncomingOverwriteSuccess: "Album overwritten successfully!",
-        toastIncomingKeepSuccess: "Local album kept and received album discarded.",
-        yourCollectionLabel: "Your Collection",
-        userLabel: "You"
+        toastIncomingKeepSuccess: "You kept your local progress."
     },
     pt: {
         title: "Fifa World Cup 2026",
@@ -335,16 +342,17 @@ const teams = [
         shareTradeImageInstruction: "Aqui está a imagem com o resumo da troca. Clique com o botão direito ou pressione e segure no celular para salvar ou copiar:",
         btnCompareImage: "Gerar Imagem de Troca",
         albumTypeLabel: "Leitura Local",
+        yourCollectionLabel: "Sua Coleção",
+        userLabel: "Você",
+        friendLabel: "Seu amigo",
         incomingCompareTitle: "Comparar Álbum Recebido",
         incomingCompareInstruction: "Você entrou no site com um código de álbum compartilhado que difere do seu progresso local. Compare os dados e escolha qual manter:",
         incomingCompareLabelLocal: "Você (Local)",
         incomingCompareLabelIncoming: "Recebido",
-        btnIncomingOverwrite: "Sobrescrever com o Recebido",
+        btnIncomingOverwrite: "Sobrescrever com o Link",
         btnIncomingKeep: "Manter meu Álbum Local",
         toastIncomingOverwriteSuccess: "Álbum sobrescrito com sucesso!",
-        toastIncomingKeepSuccess: "Álbum local mantido e álbum recebido descartado.",
-        yourCollectionLabel: "Sua Coleção",
-        userLabel: "Você"
+        toastIncomingKeepSuccess: "Você manteve seu progresso local."
     },
     it: {
         title: "Fifa World Cup 2026",
@@ -435,24 +443,17 @@ const teams = [
         shareTradeImageInstruction: "Ecco l'immagine con il riepilogo dello scambio. Fai clic con il pulsante destro o tieni premuto sul cellulare per salvare o copiare:",
         btnCompareImage: "Genera Immagine di Scambio",
         albumTypeLabel: "Lettura Locale",
+        yourCollectionLabel: "La tua Collezione",
+        userLabel: "Tu",
+        friendLabel: "Il tuo amico",
         incomingCompareTitle: "Confronta Album Ricevuto",
-        incomingCompareInstruction: "Sei entrato nel sito con un codice album condiviso che differisce dai tuoi progressi locali. Confronta i dati e scegli quale conservare:",
+        incomingCompareInstruction: "Hai effettuato l'accesso al sito con un codice album condiviso che differisce dai tuoi progressi locali. Confronta i dati e scegli quale conservare:",
         incomingCompareLabelLocal: "Tu (Locale)",
         incomingCompareLabelIncoming: "Ricevuto",
-        btnIncomingOverwrite: "Sovrascrivi con Ricevuto",
-        btnIncomingKeep: "Mantieni il Mio Album Locale",
-        toastIncomingOverwriteSuccess: "Album sovrascritto con successo!",
-        toastIncomingKeepSuccess: "Album locale mantenuto e album ricevuto scartato.",
-        yourCollectionLabel: "Tua Colezione",
-        userLabel: "Tu"
-    }
-};pareDesc: "Incolla il link di un amico per vedere quali figurine scambiare.",
-        actionImageTitle: "Genera Immagine",
-        actionImageDesc: "Crea un riepilogo visivo dei tuoi progressi pronto da salvare.",
-        btnResetHeader: "Inizia Album Vuoto",
-        shareTradeImageTitle: "Immagine di Riepilogo dello Scambio",
-        shareTradeImageInstruction: "Ecco l'immagine con il riepilogo dello scambio. Fai clic con il pulsante destro o tieni premuto sul cellulare per salvare o copiare:",
-        btnCompareImage: "Genera Immagine di Scambio"
+        btnIncomingOverwrite: "Sovrascrivi con il Link",
+        btnIncomingKeep: "Mantieni il mio Album Locale",
+        toastIncomingOverwriteSuccess: "Album sovrascritto con lo stato ricevuto!",
+        toastIncomingKeepSuccess: "Hai conservato i tuoi progressi locali."
     }
 };
 
@@ -775,7 +776,7 @@ function loadState() {
             state = incomingState;
             lastUpdate = incomingTimestamp;
             saveStateToLocalStorage();
-            history.replaceState(null, null, ' ');
+            history.replaceState(null, null, window.location.pathname + window.location.search);
         } else {
             pendingIncomingState = incomingState;
             pendingIncomingTimestamp = incomingTimestamp;
@@ -785,7 +786,7 @@ function loadState() {
             lastUpdate = savedUpdate ? parseInt(savedUpdate, 10) || 0 : 0;
             
             showIncomingCompareDialog(state, incomingState);
-            history.replaceState(null, null, ' ');
+            history.replaceState(null, null, window.location.pathname + window.location.search);
         }
     } else {
         if (hasLocalState) {
@@ -2053,7 +2054,7 @@ function generateTradeImage() {
     drawRoundedRect(ctx, 60, y, 960, 112, 20, 'rgba(255,255,255,0.03)', 'rgba(255,255,255,0.08)');
 
     const name1 = translations[activeLang].userLabel || 'Tú';
-    const name2 = comparedFriendName || (activeLang === 'en' ? 'Friend' : (activeLang === 'pt' ? 'Amigo' : (activeLang === 'it' ? 'Amico' : 'Tu amigo')));
+    const name2 = comparedFriendName || translations[activeLang].friendLabel || 'Tu amigo';
 
     ctx.fillStyle = '#ffffff';
     ctx.font = 'bold 30px Outfit, sans-serif';
