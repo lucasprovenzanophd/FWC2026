@@ -1137,8 +1137,12 @@ function setupEventListeners() {
         });
     }
 
-    if (btnHeaderReset) {
-        btnHeaderReset.addEventListener('click', () => dlgConfirmReset.showModal());
+    const dynamicHeaderReset = document.getElementById('btn-header-reset');
+    if (dynamicHeaderReset) {
+        dynamicHeaderReset.addEventListener('click', (e) => {
+            e.preventDefault();
+            dlgConfirmReset.showModal();
+        });
     }
     if (btnCompareImage) {
         btnCompareImage.addEventListener('click', openShareTradeImageModal);
