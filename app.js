@@ -1,53 +1,53 @@
 const teams = [
-    { originalIndex: 0, emoji: '🇺🇸', group: 'Grupo D', names: { es: 'EE. UU.', en: 'USA', pt: 'EUA', it: 'Stati Uniti' } },
-    { originalIndex: 1, emoji: '🇲🇽', group: 'Grupo A', names: { es: 'México', en: 'Mexico', pt: 'México', it: 'Messico' } },
-    { originalIndex: 2, emoji: '🇨🇦', group: 'Grupo B', names: { es: 'Canadá', en: 'Canada', pt: 'Canadá', it: 'Canada' } },
-    { originalIndex: 3, emoji: '🇿🇦', group: 'Grupo A', names: { es: 'Sudáfrica', en: 'South Africa', pt: 'África do Sul', it: 'Sudafrica' } },
-    { originalIndex: 4, emoji: '🇰🇷', group: 'Grupo A', names: { es: 'Corea del Sur', en: 'South Korea', pt: 'Coreia do Sul', it: 'Corea del Sud' } },
-    { originalIndex: 5, emoji: '🇨🇿', group: 'Grupo A', names: { es: 'Chequia', en: 'Czechia', pt: 'Chéquia', it: 'Repubblica Ceca' } },
-    { originalIndex: 6, emoji: '🇧🇦', group: 'Grupo B', names: { es: 'Bosnia y Herz.', en: 'Bosnia & Herz.', pt: 'Bósnia e Herz.', it: 'Bosnia ed Erz.' } },
-    { originalIndex: 7, emoji: '🇶🇦', group: 'Grupo B', names: { es: 'Qatar', en: 'Qatar', pt: 'Catar', it: 'Qatar' } },
-    { originalIndex: 8, emoji: '🇨🇭', group: 'Grupo B', names: { es: 'Suiza', en: 'Switzerland', pt: 'Suíça', it: 'Svizzera' } },
-    { originalIndex: 9, emoji: '🇧🇷', group: 'Grupo C', names: { es: 'Brasil', en: 'Brazil', pt: 'Brasil', it: 'Brasile' } },
-    { originalIndex: 10, emoji: '🇲🇦', group: 'Grupo C', names: { es: 'Marruecos', en: 'Morocco', pt: 'Marrocos', it: 'Marocco' } },
-    { originalIndex: 11, emoji: '🇭🇹', group: 'Grupo C', names: { es: 'Haití', en: 'Haiti', pt: 'Haiti', it: 'Haiti' } },
-    { originalIndex: 12, emoji: '🏴󠁧󠁢󠁳󠁣󠁴󠁿', group: 'Grupo C', names: { es: 'Escocia', en: 'Scotland', pt: 'Escócia', it: 'Scozia' } },
-    { originalIndex: 13, emoji: '🇵🇾', group: 'Grupo D', names: { es: 'Paraguay', en: 'Paraguay', pt: 'Paraguai', it: 'Paraguay' } },
-    { originalIndex: 14, emoji: '🇦🇺', group: 'Grupo D', names: { es: 'Australia', en: 'Australia', pt: 'Austrália', it: 'Australia' } },
-    { originalIndex: 15, emoji: '🇹🇷', group: 'Grupo D', names: { es: 'Turquía', en: 'Turkey', pt: 'Turquia', it: 'Turchia' } },
-    { originalIndex: 16, emoji: '🇩🇪', group: 'Grupo E', names: { es: 'Alemania', en: 'Germany', pt: 'Alemanha', it: 'Germania' } },
-    { originalIndex: 17, emoji: '🇨🇼', group: 'Grupo E', names: { es: 'Curazao', en: 'Curacao', pt: 'Curaçao', it: 'Curaçao' } },
-    { originalIndex: 18, emoji: '🇨🇮', group: 'Grupo E', names: { es: 'Costa de Marfil', en: 'Ivory Coast', pt: 'Costa do Marfim', it: 'Costa d\'Avorio' } },
-    { originalIndex: 19, emoji: '🇪🇨', group: 'Grupo E', names: { es: 'Ecuador', en: 'Ecuador', pt: 'Equador', it: 'Ecuador' } },
-    { originalIndex: 20, emoji: '🇳🇱', group: 'Grupo F', names: { es: 'Países Bajos', en: 'Netherlands', pt: 'Países Baixos', it: 'Paesi Bassi' } },
-    { originalIndex: 21, emoji: '🇯🇵', group: 'Grupo F', names: { es: 'Japón', en: 'Japan', pt: 'Japão', it: 'Giappone' } },
-    { originalIndex: 22, emoji: '🇸🇪', group: 'Grupo F', names: { es: 'Suecia', en: 'Sweden', pt: 'Suécia', it: 'Svezia' } },
-    { originalIndex: 23, emoji: '🇹🇳', group: 'Grupo F', names: { es: 'Túnez', en: 'Tunisia', pt: 'Tunísia', it: 'Tunisia' } },
-    { originalIndex: 24, emoji: '🇧🇪', group: 'Grupo G', names: { es: 'Bélgica', en: 'Belgium', pt: 'Bélgica', it: 'Belgio' } },
-    { originalIndex: 25, emoji: '🇪🇬', group: 'Grupo G', names: { es: 'Egipto', en: 'Egypt', pt: 'Egito', it: 'Egitto' } },
-    { originalIndex: 26, emoji: '🇮🇷', group: 'Grupo G', names: { es: 'Irán', en: 'Iran', pt: 'Irã', it: 'Iran' } },
-    { originalIndex: 27, emoji: '🇳🇿', group: 'Grupo G', names: { es: 'Nueva Zelanda', en: 'New Zealand', pt: 'Nova Zelândia', it: 'Nuova Zelanda' } },
-    { originalIndex: 28, emoji: '🇪🇸', group: 'Grupo H', names: { es: 'España', en: 'Spain', pt: 'Espanha', it: 'Spagna' } },
-    { originalIndex: 29, emoji: '🇨🇻', group: 'Grupo H', names: { es: 'Cabo Verde', en: 'Cape Verde', pt: 'Cabo Verde', it: 'Capo Verde' } },
-    { originalIndex: 30, emoji: '🇸🇦', group: 'Grupo H', names: { es: 'Arabia Saudita', en: 'Saudi Arabia', pt: 'Arábia Saudita', it: 'Arabia Saudita' } },
-    { originalIndex: 31, emoji: '🇺🇾', group: 'Grupo H', names: { es: 'Uruguay', en: 'Uruguay', pt: 'Uruguai', it: 'Uruguay' } },
-    { originalIndex: 32, emoji: '🇫🇷', group: 'Grupo I', names: { es: 'Francia', en: 'France', pt: 'França', it: 'Francia' } },
-    { originalIndex: 33, emoji: '🇸🇳', group: 'Grupo I', names: { es: 'Senegal', en: 'Senegal', pt: 'Senegal', it: 'Senegal' } },
-    { originalIndex: 34, emoji: '🇮🇶', group: 'Grupo I', names: { es: 'Irak', en: 'Iraq', pt: 'Iraque', it: 'Iraq' } },
-    { originalIndex: 35, emoji: '🇳🇴', group: 'Grupo I', names: { es: 'Noruega', en: 'Norway', pt: 'Noruega', it: 'Norvegia' } },
-    { originalIndex: 36, emoji: '🇦🇷', group: 'Grupo J', names: { es: 'Argentina', en: 'Argentina', pt: 'Argentina', it: 'Argentina' } },
-    { originalIndex: 37, emoji: '🇩🇿', group: 'Grupo J', names: { es: 'Argelia', en: 'Algeria', pt: 'Argélia', it: 'Algeria' } },
-    { originalIndex: 38, emoji: '🇦🇹', group: 'Grupo J', names: { es: 'Austria', en: 'Austria', pt: 'Áustria', it: 'Austria' } },
-    { originalIndex: 39, emoji: '🇯🇴', group: 'Grupo J', names: { es: 'Jordania', en: 'Jordan', pt: 'Jordânia', it: 'Giordania' } },
-    { originalIndex: 40, emoji: '🇵🇹', group: 'Grupo K', names: { es: 'Portugal', en: 'Portugal', pt: 'Portugal', it: 'Portogallo' } },
-    { originalIndex: 41, emoji: '🇨🇩', group: 'Grupo K', names: { es: 'RD Congo', en: 'DR Congo', pt: 'RD Congo', it: 'RD del Congo' } },
-    { originalIndex: 42, emoji: '🇺🇿', group: 'Grupo K', names: { es: 'Uzbekistán', en: 'Uzbekistan', pt: 'Uzbequistão', it: 'Uzbekistan' } },
-    { originalIndex: 43, emoji: '🇨🇴', group: 'Grupo K', names: { es: 'Colombia', en: 'Colombia', pt: 'Colômbia', it: 'Colombia' } },
-    { originalIndex: 44, emoji: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', group: 'Grupo L', names: { es: 'Inglaterra', en: 'England', pt: 'Inglaterra', it: 'Inghilterra' } },
-    { originalIndex: 45, emoji: '🇭🇷', group: 'Grupo L', names: { es: 'Croacia', en: 'Croatia', pt: 'Croácia', it: 'Croazia' } },
-    { originalIndex: 46, emoji: '🇬🇭', group: 'Grupo L', names: { es: 'Ghana', en: 'Ghana', pt: 'Gana', it: 'Ghana' } },
-    { originalIndex: 47, emoji: '🇵🇦', group: 'Grupo L', names: { es: 'Panamá', en: 'Panama', pt: 'Panamá', it: 'Panama' } },
-    { originalIndex: 48, emoji: '⚽', group: 'Especial', names: { es: 'Sección FWC', en: 'FWC Section', pt: 'Seção FWC', it: 'Sezione FWC' } }
+    { originalIndex: 0, code: 'USA', emoji: '🇺🇸', group: 'Grupo D', names: { es: 'EE. UU.', en: 'USA', pt: 'EUA', it: 'Stati Uniti' } },
+    { originalIndex: 1, code: 'MEX', emoji: '🇲🇽', group: 'Grupo A', names: { es: 'México', en: 'Mexico', pt: 'México', it: 'Messico' } },
+    { originalIndex: 2, code: 'CAN', emoji: '🇨🇦', group: 'Grupo B', names: { es: 'Canadá', en: 'Canada', pt: 'Canadá', it: 'Canada' } },
+    { originalIndex: 3, code: 'RSA', emoji: '🇿🇦', group: 'Grupo A', names: { es: 'Sudáfrica', en: 'South Africa', pt: 'África do Sul', it: 'Sudafrica' } },
+    { originalIndex: 4, code: 'KOR', emoji: '🇰🇷', group: 'Grupo A', names: { es: 'Corea del Sur', en: 'South Korea', pt: 'Coreia do Sul', it: 'Corea del Sud' } },
+    { originalIndex: 5, code: 'CZE', emoji: '🇨🇿', group: 'Grupo A', names: { es: 'Chequia', en: 'Czechia', pt: 'Chéquia', it: 'Repubblica Ceca' } },
+    { originalIndex: 6, code: 'BIH', emoji: '🇧🇦', group: 'Grupo B', names: { es: 'Bosnia y Herz.', en: 'Bosnia & Herz.', pt: 'Bósnia e Herz.', it: 'Bosnia ed Erz.' } },
+    { originalIndex: 7, code: 'QAT', emoji: '🇶🇦', group: 'Grupo B', names: { es: 'Qatar', en: 'Qatar', pt: 'Catar', it: 'Qatar' } },
+    { originalIndex: 8, code: 'SUI', emoji: '🇨🇭', group: 'Grupo B', names: { es: 'Suiza', en: 'Switzerland', pt: 'Suíça', it: 'Svizzera' } },
+    { originalIndex: 9, code: 'BRA', emoji: '🇧🇷', group: 'Grupo C', names: { es: 'Brasil', en: 'Brazil', pt: 'Brasil', it: 'Brasile' } },
+    { originalIndex: 10, code: 'MAR', emoji: '🇲🇦', group: 'Grupo C', names: { es: 'Marruecos', en: 'Morocco', pt: 'Marrocos', it: 'Marocco' } },
+    { originalIndex: 11, code: 'HAI', emoji: '🇭🇹', group: 'Grupo C', names: { es: 'Haití', en: 'Haiti', pt: 'Haiti', it: 'Haiti' } },
+    { originalIndex: 12, code: 'SCO', emoji: '🏴󠁧󠁢󠁳󠁣󠁴󠁿', group: 'Grupo C', names: { es: 'Escocia', en: 'Scotland', pt: 'Escócia', it: 'Scozia' } },
+    { originalIndex: 13, code: 'PAR', emoji: '🇵🇾', group: 'Grupo D', names: { es: 'Paraguay', en: 'Paraguay', pt: 'Paraguai', it: 'Paraguay' } },
+    { originalIndex: 14, code: 'AUS', emoji: '🇦🇺', group: 'Grupo D', names: { es: 'Australia', en: 'Australia', pt: 'Austrália', it: 'Australia' } },
+    { originalIndex: 15, code: 'TUR', emoji: '🇹🇷', group: 'Grupo D', names: { es: 'Turquía', en: 'Turkey', pt: 'Turquia', it: 'Turchia' } },
+    { originalIndex: 16, code: 'GER', emoji: '🇩🇪', group: 'Grupo E', names: { es: 'Alemania', en: 'Germany', pt: 'Alemanha', it: 'Germania' } },
+    { originalIndex: 17, code: 'CUW', emoji: '🇨🇼', group: 'Grupo E', names: { es: 'Curazao', en: 'Curacao', pt: 'Curaçao', it: 'Curaçao' } },
+    { originalIndex: 18, code: 'CIV', emoji: '🇨🇮', group: 'Grupo E', names: { es: 'Costa de Marfil', en: 'Ivory Coast', pt: 'Costa do Marfim', it: 'Costa d\'Avorio' } },
+    { originalIndex: 19, code: 'ECU', emoji: '🇪🇨', group: 'Grupo E', names: { es: 'Ecuador', en: 'Ecuador', pt: 'Equador', it: 'Ecuador' } },
+    { originalIndex: 20, code: 'NED', emoji: '🇳🇱', group: 'Grupo F', names: { es: 'Países Bajos', en: 'Netherlands', pt: 'Países Baixos', it: 'Paesi Bassi' } },
+    { originalIndex: 21, code: 'JPN', emoji: '🇯🇵', group: 'Grupo F', names: { es: 'Japón', en: 'Japan', pt: 'Japão', it: 'Giappone' } },
+    { originalIndex: 22, code: 'SWE', emoji: '🇸🇪', group: 'Grupo F', names: { es: 'Suecia', en: 'Sweden', pt: 'Suécia', it: 'Svezia' } },
+    { originalIndex: 23, code: 'TUN', emoji: '🇹🇳', group: 'Grupo F', names: { es: 'Túnez', en: 'Tunisia', pt: 'Tunísia', it: 'Tunisia' } },
+    { originalIndex: 24, code: 'BEL', emoji: '🇧🇪', group: 'Grupo G', names: { es: 'Bélgica', en: 'Belgium', pt: 'Bélgica', it: 'Belgio' } },
+    { originalIndex: 25, code: 'EGY', emoji: '🇪🇬', group: 'Grupo G', names: { es: 'Egipto', en: 'Egypt', pt: 'Egito', it: 'Egitto' } },
+    { originalIndex: 26, code: 'IRN', emoji: '🇮🇷', group: 'Grupo G', names: { es: 'Irán', en: 'Iran', pt: 'Irã', it: 'Iran' } },
+    { originalIndex: 27, code: 'NZL', emoji: '🇳🇿', group: 'Grupo G', names: { es: 'Nueva Zelanda', en: 'New Zealand', pt: 'Nova Zelândia', it: 'Nuova Zelanda' } },
+    { originalIndex: 28, code: 'ESP', emoji: '🇪🇸', group: 'Grupo H', names: { es: 'España', en: 'Spain', pt: 'Espanha', it: 'Spagna' } },
+    { originalIndex: 29, code: 'CPV', emoji: '🇨🇻', group: 'Grupo H', names: { es: 'Cabo Verde', en: 'Cape Verde', pt: 'Cabo Verde', it: 'Capo Verde' } },
+    { originalIndex: 30, code: 'KSA', emoji: '🇸🇦', group: 'Grupo H', names: { es: 'Arabia Saudita', en: 'Saudi Arabia', pt: 'Arábia Saudita', it: 'Arabia Saudita' } },
+    { originalIndex: 31, code: 'URU', emoji: '🇺🇾', group: 'Grupo H', names: { es: 'Uruguay', en: 'Uruguay', pt: 'Uruguai', it: 'Uruguay' } },
+    { originalIndex: 32, code: 'FRA', emoji: '🇫🇷', group: 'Grupo I', names: { es: 'Francia', en: 'France', pt: 'França', it: 'Francia' } },
+    { originalIndex: 33, code: 'SEN', emoji: '🇸🇳', group: 'Grupo I', names: { es: 'Senegal', en: 'Senegal', pt: 'Senegal', it: 'Senegal' } },
+    { originalIndex: 34, code: 'IRQ', emoji: '🇮🇶', group: 'Grupo I', names: { es: 'Irak', en: 'Iraq', pt: 'Iraque', it: 'Iraq' } },
+    { originalIndex: 35, code: 'NOR', emoji: '🇳🇴', group: 'Grupo I', names: { es: 'Noruega', en: 'Norway', pt: 'Noruega', it: 'Norvegia' } },
+    { originalIndex: 36, code: 'ARG', emoji: '🇦🇷', group: 'Grupo J', names: { es: 'Argentina', en: 'Argentina', pt: 'Argentina', it: 'Argentina' } },
+    { originalIndex: 37, code: 'ALG', emoji: '🇩🇿', group: 'Grupo J', names: { es: 'Argelia', en: 'Algeria', pt: 'Argélia', it: 'Algeria' } },
+    { originalIndex: 38, code: 'AUT', emoji: '🇦🇹', group: 'Grupo J', names: { es: 'Austria', en: 'Austria', pt: 'Áustria', it: 'Austria' } },
+    { originalIndex: 39, code: 'JOR', emoji: '🇯🇴', group: 'Grupo J', names: { es: 'Jordania', en: 'Jordan', pt: 'Jordânia', it: 'Giordania' } },
+    { originalIndex: 40, code: 'POR', emoji: '🇵🇹', group: 'Grupo K', names: { es: 'Portugal', en: 'Portugal', pt: 'Portugal', it: 'Portogallo' } },
+    { originalIndex: 41, code: 'COD', emoji: '🇨🇩', group: 'Grupo K', names: { es: 'RD Congo', en: 'DR Congo', pt: 'RD Congo', it: 'RD del Congo' } },
+    { originalIndex: 42, code: 'UZB', emoji: '🇺🇿', group: 'Grupo K', names: { es: 'Uzbekistán', en: 'Uzbekistan', pt: 'Uzbequistão', it: 'Uzbekistan' } },
+    { originalIndex: 43, code: 'COL', emoji: '🇨🇴', group: 'Grupo K', names: { es: 'Colombia', en: 'Colombia', pt: 'Colômbia', it: 'Colombia' } },
+    { originalIndex: 44, code: 'ENG', emoji: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', group: 'Grupo L', names: { es: 'Inglaterra', en: 'England', pt: 'Inglaterra', it: 'Inghilterra' } },
+    { originalIndex: 45, code: 'CRO', emoji: '🇭🇷', group: 'Grupo L', names: { es: 'Croacia', en: 'Croatia', pt: 'Croácia', it: 'Croazia' } },
+    { originalIndex: 46, code: 'GHA', emoji: '🇬🇭', group: 'Grupo L', names: { es: 'Ghana', en: 'Ghana', pt: 'Gana', it: 'Ghana' } },
+    { originalIndex: 47, code: 'PAN', emoji: '🇵🇦', group: 'Grupo L', names: { es: 'Panamá', en: 'Panama', pt: 'Panamá', it: 'Panama' } },
+    { originalIndex: 48, code: 'FWC', emoji: '⚽', group: 'Especial', names: { es: 'Sección FWC', en: 'FWC Section', pt: 'Seção FWC', it: 'Sezione FWC' } }
 ];
 
 const translations = {
@@ -1349,9 +1349,9 @@ function getGroupedStickersText(stateVal) {
             }
         }
         if (teamStickers.length > 0) {
-            const teamName = team.names[activeLang] || team.names['es'];
+            const code = team.code || '???';
             const emoji = team.emoji;
-            groups.push(`${emoji} ${teamName}: ${teamStickers.join(', ')}`);
+            groups.push(`${emoji} ${code}: ${teamStickers.join(', ')}`);
         }
     }
     return groups.join('  •  ');
@@ -1527,7 +1527,7 @@ function generateShareImage() {
     if (missingCount === 0) {
         ctx.fillStyle = '#34d399';
         ctx.fillText(translations[activeLang].shareImageNoMissing || "¡Álbum completo! Ninguna figurita faltante.", 120, 1020);
-    } else if (missingCount > 150) {
+    } else if (missingCount > 400) {
         ctx.fillStyle = '#a0aec0';
         wrapText(ctx, translations[activeLang].shareImageTooManyMissing || "Demasiadas figuritas faltantes para listar. ¡Usa el enlace del álbum para ver la lista completa!", 120, 1020, 840, 28, 5);
     } else {
