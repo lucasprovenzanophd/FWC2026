@@ -149,6 +149,10 @@ body {
     transition: background-color 0.4s ease, color 0.4s ease;
 }
 
+html {
+    overflow-x: hidden;
+}
+
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Outfit', sans-serif;
     font-weight: 700;
@@ -1461,6 +1465,13 @@ h1, h2, h3, h4, h5, h6 {
     justify-content: center;
     align-items: center;
     gap: 12px;
-    margin-top: 20px;
     flex-wrap: wrap;
+}
+
+.actions-section {
+    padding: 20px 24px;
+}
+
+.actions-section .dashboard-actions {
+    margin-top: 0;
 }

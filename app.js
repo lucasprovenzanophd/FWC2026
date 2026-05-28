@@ -124,10 +124,11 @@ const translations = {
         btnCopyCanvas: "Copiar al Portapapeles",
         toastCopyImageSuccess: "¡Imagen copiada al portapapeles!",
         toastCopyImageError: "No se pudo copiar la imagen automáticamente. Descárgala o mantén presionado para guardarla.",
-        shareImageTooManyMissing: "Demasiadas figuritas faltantes para listar. ¡Usa el enlace del álbum para ver la lista completa!",
+        shareImageTooManyMissing: "Demasiadas figuritas faltantes para listar. ¡Compartí el enlace del álbum para ver la lista completa!",
         shareImageNoDuplicates: "Ninguna figurita repetida.",
         shareImageNoMissing: "¡Álbum completo! Ninguna figurita faltante.",
-        localSecurityNotice: "Nota: Debido a restricciones de seguridad de archivos locales en este navegador, la descarga y copia automática pueden estar limitadas. Puedes descargar la imagen haciendo clic derecho (o manteniendo presionado) en ella, o tomándole una captura de pantalla."
+        localSecurityNotice: "Nota: Debido a restricciones de seguridad de archivos locales en este navegador, la descarga y copia automática pueden estar limitadas. Mantén presionada la imagen para guardarla.",
+        toastIOSDownloadHint: "En iPhone: mantén presionada la imagen para guardarla en Fotos 📷"
     },
     en: {
         title: "Fifa World Cup 2026",
@@ -202,10 +203,11 @@ const translations = {
         btnCopyCanvas: "Copy to Clipboard",
         toastCopyImageSuccess: "Image copied to clipboard!",
         toastCopyImageError: "Could not copy image automatically. Please download it instead.",
-        shareImageTooManyMissing: "Too many missing stickers to list. Use the album link to view the full list!",
+        shareImageTooManyMissing: "Too many missing stickers to list. Share the album link to see the full list!",
         shareImageNoDuplicates: "No duplicate stickers.",
-        shareImageNoMissing: "Album completed! No missing stickers.",
-        localSecurityNotice: "Note: Due to local file security restrictions in this browser, automatic download and copy may be limited. You can save the image by right-clicking (or long pressing) on it, or by taking a screenshot."
+        shareImageNoMissing: "Album complete! No missing stickers.",
+        localSecurityNotice: "Note: Due to local file security restrictions in this browser, automatic download and copy may be limited. Long press the image to save it.",
+        toastIOSDownloadHint: "On iPhone: long-press the image to save it to Photos 📷"
     },
     pt: {
         title: "Fifa World Cup 2026",
@@ -280,10 +282,11 @@ const translations = {
         btnCopyCanvas: "Copiar para Área de Transferência",
         toastCopyImageSuccess: "Imagem copiada para a área de transferência!",
         toastCopyImageError: "Não foi possível copiar a imagem automaticamente. Baixe a imagem para salvar.",
-        shareImageTooManyMissing: "Muitas figurinhas faltando para listar. Use o link do álbum para ver a lista completa!",
+        shareImageTooManyMissing: "Muitas figurinhas faltando para listar. Compartilhe o link do álbum para ver a lista completa!",
         shareImageNoDuplicates: "Nenhuma figurinha repetida.",
         shareImageNoMissing: "Álbum completo! Nenhuma figurinha faltando.",
-        localSecurityNotice: "Nota: Devido a restrições de segurança de arquivos locais neste navegador, o download e a cópia automática podem estar limitados. Você pode salvar a imagem clicando com o botão direito (ou pressionando e segurando) nela, ou tirando um print."
+        localSecurityNotice: "Nota: Devido a restrições de segurança de arquivos locais neste navegador, o download e a cópia automática podem estar limitados. Pressione e segure a imagem para salvá-la.",
+        toastIOSDownloadHint: "No iPhone: pressione e segure a imagem para salvar nas Fotos 📷"
     },
     it: {
         title: "Fifa World Cup 2026",
@@ -358,10 +361,11 @@ const translations = {
         btnCopyCanvas: "Copia negli Appunti",
         toastCopyImageSuccess: "Immagine copiata negli appunti!",
         toastCopyImageError: "Impossibile copiare l'immagine automaticamente. Per favore scaricala.",
-        shareImageTooManyMissing: "Troppe figurine mancanti da elencare. Usa il link dell'album per vedere l'elenco completo!",
+        shareImageTooManyMissing: "Troppe figurine mancanti. Condividi il link dell'album per vedere l'elenco completo!",
         shareImageNoDuplicates: "Nessuna figurina doppia.",
         shareImageNoMissing: "Album completato! Nessuna figurina mancante.",
-        localSecurityNotice: "Nota: A causa delle restrizioni di sicurezza dei file locali in questo browser, il download e la copia automatica potrebbero essere limitati. Puoi salvare l'immagine facendo clic con il pulsante destro del mouse (o tenendo premuto) su di essa, o facendo uno screenshot."
+        localSecurityNotice: "Nota: A causa delle restrizioni di sicurezza dei file locali in questo browser, il download e la copia automatica potrebbero essere limitati. Tieni premuta l'immagine per salvarla.",
+        toastIOSDownloadHint: "Su iPhone: tieni premuta l'immagine per salvarla nelle Foto 📷"
     }
 };
 
@@ -433,6 +437,7 @@ const shareCanvasPreview = document.getElementById('share-canvas-preview');
 
 let username = '';
 let lastUpdate = 0;
+let shareCanvasFinal = null; // cropped canvas for download/copy
 
 function init() {
     setupTheme();
@@ -1337,262 +1342,290 @@ function wrapText(ctx, text, x, y, maxWidth, lineHeight, maxLines) {
     return y;
 }
 
-function getGroupedStickersText(stateVal) {
-    // Define group order: A-L then Especial
+// ─── STRUCTURED DATA FOR CANVAS ───────────────────────────────────────────────
+function getGroupedStickersData(stateVal) {
     const groupOrder = [
-        'Grupo A', 'Grupo B', 'Grupo C', 'Grupo D',
-        'Grupo E', 'Grupo F', 'Grupo G', 'Grupo H',
-        'Grupo I', 'Grupo J', 'Grupo K', 'Grupo L',
-        'Especial'
+        'Grupo A','Grupo B','Grupo C','Grupo D',
+        'Grupo E','Grupo F','Grupo G','Grupo H',
+        'Grupo I','Grupo J','Grupo K','Grupo L','Especial'
     ];
-
-    // Build a map: groupName → list of formatted team strings
+    const labelMap = {
+        'Grupo A':'A','Grupo B':'B','Grupo C':'C','Grupo D':'D',
+        'Grupo E':'E','Grupo F':'F','Grupo G':'G','Grupo H':'H',
+        'Grupo I':'I','Grupo J':'J','Grupo K':'K','Grupo L':'L','Especial':'FWC'
+    };
     const groupMap = {};
     groupOrder.forEach(g => { groupMap[g] = []; });
 
-    for (let tIndex = 0; tIndex < teams.length; tIndex++) {
-        const team = teams[tIndex];
-        const teamStickers = [];
+    for (let tIdx = 0; tIdx < teams.length; tIdx++) {
+        const team = teams[tIdx];
+        const stickers = [];
         for (let s = 0; s < 20; s++) {
-            const stickerId = tIndex * 20 + s;
-            if (state[stickerId] === stateVal) {
-                teamStickers.push(s + 1);
-            }
+            if (state[tIdx * 20 + s] === stateVal) stickers.push(s + 1);
         }
-        if (teamStickers.length > 0) {
-            const code = team.code || '???';
-            const emoji = team.emoji;
-            const groupKey = team.group || 'Especial';
-            if (!groupMap[groupKey]) groupMap[groupKey] = [];
-            groupMap[groupKey].push(`${emoji}${code}:${teamStickers.join(',')}`);
+        if (stickers.length > 0) {
+            const key = team.group || 'Especial';
+            if (!groupMap[key]) groupMap[key] = [];
+            groupMap[key].push({ emoji: team.emoji, code: team.code, stickers });
         }
     }
-
-    // Flatten groups into sections separated by group label
-    const parts = [];
-    groupOrder.forEach(g => {
-        if (groupMap[g] && groupMap[g].length > 0) {
-            // Short group label: 'A', 'B'... or 'FWC'
-            const label = g === 'Especial' ? '[FWC]' : '[' + g.replace('Grupo ', '') + ']';
-            parts.push(label + ' ' + groupMap[g].join('  '));
-        }
-    });
-    return parts.join('   ');
+    return groupOrder
+        .filter(g => groupMap[g] && groupMap[g].length > 0)
+        .map(g => ({ label: labelMap[g] || g, teams: groupMap[g] }));
 }
 
+// ─── DRAW A STICKER SECTION (MISSING or DUPLICATES) ───────────────────────────
+function drawGroupSection(ctx, y, stateVal, accentColor, title, noItemsText) {
+    y += 30;
+    // Accent bar + title
+    ctx.fillStyle = accentColor;
+    ctx.fillRect(60, y, 4, 28);
+    ctx.font = 'bold 20px Outfit, sans-serif';
+    ctx.fillStyle = accentColor;
+    ctx.fillText(title, 78, y + 21);
+    y += 46;
+
+    // Thin separator
+    ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(60, y); ctx.lineTo(1020, y); ctx.stroke();
+    y += 16;
+
+    const data = getGroupedStickersData(stateVal);
+
+    if (data.length === 0) {
+        ctx.fillStyle = '#718096';
+        ctx.font = '500 16px Inter, sans-serif';
+        ctx.fillText(noItemsText, 60, y + 18);
+        return y + 52;
+    }
+
+    for (const group of data) {
+        const isLong = group.label.length > 1; // 'FWC'
+        const badgeW = isLong ? 46 : 30;
+        const badgeH = 26;
+        const rowBaseY = y;
+
+        // Badge pill
+        drawRoundedRect(ctx, 60, rowBaseY, badgeW, badgeH, 7,
+            accentColor + '28', accentColor + '88');
+        ctx.fillStyle = accentColor;
+        ctx.font = 'bold 12px Outfit, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(group.label, 60 + badgeW / 2, rowBaseY + 17);
+        ctx.textAlign = 'left';
+
+        // Team entries as flowing text
+        const lineStr = group.teams
+            .map(t => t.emoji + t.code + ':' + t.stickers.join(','))
+            .join('   ');
+        ctx.fillStyle = '#cbd5e0';
+        ctx.font = '500 15px Inter, sans-serif';
+        const textX = 60 + badgeW + 14;
+        const textStartY = rowBaseY + 18;
+        const endY = wrapText(ctx, lineStr, textX, textStartY, 950 - badgeW, 24, 0);
+
+        y = Math.max(rowBaseY + 34, endY + 14);
+    }
+    return y + 8;
+}
+
+// ─── MODAL OPENER ─────────────────────────────────────────────────────────────
 function openShareImageModal() {
-    if (dlgShareImage) {
-        dlgShareImage.showModal();
-    }
-    // Wait for custom fonts (Outfit, Inter) to be fully loaded before drawing
-    // to avoid blank or mis-measured canvas text.
+    if (dlgShareImage) dlgShareImage.showModal();
+    // Wait for custom fonts before drawing to avoid blank/mis-measured text
     document.fonts.ready.then(() => {
-        try {
-            generateShareImage();
-        } catch (err) {
-            console.error("Error generating image:", err);
-        }
+        try { generateShareImage(); }
+        catch (err) { console.error('Error generating image:', err); }
     });
 }
 
+// ─── MAIN CANVAS GENERATOR ────────────────────────────────────────────────────
 function generateShareImage() {
     if (!shareCanvas) return;
-    const ctx = shareCanvas.getContext('2d');
-    
-    ctx.clearRect(0, 0, shareCanvas.width, shareCanvas.height);
-    
-    const bgGrad = ctx.createLinearGradient(0, 0, 0, 1350);
-    bgGrad.addColorStop(0, '#0d0b21');
-    bgGrad.addColorStop(1, '#1b1747');
-    ctx.fillStyle = bgGrad;
-    ctx.fillRect(0, 0, 1080, 1350);
-    
-    const glow1 = ctx.createRadialGradient(200, 300, 50, 200, 300, 500);
-    glow1.addColorStop(0, 'rgba(88, 86, 214, 0.15)');
-    glow1.addColorStop(1, 'rgba(88, 86, 214, 0)');
-    ctx.fillStyle = glow1;
-    ctx.beginPath();
-    ctx.arc(200, 300, 500, 0, Math.PI * 2);
-    ctx.fill();
-    
-    const glow2 = ctx.createRadialGradient(900, 900, 50, 900, 900, 600);
-    glow2.addColorStop(0, 'rgba(255, 45, 85, 0.12)');
-    glow2.addColorStop(1, 'rgba(255, 45, 85, 0)');
-    ctx.fillStyle = glow2;
-    ctx.beginPath();
-    ctx.arc(900, 900, 600, 0, Math.PI * 2);
-    ctx.fill();
+    shareCanvasFinal = null;
 
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.02)';
-    ctx.lineWidth = 2;
-    for (let i = 0; i < 6; i++) {
-        ctx.beginPath();
-        ctx.arc(540, 675, 200 + i * 150, 0, Math.PI * 2);
-        ctx.stroke();
+    const W = 1080;
+    const MAX_H = 3200; // draw on a tall canvas, crop afterwards
+
+    shareCanvas.width = W;
+    shareCanvas.height = MAX_H;
+    const ctx = shareCanvas.getContext('2d');
+
+    // ── BACKGROUND ────────────────────────────────────────────────────────────
+    const bgGrad = ctx.createLinearGradient(0, 0, 0, MAX_H);
+    bgGrad.addColorStop(0, '#0d0b21');
+    bgGrad.addColorStop(0.45, '#111030');
+    bgGrad.addColorStop(1, '#0a0c18');
+    ctx.fillStyle = bgGrad;
+    ctx.fillRect(0, 0, W, MAX_H);
+
+    // Ambient glows
+    const g1 = ctx.createRadialGradient(160, 260, 20, 160, 260, 480);
+    g1.addColorStop(0, 'rgba(88,86,214,0.18)'); g1.addColorStop(1, 'rgba(88,86,214,0)');
+    ctx.fillStyle = g1; ctx.beginPath(); ctx.arc(160, 260, 480, 0, Math.PI*2); ctx.fill();
+
+    const g2 = ctx.createRadialGradient(980, 500, 20, 980, 500, 520);
+    g2.addColorStop(0, 'rgba(248,113,113,0.10)'); g2.addColorStop(1, 'rgba(248,113,113,0)');
+    ctx.fillStyle = g2; ctx.beginPath(); ctx.arc(980, 500, 520, 0, Math.PI*2); ctx.fill();
+
+    // Subtle rings
+    ctx.strokeStyle = 'rgba(255,255,255,0.012)'; ctx.lineWidth = 1.5;
+    for (let i = 0; i < 4; i++) {
+        ctx.beginPath(); ctx.arc(W/2, 380, 220 + i*190, 0, Math.PI*2); ctx.stroke();
     }
-    
+
+    let y = 0;
+
+    // ── HEADER ────────────────────────────────────────────────────────────────
+    y += 88;
     ctx.fillStyle = '#ffffff';
-    ctx.font = "bold 44px Outfit, Inter, sans-serif";
-    ctx.fillText("⚽ FIFA World Cup 2026", 80, 105);
-    
-    ctx.fillStyle = '#a0aec0';
-    ctx.font = "800 20px Outfit, Inter, sans-serif";
-    ctx.fillText("STICKER TRACKER PREMIUM", 85, 145);
-    
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.moveTo(80, 175);
-    ctx.lineTo(1000, 175);
-    ctx.stroke();
-    
-    drawRoundedRect(ctx, 80, 205, 920, 120, 24, "rgba(255, 255, 255, 0.025)", "rgba(255, 255, 255, 0.06)");
-    
-    const displayUsername = username ? username : (activeLang === 'es' ? "Mi Tracker" : (activeLang === 'pt' ? "Meu Tracker" : (activeLang === 'it' ? "Il mio Tracker" : "My Tracker")));
+    ctx.font = 'bold 46px Outfit, sans-serif';
+    ctx.fillText('\u26BD FIFA World Cup 2026', 60, y);
+    y += 36;
+    ctx.fillStyle = '#7c6fdb';
+    ctx.font = '700 17px Outfit, sans-serif';
+    ctx.fillText('STICKER TRACKER PREMIUM', 63, y);
+    y += 30;
+    ctx.strokeStyle = 'rgba(255,255,255,0.07)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(60, y); ctx.lineTo(1020, y); ctx.stroke();
+
+    // ── PROFILE CARD ──────────────────────────────────────────────────────────
+    y += 22;
+    drawRoundedRect(ctx, 60, y, 960, 112, 20, 'rgba(255,255,255,0.03)', 'rgba(255,255,255,0.08)');
+
+    const displayUsername = username ||
+        (activeLang==='es' ? 'Mi Tracker' : activeLang==='pt' ? 'Meu Tracker' :
+         activeLang==='it' ? 'Il mio Tracker' : 'My Tracker');
     ctx.fillStyle = '#ffffff';
-    ctx.font = "bold 28px Outfit, Inter, sans-serif";
-    ctx.fillText(displayUsername, 120, 260);
-    
+    ctx.font = 'bold 30px Outfit, sans-serif';
+    ctx.fillText(displayUsername, 98, y + 46);
+
     let formattedDate = '-';
     if (lastUpdate > 0) {
-        const locale = activeLang === 'es' ? 'es-ES' : (activeLang === 'pt' ? 'pt-PT' : (activeLang === 'it' ? 'it-IT' : 'en-US'));
-        const formatter = new Intl.DateTimeFormat(locale, {
-            dateStyle: 'medium',
-            timeStyle: 'short'
-        });
-        formattedDate = formatter.format(new Date(lastUpdate));
+        const loc = activeLang==='es' ? 'es-ES' : activeLang==='pt' ? 'pt-PT' :
+                    activeLang==='it' ? 'it-IT' : 'en-US';
+        formattedDate = new Intl.DateTimeFormat(loc,
+            { dateStyle: 'medium', timeStyle: 'short' }).format(new Date(lastUpdate));
     }
-    ctx.fillStyle = '#a0aec0';
-    ctx.font = "500 18px Inter, sans-serif";
-    ctx.fillText((translations[activeLang].lastUpdateLabel || "Última actualización:") + " " + formattedDate, 120, 298);
-    
-    drawRoundedRect(ctx, 80, 350, 920, 220, 24, "rgba(255, 255, 255, 0.025)", "rgba(255, 255, 255, 0.06)");
-    
-    let ownedCount = 0;
-    let missingCount = 0;
-    let duplicateCount = 0;
+    ctx.fillStyle = '#718096';
+    ctx.font = '500 17px Inter, sans-serif';
+    ctx.fillText((translations[activeLang].lastUpdateLabel || 'Última actualización:') + ' ' + formattedDate, 98, y + 84);
+
+    // Percent badge on the right
+    let owned = 0, missing = 0, dupes = 0;
     for (let i = 0; i < TOTAL_ITEMS; i++) {
-        if (state[i] === 1) ownedCount++;
-        else if (state[i] === 2) {
-            ownedCount++;
-            duplicateCount++;
-        } else {
-            missingCount++;
-        }
+        if (state[i]===1) owned++;
+        else if (state[i]===2) { owned++; dupes++; }
+        else missing++;
     }
-    const percent = TOTAL_ITEMS > 0 ? Math.round((ownedCount / TOTAL_ITEMS) * 100) : 0;
-    
-    ctx.fillStyle = '#ffffff';
-    ctx.font = "bold 24px Outfit, Inter, sans-serif";
-    ctx.fillText(translations[activeLang].albumProgress || "Progreso del Álbum", 120, 405);
-    
-    ctx.fillStyle = '#34d399';
-    ctx.font = "bold 24px Outfit, Inter, sans-serif";
+    const pct = TOTAL_ITEMS > 0 ? Math.round((owned / TOTAL_ITEMS) * 100) : 0;
     ctx.textAlign = 'right';
-    const progressBadgeText = `${percent}% (${ownedCount} / ${TOTAL_ITEMS})`;
-    ctx.fillText(progressBadgeText, 960, 405);
-    ctx.textAlign = 'left';
-    
-    const barX = 120;
-    const barY = 425;
-    const barWidth = 840;
-    const barHeight = 16;
-    drawRoundedRect(ctx, barX, barY, barWidth, barHeight, 8, "rgba(255, 255, 255, 0.08)", null);
-    if (percent > 0) {
-        const fillWidth = (percent / 100) * barWidth;
-        const barGrad = ctx.createLinearGradient(barX, 0, barX + fillWidth, 0);
-        barGrad.addColorStop(0, '#34d399');
-        barGrad.addColorStop(1, '#059669');
-        drawRoundedRect(ctx, barX, barY, fillWidth, barHeight, 8, barGrad, null);
-    }
-    
-    ctx.fillStyle = '#a0aec0';
-    ctx.font = "500 16px Inter, sans-serif";
-    ctx.fillText(translations[activeLang].statOwnedLabel || "Tengo (Únicas)", 120, 490);
     ctx.fillStyle = '#34d399';
-    ctx.font = "bold 26px Outfit, Inter, sans-serif";
-    ctx.fillText(ownedCount.toString(), 120, 525);
-    
-    ctx.fillStyle = '#a0aec0';
-    ctx.font = "500 16px Inter, sans-serif";
-    ctx.fillText(translations[activeLang].statMissingLabel || "Faltan", 420, 490);
-    ctx.fillStyle = '#f87171';
-    ctx.font = "bold 26px Outfit, Inter, sans-serif";
-    ctx.fillText(missingCount.toString(), 420, 525);
-    
-    ctx.fillStyle = '#a0aec0';
-    ctx.font = "500 16px Inter, sans-serif";
-    ctx.fillText(translations[activeLang].statDuplicatesLabel || "Repetidas", 720, 490);
-    ctx.fillStyle = '#60a5fa';
-    ctx.font = "bold 26px Outfit, Inter, sans-serif";
-    ctx.fillText(duplicateCount.toString(), 720, 525);
-    
-    drawRoundedRect(ctx, 80, 595, 920, 310, 24, "rgba(96, 165, 250, 0.02)", "rgba(96, 165, 250, 0.12)");
-    
-    ctx.fillStyle = '#60a5fa';
-    ctx.font = "bold 22px Outfit, Inter, sans-serif";
-    ctx.fillText((translations[activeLang].statDuplicatesLabel || "Repetidas").toUpperCase(), 120, 645);
-    
-    const duplicatesText = getGroupedStickersText(2);
-    ctx.fillStyle = '#e2e8f0';
-    ctx.font = "500 18px Inter, sans-serif";
-    if (duplicatesText) {
-        wrapText(ctx, duplicatesText, 120, 685, 840, 30, 6);
-    } else {
-        ctx.fillStyle = '#a0aec0';
-        ctx.fillText(translations[activeLang].shareImageNoDuplicates || "Ninguna figurita repetida.", 120, 685);
-    }
-    
-    drawRoundedRect(ctx, 80, 930, 920, 310, 24, "rgba(248, 113, 113, 0.02)", "rgba(248, 113, 113, 0.12)");
-    
-    ctx.fillStyle = '#f87171';
-    ctx.font = "bold 22px Outfit, Inter, sans-serif";
-    ctx.fillText((translations[activeLang].statMissingLabel || "Faltan").toUpperCase(), 120, 980);
-    
-    ctx.fillStyle = '#e2e8f0';
-    ctx.font = "500 18px Inter, sans-serif";
-    if (missingCount === 0) {
-        ctx.fillStyle = '#34d399';
-        ctx.fillText(translations[activeLang].shareImageNoMissing || "¡Álbum completo! Ninguna figurita faltante.", 120, 1020);
-    } else if (missingCount > 400) {
-        ctx.fillStyle = '#a0aec0';
-        wrapText(ctx, translations[activeLang].shareImageTooManyMissing || "Demasiadas figuritas faltantes para listar. ¡Usa el enlace del álbum para ver la lista completa!", 120, 1020, 840, 28, 5);
-    } else {
-        const missingText = getGroupedStickersText(0);
-        if (missingText) {
-            wrapText(ctx, missingText, 120, 1020, 840, 30, 6);
-        } else {
-            ctx.fillStyle = '#a0aec0';
-            ctx.fillText(translations[activeLang].shareImageNoMissing || "¡Álbum completo! Ninguna figurita faltante.", 120, 1020);
-        }
-    }
-    
-    // Subtle bottom glow line only — no URL footer text
-    ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
-    ctx.beginPath();
-    ctx.moveTo(80, 1265);
-    ctx.lineTo(1000, 1265);
-    ctx.stroke();
+    ctx.font = 'bold 36px Outfit, sans-serif';
+    ctx.fillText(pct + '%', 1000, y + 52);
+    ctx.fillStyle = '#718096';
+    ctx.font = '500 15px Inter, sans-serif';
+    ctx.fillText(owned + ' / ' + TOTAL_ITEMS, 1000, y + 80);
     ctx.textAlign = 'left';
-    
+    y += 112 + 20;
+
+    // ── PROGRESS CARD ─────────────────────────────────────────────────────────
+    drawRoundedRect(ctx, 60, y, 960, 170, 20, 'rgba(255,255,255,0.025)', 'rgba(255,255,255,0.065)');
+    ctx.fillStyle = '#a0aec0';
+    ctx.font = '600 13px Inter, sans-serif';
+    ctx.fillText((translations[activeLang].albumProgress || 'Progreso del Álbum').toUpperCase(), 98, y + 38);
+
+    // Progress bar
+    const bX=98, bY=y+54, bW=884, bH=14;
+    drawRoundedRect(ctx, bX, bY, bW, bH, 7, 'rgba(255,255,255,0.07)', null);
+    if (pct > 0) {
+        const fw = (pct/100)*bW;
+        const bg = ctx.createLinearGradient(bX,0,bX+fw,0);
+        bg.addColorStop(0,'#34d399'); bg.addColorStop(1,'#059669');
+        drawRoundedRect(ctx, bX, bY, fw, bH, 7, bg, null);
+    }
+
+    // 3 stat columns
+    const statCols = [98, 430, 762];
+    const statLabels = [
+        translations[activeLang].statOwnedLabel  || 'Tengo',
+        translations[activeLang].statMissingLabel || 'Faltan',
+        translations[activeLang].statDuplicatesLabel || 'Repetidas'
+    ];
+    const statVals  = [owned, missing, dupes];
+    const statClrs  = ['#34d399','#f87171','#60a5fa'];
+    for (let i=0; i<3; i++) {
+        ctx.fillStyle = '#718096';
+        ctx.font = '500 14px Inter, sans-serif';
+        ctx.fillText(statLabels[i], statCols[i], y+112);
+        ctx.fillStyle = statClrs[i];
+        ctx.font = 'bold 30px Outfit, sans-serif';
+        ctx.fillText(statVals[i].toString(), statCols[i], y+148);
+    }
+    y += 170 + 18;
+
+    // ── DUPLICATES SECTION ────────────────────────────────────────────────────
+    const dupTitle = (translations[activeLang].statDuplicatesLabel || 'Repetidas').toUpperCase();
+    const noDup = translations[activeLang].shareImageNoDuplicates || 'Ninguna figurita repetida.';
+    y = drawGroupSection(ctx, y, 2, '#60a5fa', dupTitle, noDup);
+
+    // Divider
+    y += 12;
+    ctx.strokeStyle = 'rgba(255,255,255,0.05)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(60, y); ctx.lineTo(1020, y); ctx.stroke();
+
+    // ── MISSING SECTION ───────────────────────────────────────────────────────
+    if (missing > 400) {
+        y += 30;
+        ctx.fillStyle = '#f87171';
+        ctx.fillRect(60, y, 4, 28);
+        ctx.font = 'bold 20px Outfit, sans-serif';
+        ctx.fillText((translations[activeLang].statMissingLabel || 'Faltan').toUpperCase(), 78, y+21);
+        y += 56;
+        ctx.fillStyle = '#a0aec0';
+        ctx.font = '500 16px Inter, sans-serif';
+        y = wrapText(ctx,
+            translations[activeLang].shareImageTooManyMissing ||
+            'Demasiadas faltantes para listar. Compartí el enlace del álbum.',
+            60, y, 960, 26, 0);
+        y += 30;
+    } else {
+        const misTit = (translations[activeLang].statMissingLabel || 'Faltan').toUpperCase();
+        const noMis = translations[activeLang].shareImageNoMissing || '\u00a1Álbum completo!';
+        y = drawGroupSection(ctx, y, 0, '#f87171', misTit, noMis);
+    }
+
+    // ── FOOTER ────────────────────────────────────────────────────────────────
+    y += 30;
+    ctx.strokeStyle = 'rgba(255,255,255,0.04)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(60, y); ctx.lineTo(1020, y); ctx.stroke();
+    ctx.fillStyle = '#4a5568';
+    ctx.font = '500 14px Inter, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('\u26BD FWC 2026 Sticker Tracker', W/2, y+28);
+    ctx.textAlign = 'left';
+
+    const cropH = y + 60;
+
+    // ── CROP TO CONTENT HEIGHT ────────────────────────────────────────────────
+    shareCanvasFinal = document.createElement('canvas');
+    shareCanvasFinal.width  = W;
+    shareCanvasFinal.height = cropH;
+    shareCanvasFinal.getContext('2d').drawImage(shareCanvas, 0, 0);
+
     try {
         if (shareCanvasPreview) {
-            shareCanvasPreview.src = shareCanvas.toDataURL('image/png');
+            shareCanvasPreview.src = shareCanvasFinal.toDataURL('image/png');
             shareCanvasPreview.style.display = 'block';
         }
-        if (shareCanvas) {
-            shareCanvas.style.display = 'none';
-        }
+        shareCanvas.style.display = 'none';
         const noticeEl = document.getElementById('local-security-notice');
         if (noticeEl) noticeEl.style.display = 'none';
-    } catch (e) {
-        console.warn("toDataURL failed (likely due to local file:// security policy):", e);
-        if (shareCanvas) {
-            shareCanvas.style.display = 'block';
-        }
-        if (shareCanvasPreview) {
-            shareCanvasPreview.style.display = 'none';
-        }
+    } catch(e) {
+        console.warn('toDataURL failed:', e);
+        shareCanvas.style.display = 'block';
+        if (shareCanvasPreview) shareCanvasPreview.style.display = 'none';
         const noticeEl = document.getElementById('local-security-notice');
         if (noticeEl) {
             noticeEl.style.display = 'block';
@@ -1601,50 +1634,83 @@ function generateShareImage() {
     }
 }
 
-function downloadShareImage() {
-    if (!shareCanvas) return;
-    try {
-        const dataURL = shareCanvas.toDataURL('image/png');
-        const link = document.createElement('a');
-        const cleanUsername = username ? username.replace(/[^a-zA-Z0-9]/g, '_') : 'album';
-        link.download = `FWC2026_${cleanUsername}_progress.png`;
-        link.href = dataURL;
-        link.click();
-    } catch (err) {
-        console.error("Error downloading image:", err);
-        showToast(translations[activeLang].toastCopyImageError);
-    }
+// ─── HELPERS ──────────────────────────────────────────────────────────────────
+function _getFilename() {
+    const clean = username ? username.replace(/[^a-zA-Z0-9]/g,'_') : 'album';
+    return 'FWC2026_' + clean + '_progress.png';
 }
 
+function _isIOS() {
+    return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+}
+
+// ─── DOWNLOAD (mobile-aware) ──────────────────────────────────────────────────
+function downloadShareImage() {
+    const canvas = shareCanvasFinal || shareCanvas;
+    if (!canvas) return;
+
+    canvas.toBlob(blob => {
+        if (!blob) { showToast(translations[activeLang].toastCopyImageError); return; }
+
+        if (_isIOS()) {
+            // iOS Safari ignores <a download>; open in new tab so user can long-press → Save to Photos
+            const url = URL.createObjectURL(blob);
+            const newTab = window.open(url, '_blank');
+            if (!newTab) {
+                // Popup blocked — try data URL fallback
+                const reader = new FileReader();
+                reader.onload = () => {
+                    const a = document.createElement('a');
+                    a.href = reader.result;
+                    a.download = _getFilename();
+                    a.click();
+                };
+                reader.readAsDataURL(blob);
+            }
+            showToast(translations[activeLang].toastIOSDownloadHint ||
+                'Mantén presionada la imagen para guardarla en Fotos 📷');
+        } else {
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = _getFilename();
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            setTimeout(() => URL.revokeObjectURL(url), 8000);
+        }
+    }, 'image/png');
+}
+
+// ─── COPY TO CLIPBOARD ────────────────────────────────────────────────────────
 function copyShareImageToClipboard() {
-    if (!shareCanvas) return;
+    const canvas = shareCanvasFinal || shareCanvas;
+    if (!canvas) return;
     try {
         const promise = new Promise((resolve, reject) => {
-            shareCanvas.toBlob(blob => {
+            canvas.toBlob(blob => {
                 if (blob) resolve(blob);
-                else reject(new Error("Blob generation failed"));
-            }, "image/png");
+                else reject(new Error('Blob generation failed'));
+            }, 'image/png');
         });
-        
-        const item = new ClipboardItem({ "image/png": promise });
-        navigator.clipboard.write([item]).then(() => {
-            showToast(translations[activeLang].toastCopyImageSuccess);
-        }).catch(err => {
-            console.error("Clipboard copy failed:", err);
-            showToast(translations[activeLang].toastCopyImageError);
-        });
-    } catch (err) {
-        console.error("Error copying to clipboard:", err);
+        const item = new ClipboardItem({ 'image/png': promise });
+        navigator.clipboard.write([item])
+            .then(() => showToast(translations[activeLang].toastCopyImageSuccess))
+            .catch(err => {
+                console.error('Clipboard copy failed:', err);
+                showToast(translations[activeLang].toastCopyImageError);
+            });
+    } catch(err) {
+        console.error('Error copying to clipboard:', err);
         showToast(translations[activeLang].toastCopyImageError);
     }
 }
 
+// ─── TOAST ────────────────────────────────────────────────────────────────────
 function showToast(message) {
     toast.textContent = message;
     toast.classList.add('show');
-    setTimeout(() => {
-        toast.classList.remove('show');
-    }, 3000);
+    setTimeout(() => { toast.classList.remove('show'); }, 3000);
 }
 
 window.addEventListener('DOMContentLoaded', init);
