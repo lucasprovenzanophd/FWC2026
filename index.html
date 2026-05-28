@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title data-i18n="title">Fifa World Cup 2026</title>
+    <meta name="description" content="Tracker premium y moderno de figuritas del Álbum de la Copa del Mundo FIFA 2026. Controla tus faltantes, gestiona repetidas y compara con amigos de forma sencilla.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <meta name="color-scheme" content="light dark">
+    <script>
+        {
+            const theme = localStorage.getItem("color-scheme");
+            if (theme) {
+                document.querySelector('meta[name="color-scheme"]').content = theme;
+                document.documentElement.setAttribute('data-theme', theme);
+            }
+        }
+    </script>
+</head>
+<body>
+
+    <div class="ambient-bg" aria-hidden="true"></div>
+
+    <header class="app-header">
+        <div class="header-container">
+            <div class="logo-area">
+                <span class="logo-emoji">⚽</span>
+                <div>
+                    <h1 data-i18n="title">Fifa World Cup 2026</h1>
+                    <p class="subtitle" data-i18n="subtitle">STICKER TRACKER</p>
+                </div>
+            </div>
+
+            <div class="profile-container">
+                <div class="profile-input-wrapper">
+                    <label for="username-input" data-i18n="usernameLabel">Tu Nombre:</label>
+                    <input type="text" id="username-input" maxlength="15" data-i18n-placeholder="usernamePlaceholder" placeholder="Tu nombre..." aria-label="Tu Nombre">
+                </div>
+                <div class="last-update-wrapper">
+                    <span class="last-update-label" data-i18n="lastUpdateLabel">Última actualización:</span>
+                    <span id="last-update-value" class="last-update-value">-</span>
+                </div>
+            </div>
+            
+            <div class="header-actions">
+                <select id="select-lang" class="select-lang" title="Idioma / Language / Idioma">
+                    <option value="es">ES</option>
+                    <option value="en">EN</option>
+                    <option value="pt">PT</option>
+                    <option value="it">IT</option>
+                </select>
+
+                <button id="btn-theme-toggle" class="btn-icon" title="Cambiar Tema" aria-label="Cambiar Tema">
+                    <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3v2.25m0 13.5V21M4.95 4.95l1.59 1.59m10.91 10.91l1.59 1.59M3 12h2.25m13.5 0H21M4.95 19.05l1.59-1.59m10.91-10.91l1.59-1.59M12 9a3 3 0 100 6 3 3 0 000-6z" />
+                    </svg>
+                    <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21.752 15.002A9.718 9.718 0 0118 15.75c-5.385 0-9.75-4.365-9.75-9.75 0-1.33.266-2.597.748-3.752A9.753 9.753 0 003 11.25C3 16.635 7.365 21 12.75 21a9.753 9.753 0 009.002-5.998z" />
+                    </svg>
+                </button>
+                
+                <button id="btn-share" class="btn btn-secondary">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="18" height="18">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" />
+                    </svg>
+                    <span data-i18n="btnShare">Copiar Enlace del Álbum</span>
+                </button>
+                
+                <button id="btn-compare" class="btn btn-primary">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="18" height="18">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
+                    </svg>
+                    <span data-i18n="btnCompare">Intercambiar</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        
+        <section id="instructions-card" class="instructions-section glass-card">
+            <div class="instructions-header">
+                <h2 data-i18n="instructionsTitle">¿Cómo funciona el Tracker?</h2>
+            </div>
+            <div class="instructions-grid">
+                <div class="instruction-step">
+                    <div class="step-num">1</div>
+                    <div class="step-desc">
+                        <h3 data-i18n="step1Title">Marcación de figuritas</h3>
+                        <p data-i18n="step1Desc">Haz clic en el número de cualquier figurita para cambiar su estado: Falta (gris), Tengo (verde 🟢) o Repetida (azul 🔵). Vuelve a hacer clic para volver a Falta.</p>
+                    </div>
+                </div>
+                <div class="instruction-step">
+                    <div class="step-num">2</div>
+                    <div class="step-desc">
+                        <h3 data-i18n="step2Title">Guardado automático</h3>
+                        <p data-i18n="step2Desc">Tus datos se guardan al instante en tu navegador (Local Storage) y en la dirección URL (hash). Puedes cerrar o recargar la página sin perder nada.</p>
+                    </div>
+                </div>
+                <div class="instruction-step">
+                    <div class="step-num">3</div>
+                    <div class="step-desc">
+                        <h3 data-i18n="step3Title">Intercambio inteligente</h3>
+                        <p data-i18n="step3Desc">Copia tu dirección URL con el botón 'Compartir'. Con el botón 'Intercambiar', pega el enlace de tu amigo para ver qué figuritas pueden cambiarse.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section class="dashboard-section glass-card">
+            <div class="progress-container">
+                <div class="progress-info">
+                    <h2 class="progress-title" data-i18n="albumProgress">Progreso del Álbum</h2>
+                    <span id="progress-text" class="progress-badge">0% (0 / 980)</span>
+                </div>
+                <div class="progress-bar-outer" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="album-progressbar">
+                    <div id="progress-bar-inner" class="progress-bar-inner" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-label" data-i18n="statOwnedLabel">Tengo (Únicas)</span>
+                    <span id="stat-owned" class="stat-value">0</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label" data-i18n="statMissingLabel">Faltan</span>
+                    <span id="stat-missing" class="stat-value text-red">980</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label" data-i18n="statDuplicatesLabel">Repetidas</span>
+                    <span id="stat-duplicates" class="stat-value text-blue">0</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="controls-section glass-card">
+            <div class="controls-row">
+                <div class="search-box">
+                    <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="18" height="18">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                    </svg>
+                    <input type="text" id="search-input" data-i18n-placeholder="searchPlaceholder" placeholder="Buscar selección..." aria-label="Buscar selección">
+                    <button id="btn-clear-search" class="btn-clear-search" aria-label="Limpiar búsqueda" style="display: none;">&times;</button>
+                </div>
+                
+                <div class="filter-group" role="group" aria-label="Filtrar por estado">
+                    <button id="filter-all" class="btn-tab active" data-i18n="filterAll">Todas</button>
+                    <button id="filter-missing" class="btn-tab" data-i18n="filterMissing">Faltantes</button>
+                    <button id="filter-duplicates" class="btn-tab" data-i18n="filterDuplicates">Repetidas</button>
+                </div>
+            </div>
+            
+            <div class="groups-tab-container scroller" role="tablist">
+                <button id="tab-all" class="group-tab active" role="tab" aria-selected="true" aria-controls="matrix-panel" data-i18n="tabAll">Todos los Grupos</button>
+                <button id="tab-ad" class="group-tab" role="tab" aria-selected="false" aria-controls="matrix-panel" data-i18n="tabAd">Grupos A - D</button>
+                <button id="tab-eh" class="group-tab" role="tab" aria-selected="false" aria-controls="matrix-panel" data-i18n="tabEh">Grupos E - H</button>
+                <button id="tab-il" class="group-tab" role="tab" aria-selected="false" aria-controls="matrix-panel" data-i18n="tabIl">Grupos I - L</button>
+                <button id="tab-fwc" class="group-tab" role="tab" aria-selected="false" aria-controls="matrix-panel" data-i18n="tabFwc">Especial (FWC)</button>
+            </div>
+        </section>
+
+        <section id="matrix-panel" class="matrix-section">
+            <div id="matrix-container" class="matrix-grid"></div>
+        </section>
+        
+        <section class="quick-actions-section">
+            <button id="btn-export-import" class="btn btn-tertiary">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="16" height="16">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5m-13.5-9L12 3m0 0l4.5 4.5M12 3v13.5" />
+                </svg>
+                <span data-i18n="btnExportImport">Respaldar / Importar</span>
+            </button>
+            <button id="btn-reset" class="btn btn-danger-link">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="16" height="16">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+                <span data-i18n="btnReset">Reiniciar Álbum</span>
+            </button>
+        </section>
+        
+    </main>
+
+    <footer class="app-footer">
+        <div class="footer-content">
+            <p><span data-i18n="title">Fifa World Cup 2026</span> Sticker Tracker Premium &copy; 2026</p>
+            <p class="small" data-i18n="footerText">Diseñado con tecnología estática. Se ejecuta completamente en tu navegador.</p>
+            <p class="author" style="margin-top: 10px; font-size: 13px; font-weight: 600;"><span data-i18n="footerAuthor">Creado por</span> <a href="https://www.linkedin.com/in/lucasprovenzano" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color); text-decoration: none;">Lucas Provenzano</a></p>
+        </div>
+    </footer>
+
+    <dialog id="dlg-compare" class="glass-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 data-i18n="compareTitle">Intercambiar con Amigos</h2>
+                <button id="btn-close-compare" class="btn-close-modal" aria-label="Cerrar modal">&times;</button>
+            </div>
+            
+            <div class="modal-body">
+                <p class="modal-instruction" data-i18n="compareInstruction">Pega aquí el enlace del tracker de tu amigo para calcular automáticamente qué figuritas pueden intercambiar:</p>
+                <div class="compare-input-group">
+                    <input type="text" id="friend-link-input" data-i18n-placeholder="friendLinkPlaceholder" placeholder="Enlace del tracker de tu amigo..." aria-label="Enlace del tracker de tu amigo">
+                    <button id="btn-do-compare" class="btn btn-primary" data-i18n="btnDoCompareText">Comparar</button>
+                </div>
+
+                <div id="compare-friend-meta" class="compare-friend-meta" style="display: none;"></div>
+                
+                <div id="compare-results" class="compare-results" style="display: none;">
+                    <div class="results-layout">
+                        <div class="result-column">
+                            <h3 class="result-title text-green">
+                                <span data-i18n="friendGivesTitle">Tu amigo te da</span>
+                                <span id="count-friends-duplicates" class="badge-count bg-green">0</span>
+                            </h3>
+                            <p class="result-subtitle" data-i18n="friendGivesSubtitle">Figuritas que tu amigo tiene repetidas (State 2) y a ti te faltan (State 0):</p>
+                            <div class="list-container scroller" id="list-friends-duplicates"></div>
+                        </div>
+                        
+                        <div class="result-column">
+                            <h3 class="result-title text-blue">
+                                <span data-i18n="userGivesTitle">Tú le das a tu amigo</span>
+                                <span id="count-user-duplicates" class="badge-count bg-blue">0</span>
+                            </h3>
+                            <p class="result-subtitle" data-i18n="userGivesSubtitle">Figuritas que tú tienes repetidas (State 2) y a tu amigo le faltan (State 0):</p>
+                            <div class="list-container scroller" id="list-user-duplicates"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </dialog>
+
+    <dialog id="dlg-export-import" class="glass-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 data-i18n="exportImportTitle">Respaldar e Importar Datos</h2>
+                <button id="btn-close-export" class="btn-close-modal" aria-label="Cerrar modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-tab-headers">
+                    <button id="btn-tab-export" class="modal-tab-btn active" data-i18n="tabExport">Exportar</button>
+                    <button id="btn-tab-import" class="modal-tab-btn" data-i18n="tabImport">Importar</button>
+                </div>
+                
+                <div id="export-pane" class="modal-pane">
+                    <p class="modal-instruction" data-i18n="exportInstruction">Copia este código de respaldo y guárdalo en un lugar seguro. Contiene todo tu progreso actual:</p>
+                    <textarea id="export-textarea" readonly aria-label="Código de exportación de datos"></textarea>
+                    <button id="btn-copy-backup" class="btn btn-secondary btn-full" data-i18n="btnCopyBackupText">Copiar Código de Respaldo</button>
+                </div>
+                
+                <div id="import-pane" class="modal-pane" style="display: none;">
+                    <p class="modal-instruction text-warning" data-i18n="importInstruction">Pega aquí tu código de respaldo JSON o un enlace hash completo. Esto sobrescribirá tu estado actual:</p>
+                    <textarea id="import-textarea" data-i18n-placeholder="importPlaceholder" placeholder="Pega el código JSON o enlace hash aquí..." aria-label="Código de importación de datos"></textarea>
+                    <div id="import-error-msg" class="error-msg" style="display: none;" data-i18n="importErrorMsgText">El código proporcionado no es válido.</div>
+                    <button id="btn-do-import" class="btn btn-primary btn-full" data-i18n="btnDoImportText">Restaurar Datos</button>
+                </div>
+            </div>
+        </div>
+    </dialog>
+
+    <dialog id="dlg-confirm-reset" class="glass-modal dialog-narrow">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 data-i18n="resetTitle">¿Reiniciar Álbum?</h2>
+                <button id="btn-close-reset-dlg" class="btn-close-modal" aria-label="Cerrar diálogo">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p data-i18n="resetWarning1">Esta acción borrará todo tu progreso actual y marcará todas las figuritas como faltantes.</p>
+                <p><strong data-i18n="resetWarning2">Esta acción no se puede deshacer.</strong></p>
+                <div class="dialog-actions">
+                    <button id="btn-cancel-reset" class="btn btn-secondary" data-i18n="btnCancelResetText">Cancelar</button>
+                    <button id="btn-confirm-reset" class="btn btn-danger" data-i18n="btnConfirmResetText">Sí, borrar todo</button>
+                </div>
+            </div>
+        </div>
+    </dialog>
+
+    <div id="toast" class="toast" role="alert" aria-live="polite"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
