@@ -111,15 +111,15 @@ const translations = {
         noResultsText: "No se encontraron selecciones coincidentes.",
         toastThemeChanged: "¡Tema cambiado!",
         toastCopyShareError: "No se pudo copiar el enlace al portapapeles.",
-        usernameLabel: "Tu Nombre:",
-        usernamePlaceholder: "Tu nombre...",
-        lastUpdateLabel: "Última actualización:",
+        usernameLabel: "Álbum de:",
+        usernamePlaceholder: "Nombre...",
+        lastUpdateLabel: "Actualizado:",
         friendGivesTitleWithName: "{name} te da",
         userGivesTitleWithName: "Tú le das a {name}",
         friendLastUpdated: "Última actualización de {name}: {date}",
         btnShareImage: "Generar Imagen",
         shareImageTitle: "Resumen para Compartir",
-        shareImageInstruction: "Aquí tienes una imagen con el resumen de tu álbum lista para descargar o copiar:",
+        shareImageInstruction: "Aquí tienes una imagen con el resumen de tu álbum. Haz clic derecho (o mantén presionado en el celular) para descargarla o copiarla:",
         btnDownloadCanvas: "Descargar Imagen",
         btnCopyCanvas: "Copiar al Portapapeles",
         toastCopyImageSuccess: "¡Imagen copiada al portapapeles!",
@@ -128,7 +128,17 @@ const translations = {
         shareImageNoDuplicates: "Ninguna figurita repetida.",
         shareImageNoMissing: "¡Álbum completo! Ninguna figurita faltante.",
         localSecurityNotice: "Nota: Debido a restricciones de seguridad de archivos locales en este navegador, la descarga y copia automática pueden estar limitadas. Mantén presionada la imagen para guardarla.",
-        toastIOSDownloadHint: "En iPhone: mantén presionada la imagen para guardarla en Fotos 📷"
+        toastIOSDownloadHint: "En iPhone: mantén presionada la imagen para guardarla en Fotos 📷",
+        actionShareTitle: "Copiar Enlace",
+        actionShareDesc: "Copia la dirección URL de tu progreso para compartir con amigos.",
+        actionCompareTitle: "Intercambiar",
+        actionCompareDesc: "Pega el enlace de un amigo para ver qué figuritas pueden cambiarse.",
+        actionImageTitle: "Generar Imagen",
+        actionImageDesc: "Crea un resumen visual de tu progreso listo para guardar.",
+        btnResetHeader: "Iniciar Álbum Blanco",
+        shareTradeImageTitle: "Imagen de Intercambio",
+        shareTradeImageInstruction: "Aquí tienes la imagen con el resumen del intercambio. Haz clic derecho (o mantén presionado en el celular) para descargarla o copiarla:",
+        btnCompareImage: "Generar Imagen de Intercambio"
     },
     en: {
         title: "Fifa World Cup 2026",
@@ -190,15 +200,15 @@ const translations = {
         noResultsText: "No matching teams found.",
         toastThemeChanged: "Theme changed!",
         toastCopyShareError: "Could not copy link to clipboard.",
-        usernameLabel: "Your Name:",
-        usernamePlaceholder: "Your name...",
-        lastUpdateLabel: "Last updated:",
+        usernameLabel: "Album of:",
+        usernamePlaceholder: "Name...",
+        lastUpdateLabel: "Updated:",
         friendGivesTitleWithName: "{name} gives you",
         userGivesTitleWithName: "You give {name}",
         friendLastUpdated: "Last updated by {name}: {date}",
         btnShareImage: "Generate Image",
         shareImageTitle: "Shareable Summary",
-        shareImageInstruction: "Here is an image with your album summary ready to download or copy:",
+        shareImageInstruction: "Here is an image with your album summary. Right-click or long-press on mobile to save or copy it:",
         btnDownloadCanvas: "Download Image",
         btnCopyCanvas: "Copy to Clipboard",
         toastCopyImageSuccess: "Image copied to clipboard!",
@@ -207,7 +217,17 @@ const translations = {
         shareImageNoDuplicates: "No duplicate stickers.",
         shareImageNoMissing: "Album complete! No missing stickers.",
         localSecurityNotice: "Note: Due to local file security restrictions in this browser, automatic download and copy may be limited. Long press the image to save it.",
-        toastIOSDownloadHint: "On iPhone: long-press the image to save it to Photos 📷"
+        toastIOSDownloadHint: "On iPhone: long-press the image to save it to Photos 📷",
+        actionShareTitle: "Copy Link",
+        actionShareDesc: "Copy your progress URL to share with friends.",
+        actionCompareTitle: "Trade",
+        actionCompareDesc: "Paste a friend's link to see which stickers you can swap.",
+        actionImageTitle: "Generate Image",
+        actionImageDesc: "Create a visual summary of your progress ready to save.",
+        btnResetHeader: "Start Blank Album",
+        shareTradeImageTitle: "Trade Summary Image",
+        shareTradeImageInstruction: "Here is the image with your trade summary. Right-click or long-press on mobile to save or copy it:",
+        btnCompareImage: "Generate Trade Image"
     },
     pt: {
         title: "Fifa World Cup 2026",
@@ -248,7 +268,7 @@ const translations = {
         userGivesSubtitle: "Figurinhas que você tem repetidas (State 2) e seu amigo está precisando (State 0):",
         compareNoMatches: "Nenhuma figurinha coincide para este caso.",
         compareInvalidLink: "O link ou código do amigo não é válido.",
-        exportImportTitle: "Backup e Importar Dados",
+        exportImportTitle: "Backup e Importar Dati",
         tabExport: "Exportar",
         tabImport: "Importar",
         exportInstruction: "Copie este código de backup e salve em um local seguro. Ele contém todo o seu progresso atual:",
@@ -258,7 +278,7 @@ const translations = {
         importErrorMsgText: "O código fornecido não é válido.",
         btnDoImportText: "Restaurar Dados",
         resetTitle: "Reiniciar Álbum?",
-        resetWarning1: "Esta ação apagará todo o seu progresso atual e marcará todas as figurinhas como faltando.",
+        resetWarning1: "Esta ação apagará todo o seu progresso atual e marcará todas las figurinhas como faltando.",
         resetWarning2: "Esta ação não pode ser desfeita.",
         btnCancelResetText: "Cancelar",
         btnConfirmResetText: "Sim, apagar tudo",
@@ -269,15 +289,15 @@ const translations = {
         noResultsText: "Nenhuma seleção correspondente encontrada.",
         toastThemeChanged: "Tema alterado!",
         toastCopyShareError: "Não foi possível copiar o link para a área de transferência.",
-        usernameLabel: "Seu Nome:",
-        usernamePlaceholder: "Seu nome...",
-        lastUpdateLabel: "Última atualização:",
+        usernameLabel: "Álbum de:",
+        usernamePlaceholder: "Nome...",
+        lastUpdateLabel: "Atualizado:",
         friendGivesTitleWithName: "{name} te dá",
         userGivesTitleWithName: "Você dá para {name}",
         friendLastUpdated: "Última atualização de {name}: {date}",
         btnShareImage: "Gerar Imagem",
-        shareImageTitle: "Resumo para Compartilhar",
-        shareImageInstruction: "Aqui está uma imagem com o resumo do seu álbum pronta para baixar ou copiar:",
+        shareImageTitle: "Resumen para Compartilhar",
+        shareImageInstruction: "Aqui está uma imagem com o resumo do seu álbum. Clique com o botão direito ou pressione e segure no celular para salvar ou copiar:",
         btnDownloadCanvas: "Baixar Imagem",
         btnCopyCanvas: "Copiar para Área de Transferência",
         toastCopyImageSuccess: "Imagem copiada para a área de transferência!",
@@ -286,7 +306,17 @@ const translations = {
         shareImageNoDuplicates: "Nenhuma figurinha repetida.",
         shareImageNoMissing: "Álbum completo! Nenhuma figurinha faltando.",
         localSecurityNotice: "Nota: Devido a restrições de segurança de arquivos locais neste navegador, o download e a cópia automática podem estar limitados. Pressione e segure a imagem para salvá-la.",
-        toastIOSDownloadHint: "No iPhone: pressione e segure a imagem para salvar nas Fotos 📷"
+        toastIOSDownloadHint: "No iPhone: pressione e segure a imagem para salvar nas Fotos 📷",
+        actionShareTitle: "Copiar Link",
+        actionShareDesc: "Copie a URL do seu progresso para compartilhar com amigos.",
+        actionCompareTitle: "Trocar",
+        actionCompareDesc: "Cole o link de um amigo para ver quais figurinhas trocar.",
+        actionImageTitle: "Gerar Imagem",
+        actionImageDesc: "Crie um resumo visual do seu progresso pronto para salvar.",
+        btnResetHeader: "Iniciar Álbum em Branco",
+        shareTradeImageTitle: "Imagem de Resumo da Troca",
+        shareTradeImageInstruction: "Aqui está a imagem com o resumo da troca. Clique com o botão direito ou pressione e segure no celular para salvar ou copiar:",
+        btnCompareImage: "Gerar Imagem de Troca"
     },
     it: {
         title: "Fifa World Cup 2026",
@@ -348,15 +378,15 @@ const translations = {
         noResultsText: "Nessuna squadra corrispondente trovata.",
         toastThemeChanged: "Tema cambiato!",
         toastCopyShareError: "Impossibile copiare il link negli appunti.",
-        usernameLabel: "Il tuo nome:",
-        usernamePlaceholder: "Il tuo nome...",
-        lastUpdateLabel: "Ultimo aggiornamento:",
+        usernameLabel: "Album di:",
+        usernamePlaceholder: "Nome...",
+        lastUpdateLabel: "Aggiornato:",
         friendGivesTitleWithName: "{name} ti dà",
         userGivesTitleWithName: "Tu dai a {name}",
         friendLastUpdated: "Ultimo aggiornamento di {name}: {date}",
         btnShareImage: "Genera Immagine",
         shareImageTitle: "Riepilogo da Condividere",
-        shareImageInstruction: "Ecco un'immagine con il riepilogo del tuo album pronta da scaricare o copiare:",
+        shareImageInstruction: "Ecco un'immagine con il riepilogo del tuo album. Fai clic con il pulsante destro o tieni premuto sul cellulare per salvare o copiare:",
         btnDownloadCanvas: "Scarica Immagine",
         btnCopyCanvas: "Copia negli Appunti",
         toastCopyImageSuccess: "Immagine copiata negli appunti!",
@@ -365,7 +395,17 @@ const translations = {
         shareImageNoDuplicates: "Nessuna figurina doppia.",
         shareImageNoMissing: "Album completato! Nessuna figurina mancante.",
         localSecurityNotice: "Nota: A causa delle restrizioni di sicurezza dei file locali in questo browser, il download e la copia automatica potrebbero essere limitati. Tieni premuta l'immagine per salvarla.",
-        toastIOSDownloadHint: "Su iPhone: tieni premuta l'immagine per salvarla nelle Foto 📷"
+        toastIOSDownloadHint: "Su iPhone: tieni premuta l'immagine per salvarla nelle Foto 📷",
+        actionShareTitle: "Copia Link",
+        actionShareDesc: "Copia l'URL dei tuoi progressi da condividere con gli amici.",
+        actionCompareTitle: "Scambia",
+        actionCompareDesc: "Incolla il link di un amico per vedere quali figurine scambiare.",
+        actionImageTitle: "Genera Immagine",
+        actionImageDesc: "Crea un riepilogo visivo dei tuoi progressi pronto da salvare.",
+        btnResetHeader: "Inizia Album Vuoto",
+        shareTradeImageTitle: "Immagine di Riepilogo dello Scambio",
+        shareTradeImageInstruction: "Ecco l'immagine con il riepilogo dello scambio. Fai clic con il pulsante destro o tieni premuto sul cellulare per salvare o copiare:",
+        btnCompareImage: "Genera Immagine di Scambio"
     }
 };
 
@@ -434,10 +474,20 @@ const btnDownloadCanvas = document.getElementById('btn-download-canvas');
 const btnCopyCanvas = document.getElementById('btn-copy-canvas');
 const shareCanvas = document.getElementById('share-canvas');
 const shareCanvasPreview = document.getElementById('share-canvas-preview');
+const btnHeaderReset = document.getElementById('btn-header-reset');
+const btnCompareImage = document.getElementById('btn-compare-image');
+const dlgShareTradeImage = document.getElementById('dlg-share-trade-image');
+const btnCloseShareTradeImage = document.getElementById('btn-close-share-trade-image');
+const shareTradeCanvas = document.getElementById('share-trade-canvas');
+const shareTradeCanvasPreview = document.getElementById('share-trade-canvas-preview');
 
 let username = '';
 let lastUpdate = 0;
 let shareCanvasFinal = null; // cropped canvas for download/copy
+let shareTradeCanvasFinal = null;
+let comparedFriendState = null;
+let comparedFriendName = '';
+let comparedFriendTimestamp = 0;
 
 function init() {
     setupTheme();
@@ -1086,6 +1136,25 @@ function setupEventListeners() {
             }
         });
     }
+
+    if (btnHeaderReset) {
+        btnHeaderReset.addEventListener('click', () => dlgConfirmReset.showModal());
+    }
+    if (btnCompareImage) {
+        btnCompareImage.addEventListener('click', openShareTradeImageModal);
+    }
+    if (btnCloseShareTradeImage) {
+        btnCloseShareTradeImage.addEventListener('click', () => dlgShareTradeImage.close());
+    }
+    if (dlgShareTradeImage) {
+        dlgShareTradeImage.addEventListener('click', (e) => {
+            const rect = dlgShareTradeImage.getBoundingClientRect();
+            if (e.clientX < rect.left || e.clientX > rect.right ||
+                e.clientY < rect.top || e.clientY > rect.bottom) {
+                dlgShareTradeImage.close();
+            }
+        });
+    }
 }
 
 function setActiveFilter(filter, button) {
@@ -1226,6 +1295,9 @@ function compareStates() {
     }
     
     const friendState = decompressState(friendStateHash);
+    comparedFriendState = friendState;
+    comparedFriendName = friendName;
+    comparedFriendTimestamp = friendTimestamp;
     const friendGivesList = [];
     const userGivesList = [];
     for (let i = 0; i < TOTAL_ITEMS; i++) {
@@ -1485,7 +1557,7 @@ function generateShareImage() {
     y += 36;
     ctx.fillStyle = '#7c6fdb';
     ctx.font = '700 17px Outfit, sans-serif';
-    ctx.fillText('STICKER TRACKER PREMIUM', 63, y);
+    ctx.fillText('STICKER TRACKER', 63, y);
     y += 30;
     ctx.strokeStyle = 'rgba(255,255,255,0.07)'; ctx.lineWidth = 1;
     ctx.beginPath(); ctx.moveTo(60, y); ctx.lineTo(1020, y); ctx.stroke();
@@ -1703,6 +1775,226 @@ function copyShareImageToClipboard() {
     } catch(err) {
         console.error('Error copying to clipboard:', err);
         showToast(translations[activeLang].toastCopyImageError);
+    }
+}
+
+// ─── TRADE IMAGE GENERATION ───────────────────────────────────────────────────
+function openShareTradeImageModal() {
+    if (dlgShareTradeImage) dlgShareTradeImage.showModal();
+    // Wait for custom fonts before drawing to avoid blank/mis-measured text
+    document.fonts.ready.then(() => {
+        try { generateTradeImage(); }
+        catch (err) { console.error('Error generating trade image:', err); }
+    });
+}
+
+function getTradeGroupedData(friendState, isUserGiving) {
+    const groupOrder = [
+        'Grupo A','Grupo B','Grupo C','Grupo D',
+        'Grupo E','Grupo F','Grupo G','Grupo H',
+        'Grupo I','Grupo J','Grupo K','Grupo L','Especial'
+    ];
+    const labelMap = {
+        'Grupo A':'A','Grupo B':'B','Grupo C':'C','Grupo D':'D',
+        'Grupo E':'E','Grupo F':'F','Grupo G':'G','Grupo H':'H',
+        'Grupo I':'I','Grupo J':'J','Grupo K':'K','Grupo L':'L','Especial':'FWC'
+    };
+    const groupMap = {};
+    groupOrder.forEach(g => { groupMap[g] = []; });
+
+    for (let tIdx = 0; tIdx < teams.length; tIdx++) {
+        const team = teams[tIdx];
+        const stickers = [];
+        for (let s = 0; s < 20; s++) {
+            const idx = tIdx * 20 + s;
+            // If isUserGiving is true: user has duplicate (state 2), friend is missing (friendState 0)
+            // If isUserGiving is false: friend has duplicate (friendState 2), user is missing (state 0)
+            const condition = isUserGiving 
+                ? (state[idx] === 2 && friendState[idx] === 0)
+                : (friendState[idx] === 2 && state[idx] === 0);
+            if (condition) {
+                stickers.push(s + 1);
+            }
+        }
+        if (stickers.length > 0) {
+            const key = team.group || 'Especial';
+            if (!groupMap[key]) groupMap[key] = [];
+            groupMap[key].push({ emoji: team.emoji, code: team.code, stickers });
+        }
+    }
+    return groupOrder
+        .filter(g => groupMap[g] && groupMap[g].length > 0)
+        .map(g => ({ label: labelMap[g] || g, teams: groupMap[g] }));
+}
+
+function drawTradeGroupSection(ctx, y, friendStateVal, isUserGiving, accentColor, title, noItemsText) {
+    y += 30;
+    // Accent bar + title
+    ctx.fillStyle = accentColor;
+    ctx.fillRect(60, y, 4, 28);
+    ctx.font = 'bold 20px Outfit, sans-serif';
+    ctx.fillStyle = accentColor;
+    ctx.fillText(title, 78, y + 21);
+    y += 46;
+
+    // Thin separator
+    ctx.strokeStyle = 'rgba(255,255,255,0.06)';
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(60, y); ctx.lineTo(1020, y); ctx.stroke();
+    y += 16;
+
+    const data = getTradeGroupedData(friendStateVal, isUserGiving);
+
+    if (data.length === 0) {
+        ctx.fillStyle = '#718096';
+        ctx.font = '500 16px Inter, sans-serif';
+        ctx.fillText(noItemsText, 60, y + 18);
+        return y + 52;
+    }
+
+    for (const group of data) {
+        const isLong = group.label.length > 1; // 'FWC'
+        const badgeW = isLong ? 46 : 30;
+        const badgeH = 26;
+        const rowBaseY = y;
+
+        // Badge pill
+        drawRoundedRect(ctx, 60, rowBaseY, badgeW, badgeH, 7,
+            accentColor + '28', accentColor + '88');
+        ctx.fillStyle = accentColor;
+        ctx.font = 'bold 12px Outfit, sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText(group.label, 60 + badgeW / 2, rowBaseY + 17);
+        ctx.textAlign = 'left';
+
+        // Team entries as flowing text
+        const lineStr = group.teams
+            .map(t => t.emoji + t.code + ':' + t.stickers.join(','))
+            .join('   ');
+        ctx.fillStyle = '#cbd5e0';
+        ctx.font = '500 15px Inter, sans-serif';
+        const textX = 60 + badgeW + 14;
+        const textStartY = rowBaseY + 18;
+        const endY = wrapText(ctx, lineStr, textX, textStartY, 950 - badgeW, 24, 0);
+
+        y = Math.max(rowBaseY + 34, endY + 14);
+    }
+    return y + 8;
+}
+
+function generateTradeImage() {
+    if (!shareTradeCanvas || !comparedFriendState) return;
+    shareTradeCanvasFinal = null;
+
+    const W = 1080;
+    const MAX_H = 3200; // draw on a tall canvas, crop afterwards
+
+    shareTradeCanvas.width = W;
+    shareTradeCanvas.height = MAX_H;
+    const ctx = shareTradeCanvas.getContext('2d');
+
+    // Background grad
+    const bgGrad = ctx.createLinearGradient(0, 0, 0, MAX_H);
+    bgGrad.addColorStop(0, '#0d0b21');
+    bgGrad.addColorStop(0.45, '#111030');
+    bgGrad.addColorStop(1, '#0a0c18');
+    ctx.fillStyle = bgGrad;
+    ctx.fillRect(0, 0, W, MAX_H);
+
+    // Ambient glows
+    const g1 = ctx.createRadialGradient(160, 260, 20, 160, 260, 480);
+    g1.addColorStop(0, 'rgba(88,86,214,0.18)'); g1.addColorStop(1, 'rgba(88,86,214,0)');
+    ctx.fillStyle = g1; ctx.beginPath(); ctx.arc(160, 260, 480, 0, Math.PI*2); ctx.fill();
+
+    const g2 = ctx.createRadialGradient(980, 500, 20, 980, 500, 520);
+    g2.addColorStop(0, 'rgba(248,113,113,0.10)'); g2.addColorStop(1, 'rgba(248,113,113,0)');
+    ctx.fillStyle = g2; ctx.beginPath(); ctx.arc(980, 500, 520, 0, Math.PI*2); ctx.fill();
+
+    // Subtle rings
+    ctx.strokeStyle = 'rgba(255,255,255,0.012)'; ctx.lineWidth = 1.5;
+    for (let i = 0; i < 4; i++) {
+        ctx.beginPath(); ctx.arc(W/2, 380, 220 + i*190, 0, Math.PI*2); ctx.stroke();
+    }
+
+    let y = 0;
+
+    // Header
+    y += 88;
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 46px Outfit, sans-serif';
+    ctx.fillText('\u26BD ' + (translations[activeLang].shareTradeImageTitle || 'Imagen de Intercambio'), 60, y);
+    y += 36;
+    ctx.fillStyle = '#7c6fdb';
+    ctx.font = '700 17px Outfit, sans-serif';
+    ctx.fillText('STICKER TRACKER', 63, y);
+    y += 30;
+    ctx.strokeStyle = 'rgba(255,255,255,0.07)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(60, y); ctx.lineTo(1020, y); ctx.stroke();
+
+    // Both collectors card
+    y += 22;
+    drawRoundedRect(ctx, 60, y, 960, 112, 20, 'rgba(255,255,255,0.03)', 'rgba(255,255,255,0.08)');
+
+    const name1 = username || (activeLang === 'es' ? 'Tú' : 'You');
+    const name2 = comparedFriendName || (activeLang === 'es' ? 'Tu amigo' : 'Your friend');
+
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 30px Outfit, sans-serif';
+    ctx.fillText(`${name1} \u21c4 ${name2}`, 98, y + 46);
+
+    ctx.fillStyle = '#718096';
+    ctx.font = '500 17px Inter, sans-serif';
+    const tradeTimeText = translations[activeLang].lastUpdateLabel || 'Actualizado:';
+    ctx.fillText(`${tradeTimeText} ${new Intl.DateTimeFormat(activeLang === 'es' ? 'es-ES' : 'en-US', { dateStyle: 'medium', timeStyle: 'short' }).format(new Date())}`, 98, y + 84);
+    
+    y += 112 + 20;
+
+    // Duplicates list (Friend gives you)
+    const titleFriendGives = (comparedFriendName 
+        ? translations[activeLang].friendGivesTitleWithName.replace('{name}', comparedFriendName)
+        : translations[activeLang].friendGivesTitle).toUpperCase();
+    const noFriendGives = translations[activeLang].compareNoMatches || 'Ninguna figurita coincide.';
+    y = drawTradeGroupSection(ctx, y, comparedFriendState, false, '#10b981', titleFriendGives, noFriendGives);
+
+    // Divider
+    y += 12;
+    ctx.strokeStyle = 'rgba(255,255,255,0.05)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(60, y); ctx.lineTo(1020, y); ctx.stroke();
+
+    // Missing list (You give friend)
+    const titleUserGives = (comparedFriendName 
+        ? translations[activeLang].userGivesTitleWithName.replace('{name}', comparedFriendName)
+        : translations[activeLang].userGivesTitle).toUpperCase();
+    const noUserGives = translations[activeLang].compareNoMatches || 'Ninguna figurita coincide.';
+    y = drawTradeGroupSection(ctx, y, comparedFriendState, true, '#3b82f6', titleUserGives, noUserGives);
+
+    // Footer
+    y += 30;
+    ctx.strokeStyle = 'rgba(255,255,255,0.04)'; ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.moveTo(60, y); ctx.lineTo(1020, y); ctx.stroke();
+    ctx.fillStyle = '#4a5568';
+    ctx.font = '500 14px Inter, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.fillText('\u26BD FWC 2026 Sticker Tracker', W/2, y+28);
+    ctx.textAlign = 'left';
+
+    const cropH = y + 60;
+
+    shareTradeCanvasFinal = document.createElement('canvas');
+    shareTradeCanvasFinal.width  = W;
+    shareTradeCanvasFinal.height = cropH;
+    shareTradeCanvasFinal.getContext('2d').drawImage(shareTradeCanvas, 0, 0);
+
+    try {
+        if (shareTradeCanvasPreview) {
+            shareTradeCanvasPreview.src = shareTradeCanvasFinal.toDataURL('image/png');
+            shareTradeCanvasPreview.style.display = 'block';
+        }
+        shareTradeCanvas.style.display = 'none';
+    } catch(e) {
+        console.warn('Trade canvas toDataURL failed:', e);
+        shareTradeCanvas.style.display = 'block';
+        if (shareTradeCanvasPreview) shareTradeCanvasPreview.style.display = 'none';
     }
 }
 

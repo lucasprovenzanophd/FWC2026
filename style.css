@@ -1445,7 +1445,7 @@ h1, h2, h3, h4, h5, h6 {
     border: 1px solid var(--border-card);
 }
 
-#share-canvas, #share-canvas-preview {
+#share-canvas, #share-canvas-preview, #share-trade-canvas, #share-trade-canvas-preview {
     max-width: 100%;
     max-height: 420px;
     height: auto;
@@ -1475,3 +1475,106 @@ h1, h2, h3, h4, h5, h6 {
 .actions-section .dashboard-actions {
     margin-top: 0;
 }
+
+/* Actions Grid Design */
+.actions-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 100%;
+}
+
+@media (max-width: 900px) {
+    .actions-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.action-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-card);
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: transform 0.2s, box-shadow 0.2s;
+    position: relative;
+    overflow: hidden;
+}
+
+[data-theme="light"] .action-card {
+    background: rgba(0, 0, 0, 0.015);
+}
+
+.action-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.05);
+}
+
+.action-card.featured {
+    border-color: var(--primary-color);
+    background: rgba(88, 86, 214, 0.03);
+}
+
+[data-theme="dark"] .action-card.featured {
+    background: rgba(128, 90, 213, 0.04);
+}
+
+.action-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.action-icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: var(--btn-secondary-bg);
+}
+
+.action-card.featured .action-icon-wrapper {
+    background: rgba(88, 86, 214, 0.1);
+    color: var(--primary-color);
+}
+
+.action-header h3 {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.action-desc {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    flex-grow: 1;
+}
+
+/* Header Reset Button styling */
+#btn-header-reset {
+    margin-left: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0 10px;
+    height: 32px;
+    border-radius: 8px;
+    font-size: 12px;
+}
+
+#btn-header-reset svg {
+    margin: 0;
+}
+
+@media (max-width: 1024px) {
+    #btn-header-reset {
+        margin-left: 0;
+        margin-top: 4px;
+    }
+}
+

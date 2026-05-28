@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title data-i18n="title">Fifa World Cup 2026</title>
-    <meta name="description" content="Tracker premium y moderno de figuritas del Álbum de la Copa del Mundo FIFA 2026. Controla tus faltantes, gestiona repetidas y compara con amigos de forma sencilla.">
+    <meta name="description" content="Tracker moderno de figuritas del Álbum de la Copa del Mundo FIFA 2026. Controla tus faltantes, gestiona repetidas y compara con amigos de forma sencilla.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -36,13 +36,19 @@
 
             <div class="profile-container">
                 <div class="profile-input-wrapper">
-                    <label for="username-input" data-i18n="usernameLabel">Tu Nombre:</label>
-                    <input type="text" id="username-input" maxlength="15" data-i18n-placeholder="usernamePlaceholder" placeholder="Tu nombre..." aria-label="Tu Nombre">
+                    <label for="username-input" data-i18n="usernameLabel">Álbum de:</label>
+                    <input type="text" id="username-input" maxlength="15" data-i18n-placeholder="usernamePlaceholder" placeholder="Tu nombre..." aria-label="Propietario del Álbum">
                 </div>
                 <div class="last-update-wrapper">
-                    <span class="last-update-label" data-i18n="lastUpdateLabel">Última actualización:</span>
+                    <span class="last-update-label" data-i18n="lastUpdateLabel">Actualizado:</span>
                     <span id="last-update-value" class="last-update-value">-</span>
                 </div>
+                <button id="btn-header-reset" class="btn btn-danger-link btn-xs" title="Iniciar Álbum Blanco" aria-label="Iniciar Álbum Blanco">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="16" height="16">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                    </svg>
+                    <span class="btn-text" data-i18n="btnResetHeader">Iniciar Álbum Blanco</span>
+                </button>
             </div>
             
             <div class="header-actions">
@@ -125,27 +131,51 @@
         </section>
 
         <section class="actions-section glass-card">
-            <div class="dashboard-actions">
-                <button id="btn-share" class="btn btn-secondary">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="18" height="18">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" />
-                    </svg>
-                    <span data-i18n="btnShare">Copiar Enlace del Álbum</span>
-                </button>
+            <div class="actions-grid">
+                <div class="action-card">
+                    <div class="action-header">
+                        <div class="action-icon-wrapper text-blue">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="22" height="22">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 100 2.186m0-2.186l9.566-5.314m-9.566 7.5l9.566 5.314m0 0a2.25 2.25 0 103.935 2.186 2.25 2.25 0 00-3.935-2.186zm0-12.814a2.25 2.25 0 103.933-2.185 2.25 2.25 0 00-3.933 2.185z" />
+                            </svg>
+                        </div>
+                        <h3 data-i18n="actionShareTitle">Copiar Enlace</h3>
+                    </div>
+                    <p class="action-desc" data-i18n="actionShareDesc">Copia la dirección URL de tu progreso para compartir con amigos.</p>
+                    <button id="btn-share" class="btn btn-secondary btn-full">
+                        <span data-i18n="btnShare">Copiar Enlace del Álbum</span>
+                    </button>
+                </div>
                 
-                <button id="btn-compare" class="btn btn-primary">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="18" height="18">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
-                    </svg>
-                    <span data-i18n="btnCompare">Intercambiar</span>
-                </button>
+                <div class="action-card featured">
+                    <div class="action-header">
+                        <div class="action-icon-wrapper text-green">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="22" height="22">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 21L3 16.5m0 0L7.5 12M3 16.5h13.5m0-13.5L21 7.5m0 0L16.5 12M21 7.5H7.5" />
+                            </svg>
+                        </div>
+                        <h3 data-i18n="actionCompareTitle">Intercambiar</h3>
+                    </div>
+                    <p class="action-desc" data-i18n="actionCompareDesc">Pega el enlace de un amigo para ver qué figuritas pueden cambiarse.</p>
+                    <button id="btn-compare" class="btn btn-primary btn-full">
+                        <span data-i18n="btnCompare">Intercambiar</span>
+                    </button>
+                </div>
 
-                <button id="btn-share-image-dashboard" class="btn btn-secondary">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="18" height="18">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
-                    </svg>
-                    <span data-i18n="btnShareImage">Generar Imagen</span>
-                </button>
+                <div class="action-card">
+                    <div class="action-header">
+                        <div class="action-icon-wrapper text-purple">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="22" height="22">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                            </svg>
+                        </div>
+                        <h3 data-i18n="actionImageTitle">Generar Imagen</h3>
+                    </div>
+                    <p class="action-desc" data-i18n="actionImageDesc">Crea un resumen visual de tu progreso listo para guardar.</p>
+                    <button id="btn-share-image-dashboard" class="btn btn-secondary btn-full">
+                        <span data-i18n="btnShareImage">Generar Imagen</span>
+                    </button>
+                </div>
             </div>
         </section>
 
@@ -204,7 +234,7 @@
 
     <footer class="app-footer">
         <div class="footer-content">
-            <p><span data-i18n="title">Fifa World Cup 2026</span> Sticker Tracker Premium &copy; 2026</p>
+            <p><span data-i18n="title">Fifa World Cup 2026</span> Sticker Tracker &copy; 2026</p>
             <p class="small" data-i18n="footerText">Diseñado con tecnología estática. Se ejecuta completamente en tu navegador.</p>
             <p class="author" style="margin-top: 10px; font-size: 13px; font-weight: 600;"><span data-i18n="footerAuthor">Creado por</span> <a href="https://www.linkedin.com/in/lucasprovenzano" target="_blank" rel="noopener noreferrer" style="color: var(--primary-color); text-decoration: none;">Lucas Provenzano</a></p>
         </div>
@@ -245,6 +275,14 @@
                             <p class="result-subtitle" data-i18n="userGivesSubtitle">Figuritas que tú tienes repetidas (State 2) y a tu amigo le faltan (State 0):</p>
                             <div class="list-container scroller" id="list-user-duplicates"></div>
                         </div>
+                    </div>
+                    <div class="compare-image-actions" style="margin-top: 20px; display: flex; justify-content: center;">
+                        <button id="btn-compare-image" class="btn btn-secondary">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="18" height="18">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                            </svg>
+                            <span data-i18n="btnCompareImage">Generar Imagen de Intercambio</span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -303,25 +341,27 @@
                 <button id="btn-close-share-image" class="btn-close-modal" aria-label="Cerrar modal">&times;</button>
             </div>
             <div class="modal-body">
-                <p class="modal-instruction" data-i18n="shareImageInstruction">Aquí tienes una imagen con el resumen de tu álbum lista para descargar o copiar:</p>
+                <p class="modal-instruction" data-i18n="shareImageInstruction">Aquí tienes una imagen con el resumen de tu álbum. Haz clic derecho (o mantén presionado en el celular) para descargarla o copiarla:</p>
                 <p id="local-security-notice" class="modal-instruction text-warning" style="display: none; margin-top: 10px; margin-bottom: 15px;" data-i18n="localSecurityNotice"></p>
                 <div class="canvas-preview-container">
                     <canvas id="share-canvas" width="1080" height="1350" style="display: none;"></canvas>
                     <img id="share-canvas-preview" alt="Resumen del Álbum">
                 </div>
-                <div class="dialog-actions vertical-actions">
-                    <button id="btn-download-canvas" class="btn btn-primary btn-full">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="18" height="18">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75V16.5M16.5 12L12 16.5m0 0L7.5 12m4.5 4.5V3" />
-                        </svg>
-                        <span data-i18n="btnDownloadCanvas">Descargar Imagen</span>
-                    </button>
-                    <button id="btn-copy-canvas" class="btn btn-secondary btn-full">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" width="18" height="18">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 7.5V6.108c0-1.135.845-2.098 1.976-2.192.373-.03.748-.057 1.123-.08M15.75 18H18a2.25 2.25 0 002.25-2.25V6.108c0-1.135-.845-2.098-1.976-2.192a48.424 48.424 0 00-1.123-.08M15.75 18.75v-1.875a3.375 3.375 0 00-3.375-3.375h-1.5a1.125 1.125 0 01-1.125-1.125v-1.5A3.375 3.375 0 006.375 7.5H5.25m11.9-3.664A2.251 2.251 0 0015 2.25h-1.5a2.251 2.251 0 00-2.15 1.586m5.8 0c.065.21.1.433.1.664v.75h-6V4.5c0-.231.035-.454.1-.664M6.75 7.5H4.875c-.621 0-1.125.504-1.125 1.125v9.75c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V16.5" />
-                        </svg>
-                        <span data-i18n="btnCopyCanvas">Copiar al Portapapeles</span>
-                    </button>
+            </div>
+        </div>
+    </dialog>
+
+    <dialog id="dlg-share-trade-image" class="glass-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 data-i18n="shareTradeImageTitle">Imagen de Intercambio</h2>
+                <button id="btn-close-share-trade-image" class="btn-close-modal" aria-label="Cerrar modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-instruction" data-i18n="shareTradeImageInstruction">Aquí tienes la imagen con el resumen del intercambio. Haz clic derecho (o mantén presionado en el celular) para descargarla o copiarla:</p>
+                <div class="canvas-preview-container">
+                    <canvas id="share-trade-canvas" width="1080" height="1350" style="display: none;"></canvas>
+                    <img id="share-trade-canvas-preview" alt="Resumen de Intercambio">
                 </div>
             </div>
         </div>
