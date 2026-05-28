@@ -1430,5 +1430,37 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
+.canvas-preview-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 20px;
+    border: 1px solid var(--border-card);
+}
 
+#share-canvas, #share-canvas-preview {
+    max-width: 100%;
+    max-height: 420px;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+    background: #0d0b21;
+}
 
+.vertical-actions {
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+}
+
+.dashboard-actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
