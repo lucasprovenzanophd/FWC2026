@@ -41,9 +41,8 @@
             </div>
 
             <div class="profile-container">
-                <div class="profile-input-wrapper">
-                    <label for="username-input" data-i18n="usernameLabel">Álbum de:</label>
-                    <input type="text" id="username-input" maxlength="15" data-i18n-placeholder="usernamePlaceholder" placeholder="Tu nombre..." aria-label="Propietario del Álbum">
+                <div class="album-type-badge-wrapper">
+                    <span id="album-type-badge" class="album-type-badge" data-i18n="albumTypeLabel">Lectura Local</span>
                 </div>
                 <div class="last-update-wrapper">
                     <span class="last-update-label" data-i18n="lastUpdateLabel">Actualizado:</span>
@@ -335,6 +334,41 @@
                 <div class="dialog-actions">
                     <button id="btn-cancel-reset" class="btn btn-secondary" data-i18n="btnCancelResetText">Cancelar</button>
                     <button id="btn-confirm-reset" class="btn btn-danger" data-i18n="btnConfirmResetText">Sí, borrar todo</button>
+                </div>
+            </div>
+        </div>
+    </dialog>
+
+    <dialog id="dlg-incoming-compare" class="glass-modal dialog-narrow">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 data-i18n="incomingCompareTitle">Comparar Álbum Recibido</h2>
+                <button id="btn-close-incoming-compare" class="btn-close-modal" aria-label="Cerrar diálogo">&times;</button>
+            </div>
+            <div class="modal-body">
+                <p class="modal-instruction" data-i18n="incomingCompareInstruction">Has ingresado al sitio con un código de álbum compartido que difiere de tu progreso local. Compara los datos y elige cuál conservar:</p>
+                
+                <div class="comparison-grid">
+                    <div class="comparison-header"></div>
+                    <div class="comparison-header-col" data-i18n="incomingCompareLabelLocal">Tú (Local)</div>
+                    <div class="comparison-header-col" data-i18n="incomingCompareLabelIncoming">Recibido</div>
+                    
+                    <div class="comparison-label" data-i18n="albumProgress">Completado</div>
+                    <div class="comparison-val local" id="inc-local-pct">-</div>
+                    <div class="comparison-val incoming" id="inc-incoming-pct">-</div>
+                    
+                    <div class="comparison-label" data-i18n="statOwnedLabel">Tengo (Únicas)</div>
+                    <div class="comparison-val local" id="inc-local-owned">-</div>
+                    <div class="comparison-val incoming" id="inc-incoming-owned">-</div>
+                    
+                    <div class="comparison-label" data-i18n="statDuplicatesLabel">Repetidas</div>
+                    <div class="comparison-val local" id="inc-local-duplicates">-</div>
+                    <div class="comparison-val incoming" id="inc-incoming-duplicates">-</div>
+                </div>
+
+                <div class="dialog-actions vertical-actions">
+                    <button id="btn-incoming-overwrite" class="btn btn-primary btn-full" data-i18n="btnIncomingOverwrite">Sobrescribir con el Enlace</button>
+                    <button id="btn-incoming-keep" class="btn btn-secondary btn-full" data-i18n="btnIncomingKeep">Mantener mi Álbum Local</button>
                 </div>
             </div>
         </div>

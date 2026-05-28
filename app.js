@@ -45,16 +45,11 @@ const teams = [
     { originalIndex: 43, code: 'COL', emoji: '🇨🇴', group: 'Grupo K', names: { es: 'Colombia', en: 'Colombia', pt: 'Colômbia', it: 'Colombia' } },
     { originalIndex: 44, code: 'ENG', emoji: '🏴󠁧󠁢󠁥󠁮󠁧󠁿', group: 'Grupo L', names: { es: 'Inglaterra', en: 'England', pt: 'Inglaterra', it: 'Inghilterra' } },
     { originalIndex: 45, code: 'CRO', emoji: '🇭🇷', group: 'Grupo L', names: { es: 'Croacia', en: 'Croatia', pt: 'Croácia', it: 'Croazia' } },
-    { originalIndex: 46, code: 'GHA', emoji: '🇬🇭', group: 'Grupo L', names: { es: 'Ghana', en: 'Ghana', pt: 'Gana', it: 'Ghana' } },
-    { originalIndex: 47, code: 'PAN', emoji: '🇵🇦', group: 'Grupo L', names: { es: 'Panamá', en: 'Panama', pt: 'Panamá', it: 'Panama' } },
-    { originalIndex: 48, code: 'FWC', emoji: '⚽', group: 'Especial', names: { es: 'Sección FWC', en: 'FWC Section', pt: 'Seção FWC', it: 'Sezione FWC' } }
-];
-
-const translations = {
+    { originalIndex: 46, code: 'GHA', emoji: '🇬🇭', group: 'Grupo L', names: { es: 'Ghanconst translations = {
     es: {
         title: "Fifa World Cup 2026",
         subtitle: "TRACKER DE FIGURITAS",
-        btnShare: "Copiar Enlace del Álbum",
+        btnShare: "Copiar Código de Compartir",
         btnCompare: "Intercambiar",
         albumProgress: "Progreso del Álbum",
         statOwnedLabel: "Tengo (Únicas)",
@@ -77,12 +72,12 @@ const translations = {
         step1Title: "Marcación de figuritas",
         step1Desc: "Haz clic en el número de cualquier figurita para cambiar su estado: Falta (gris), Tengo (verde 🟢) o Repetida (azul 🔵). Vuelve a hacer clic para volver a Falta.",
         step2Title: "Guardado automático",
-        step2Desc: "Tus datos se guardan al instante en tu navegador (Local Storage) y en la dirección URL (hash). Puedes cerrar o recargar la página sin perder nada.",
+        step2Desc: "Tus datos se guardan al instante en tu navegador (Local Storage) y no ensucian la dirección URL. Puedes cerrar o recargar la página sin perder nada.",
         step3Title: "Intercambio inteligente",
-        step3Desc: "Copia tu dirección URL con el botón 'Compartir'. Con el botón 'Intercambiar', pega el enlace de tu amigo para ver qué figuritas pueden cambiarse.",
+        step3Desc: "Copia el código de tu progreso con el botón 'Copiar Código'. Con el botón 'Intercambiar', pega el código de tu amigo para ver qué figuritas pueden cambiarse.",
         compareTitle: "Intercambiar con Amigos",
-        compareInstruction: "Pega aquí el enlace del tracker de tu amigo para calcular automáticamente qué figuritas pueden intercambiar:",
-        friendLinkPlaceholder: "Enlace del tracker de tu amigo...",
+        compareInstruction: "Pega aquí el código del tracker de tu amigo para calcular automáticamente qué figuritas pueden intercambiar:",
+        friendLinkPlaceholder: "Código de tracker de tu amigo...",
         btnDoCompareText: "Comparar",
         friendGivesTitle: "Tu amigo te da",
         friendGivesSubtitle: "Figuritas que tu amigo tiene repetidas (State 2) y a ti te faltan (State 0):",
@@ -95,8 +90,8 @@ const translations = {
         tabImport: "Importar",
         exportInstruction: "Copia este código de respaldo y guárdalo en un lugar seguro. Contiene todo tu progreso actual:",
         btnCopyBackupText: "Copiar Código de Respaldo",
-        importInstruction: "Pega aquí tu código de respaldo JSON o un enlace hash completo. Esto sobrescribirá tu estado actual:",
-        importPlaceholder: "Pega el código JSON o enlace hash aquí...",
+        importInstruction: "Pega aquí tu código de respaldo JSON o un código hash completo. Esto sobrescribirá tu estado actual:",
+        importPlaceholder: "Pega el código JSON o código hash aquí...",
         importErrorMsgText: "El código proporcionado no es válido.",
         btnDoImportText: "Restaurar Datos",
         resetTitle: "¿Reiniciar Álbum?",
@@ -104,13 +99,13 @@ const translations = {
         resetWarning2: "Esta acción no se puede deshacer.",
         btnCancelResetText: "Cancelar",
         btnConfirmResetText: "Sí, borrar todo",
-        toastCopyShare: "¡Enlace de compartir copiado al portapapeles!",
+        toastCopyShare: "¡Código de compartir copiado al portapapeles!",
         toastCopyBackup: "¡Código de respaldo copiado!",
         toastImportSuccess: "¡Datos importados con éxito!",
         toastResetSuccess: "El progreso del álbum ha sido reiniciado.",
         noResultsText: "No se encontraron selecciones coincidentes.",
         toastThemeChanged: "¡Tema cambiado!",
-        toastCopyShareError: "No se pudo copiar el enlace al portapapeles.",
+        toastCopyShareError: "No se pudo copiar el código al portapapeles.",
         usernameLabel: "Álbum de:",
         usernamePlaceholder: "Nombre...",
         lastUpdateLabel: "Actualizado:",
@@ -124,26 +119,37 @@ const translations = {
         btnCopyCanvas: "Copiar al Portapapeles",
         toastCopyImageSuccess: "¡Imagen copiada al portapapeles!",
         toastCopyImageError: "No se pudo copiar la imagen automáticamente. Descárgala o mantén presionado para guardarla.",
-        shareImageTooManyMissing: "Demasiadas figuritas faltantes para listar. ¡Compartí el enlace del álbum para ver la lista completa!",
+        shareImageTooManyMissing: "Demasiadas figuritas faltantes para listar. ¡Compartí el álbum para ver la lista completa!",
         shareImageNoDuplicates: "Ninguna figurita repetida.",
         shareImageNoMissing: "¡Álbum completo! Ninguna figurita faltante.",
         localSecurityNotice: "Nota: Debido a restricciones de seguridad de archivos locales en este navegador, la descarga y copia automática pueden estar limitadas. Mantén presionada la imagen para guardarla.",
         toastIOSDownloadHint: "En iPhone: mantén presionada la imagen para guardarla en Fotos 📷",
-        actionShareTitle: "Copiar Enlace",
-        actionShareDesc: "Copia la dirección URL de tu progreso para compartir con amigos.",
+        actionShareTitle: "Copiar Código",
+        actionShareDesc: "Copia el código de tu progreso para compartirlo con amigos.",
         actionCompareTitle: "Intercambiar",
-        actionCompareDesc: "Pega el enlace de un amigo para ver qué figuritas pueden cambiarse.",
+        actionCompareDesc: "Pega el código de un amigo para ver qué figuritas pueden cambiarse.",
         actionImageTitle: "Generar Imagen",
         actionImageDesc: "Crea un resumen visual de tu progreso listo para guardar.",
         btnResetHeader: "Iniciar Álbum Blanco",
         shareTradeImageTitle: "Imagen de Intercambio",
         shareTradeImageInstruction: "Aquí tienes la imagen con el resumen del intercambio. Haz clic derecho (o mantén presionado en el celular) para descargarla o copiarla:",
-        btnCompareImage: "Generar Imagen de Intercambio"
+        btnCompareImage: "Generar Imagen de Intercambio",
+        albumTypeLabel: "Lectura Local",
+        incomingCompareTitle: "Comparar Álbum Recibido",
+        incomingCompareInstruction: "Has ingresado al sitio con un código de álbum compartido que difiere de tu progreso local. Compara los datos y elige cuál conservar:",
+        incomingCompareLabelLocal: "Tú (Local)",
+        incomingCompareLabelIncoming: "Recibido",
+        btnIncomingOverwrite: "Sobrescribir con el Enlace",
+        btnIncomingKeep: "Mantener mi Álbum Local",
+        toastIncomingOverwriteSuccess: "¡Álbum sobrescrito con éxito!",
+        toastIncomingKeepSuccess: "Se mantuvo el álbum local y se descartó el recibido.",
+        yourCollectionLabel: "Tu Colección",
+        userLabel: "Tú"
     },
     en: {
         title: "Fifa World Cup 2026",
         subtitle: "STICKER TRACKER",
-        btnShare: "Copy Album Link",
+        btnShare: "Copy Share Code",
         btnCompare: "Trade",
         albumProgress: "Album Progress",
         statOwnedLabel: "Owned (Unique)",
@@ -166,12 +172,12 @@ const translations = {
         step1Title: "Sticker Marking",
         step1Desc: "Click on any sticker number to change its state: Missing (gray), Owned (green 🟢), or Duplicate (blue 🔵). Click again to return to Missing.",
         step2Title: "Automatic Saving",
-        step2Desc: "Your data is instantly saved in your browser (Local Storage) and in the URL hash. You can close or reload the page without losing anything.",
+        step2Desc: "Your data is instantly saved in your browser (Local Storage) and does not clutter the URL. You can close or reload the page without losing anything.",
         step3Title: "Smart Trading",
-        step3Desc: "Copy your URL using the 'Share' button. Click the 'Trade' button and paste your friend's link to see which stickers you can swap.",
+        step3Desc: "Copy your progress code using the 'Copy Code' button. Click the 'Trade' button and paste your friend's code to see which stickers you can swap.",
         compareTitle: "Trade with Friends",
-        compareInstruction: "Paste your friend's tracker link here to automatically calculate which stickers you can swap:",
-        friendLinkPlaceholder: "Friend's tracker link...",
+        compareInstruction: "Paste your friend's tracker code here to automatically calculate which stickers you can swap:",
+        friendLinkPlaceholder: "Friend's tracker code...",
         btnDoCompareText: "Compare",
         friendGivesTitle: "Your friend gives you",
         friendGivesSubtitle: "Stickers your friend has duplicated (State 2) and you are missing (State 0):",
@@ -184,8 +190,8 @@ const translations = {
         tabImport: "Import",
         exportInstruction: "Copy this backup code and save it in a safe place. It contains all your current progress:",
         btnCopyBackupText: "Copy Backup Code",
-        importInstruction: "Paste your JSON backup code or a full hash link here. This will overwrite your current state:",
-        importPlaceholder: "Paste JSON code or hash link here...",
+        importInstruction: "Paste your JSON backup code or a full hash code here. This will overwrite your current state:",
+        importPlaceholder: "Paste JSON code or hash code here...",
         importErrorMsgText: "The code provided is invalid.",
         btnDoImportText: "Restore Data",
         resetTitle: "Reset Album?",
@@ -193,13 +199,13 @@ const translations = {
         resetWarning2: "This action cannot be undone.",
         btnCancelResetText: "Cancel",
         btnConfirmResetText: "Yes, delete all",
-        toastCopyShare: "Share link copied to clipboard!",
+        toastCopyShare: "Share code copied to clipboard!",
         toastCopyBackup: "Backup code copied!",
         toastImportSuccess: "Data imported successfully!",
         toastResetSuccess: "Album progress has been reset.",
         noResultsText: "No matching teams found.",
         toastThemeChanged: "Theme changed!",
-        toastCopyShareError: "Could not copy link to clipboard.",
+        toastCopyShareError: "Could not copy code to clipboard.",
         usernameLabel: "Album of:",
         usernamePlaceholder: "Name...",
         lastUpdateLabel: "Updated:",
@@ -213,26 +219,37 @@ const translations = {
         btnCopyCanvas: "Copy to Clipboard",
         toastCopyImageSuccess: "Image copied to clipboard!",
         toastCopyImageError: "Could not copy image automatically. Please download it instead.",
-        shareImageTooManyMissing: "Too many missing stickers to list. Share the album link to see the full list!",
+        shareImageTooManyMissing: "Too many missing stickers to list. Share the album to see the full list!",
         shareImageNoDuplicates: "No duplicate stickers.",
         shareImageNoMissing: "Album complete! No missing stickers.",
         localSecurityNotice: "Note: Due to local file security restrictions in this browser, automatic download and copy may be limited. Long press the image to save it.",
         toastIOSDownloadHint: "On iPhone: long-press the image to save it to Photos 📷",
-        actionShareTitle: "Copy Link",
-        actionShareDesc: "Copy your progress URL to share with friends.",
+        actionShareTitle: "Copy Code",
+        actionShareDesc: "Copy your progress code to share with friends.",
         actionCompareTitle: "Trade",
-        actionCompareDesc: "Paste a friend's link to see which stickers you can swap.",
+        actionCompareDesc: "Paste a friend's code to see which stickers you can swap.",
         actionImageTitle: "Generate Image",
         actionImageDesc: "Create a visual summary of your progress ready to save.",
         btnResetHeader: "Start Blank Album",
         shareTradeImageTitle: "Trade Summary Image",
         shareTradeImageInstruction: "Here is the image with your trade summary. Right-click or long-press on mobile to save or copy it:",
-        btnCompareImage: "Generate Trade Image"
+        btnCompareImage: "Generate Trade Image",
+        albumTypeLabel: "Local Read",
+        incomingCompareTitle: "Compare Received Album",
+        incomingCompareInstruction: "You have entered the site with a shared album code that differs from your local progress. Compare the data and choose which to keep:",
+        incomingCompareLabelLocal: "You (Local)",
+        incomingCompareLabelIncoming: "Received",
+        btnIncomingOverwrite: "Overwrite with Received",
+        btnIncomingKeep: "Keep My Local Album",
+        toastIncomingOverwriteSuccess: "Album overwritten successfully!",
+        toastIncomingKeepSuccess: "Local album kept and received album discarded.",
+        yourCollectionLabel: "Your Collection",
+        userLabel: "You"
     },
     pt: {
         title: "Fifa World Cup 2026",
         subtitle: "TRACKER DE FIGURINHAS",
-        btnShare: "Copiar Link do Álbum",
+        btnShare: "Copiar Código de Compartilhamento",
         btnCompare: "Trocar",
         albumProgress: "Progresso do Álbum",
         statOwnedLabel: "Tenho (Únicas)",
@@ -255,12 +272,12 @@ const translations = {
         step1Title: "Marcação de figurinhas",
         step1Desc: "Clique no número de qualquer figurinha para alterar o estado: Faltando (cinza), Tenho (verde 🟢) ou Repetida (azul 🔵). Clique novamente para retornar para Faltando.",
         step2Title: "Salvar automaticamente",
-        step2Desc: "Seus dados são salvos instantaneamente no seu navegador (Local Storage) e no hash da URL. Você pode fechar ou recarregar a página sem perder nada.",
+        step2Desc: "Seus dados são salvos instantaneamente no seu navegador (Local Storage) e não afetam a URL. Você pode fechar ou recarregar a página sem perder nada.",
         step3Title: "Troca inteligente",
-        step3Desc: "Copie o link usando o botão 'Compartilhar'. Clique no botão 'Trocar' e cole o link do seu amigo para ver quais figurinhas podem ser trocadas.",
+        step3Desc: "Copie o código do seu progresso usando o botão 'Copiar Código'. Clique no botão 'Trocar' e cole o código do seu amigo para ver quais figurinhas podem ser trocadas.",
         compareTitle: "Trocar com Amigos",
-        compareInstruction: "Cole aqui o link do tracker do seu amigo para calcular automaticamente quais figurinhas vocês podem trocar:",
-        friendLinkPlaceholder: "Link do tracker do seu amigo...",
+        compareInstruction: "Cole aqui o código do tracker do seu amigo para calcular automaticamente quais figurinhas vocês podem trocar:",
+        friendLinkPlaceholder: "Código do tracker do seu amigo...",
         btnDoCompareText: "Comparar",
         friendGivesTitle: "Seu amigo te dá",
         friendGivesSubtitle: "Figurinhas que seu amigo tem repetidas (State 2) e você está precisando (State 0):",
@@ -273,8 +290,8 @@ const translations = {
         tabImport: "Importar",
         exportInstruction: "Copie este código de backup e salve em um local seguro. Ele contém todo o seu progresso atual:",
         btnCopyBackupText: "Copiar Código de Backup",
-        importInstruction: "Cole aqui o seu código de backup JSON ou link hash completo. Isso substituirá o seu estado atual:",
-        importPlaceholder: "Cole o código JSON ou link hash aqui...",
+        importInstruction: "Cole aqui o seu código de backup JSON ou código hash completo. Isso substituirá o seu estado atual:",
+        importPlaceholder: "Cole o código JSON ou código hash aqui...",
         importErrorMsgText: "O código fornecido não é válido.",
         btnDoImportText: "Restaurar Dados",
         resetTitle: "Reiniciar Álbum?",
@@ -282,13 +299,13 @@ const translations = {
         resetWarning2: "Esta ação não pode ser desfeita.",
         btnCancelResetText: "Cancelar",
         btnConfirmResetText: "Sim, apagar tudo",
-        toastCopyShare: "Link de compartilhamento copiado!",
+        toastCopyShare: "Código de compartilhamento copiado!",
         toastCopyBackup: "Código de backup copiado!",
         toastImportSuccess: "Dados importados com sucesso!",
         toastResetSuccess: "O progresso do álbum foi reiniciado.",
         noResultsText: "Nenhuma seleção correspondente encontrada.",
         toastThemeChanged: "Tema alterado!",
-        toastCopyShareError: "Não foi possível copiar o link para a área de transferência.",
+        toastCopyShareError: "Não foi possível copiar o código para a área de transferência.",
         usernameLabel: "Álbum de:",
         usernamePlaceholder: "Nome...",
         lastUpdateLabel: "Atualizado:",
@@ -302,26 +319,37 @@ const translations = {
         btnCopyCanvas: "Copiar para Área de Transferência",
         toastCopyImageSuccess: "Imagem copiada para a área de transferência!",
         toastCopyImageError: "Não foi possível copiar a imagem automaticamente. Baixe a imagem para salvar.",
-        shareImageTooManyMissing: "Muitas figurinhas faltando para listar. Compartilhe o link do álbum para ver a lista completa!",
+        shareImageTooManyMissing: "Muitas figurinhas faltando para listar. Compartilhe o álbum para ver a lista completa!",
         shareImageNoDuplicates: "Nenhuma figurinha repetida.",
         shareImageNoMissing: "Álbum completo! Nenhuma figurinha faltando.",
         localSecurityNotice: "Nota: Devido a restrições de segurança de arquivos locais neste navegador, o download e a cópia automática podem estar limitados. Pressione e segure a imagem para salvá-la.",
         toastIOSDownloadHint: "No iPhone: pressione e segure a imagem para salvar nas Fotos 📷",
-        actionShareTitle: "Copiar Link",
-        actionShareDesc: "Copie a URL do seu progresso para compartilhar com amigos.",
+        actionShareTitle: "Copiar Código",
+        actionShareDesc: "Copie o código do seu progresso para compartilhar com amigos.",
         actionCompareTitle: "Trocar",
-        actionCompareDesc: "Cole o link de um amigo para ver quais figurinhas trocar.",
+        actionCompareDesc: "Cole o código de um amigo para ver quais figurinhas trocar.",
         actionImageTitle: "Gerar Imagem",
         actionImageDesc: "Crie um resumo visual do seu progresso pronto para salvar.",
         btnResetHeader: "Iniciar Álbum em Branco",
         shareTradeImageTitle: "Imagem de Resumo da Troca",
         shareTradeImageInstruction: "Aqui está a imagem com o resumo da troca. Clique com o botão direito ou pressione e segure no celular para salvar ou copiar:",
-        btnCompareImage: "Gerar Imagem de Troca"
+        btnCompareImage: "Gerar Imagem de Troca",
+        albumTypeLabel: "Leitura Local",
+        incomingCompareTitle: "Comparar Álbum Recebido",
+        incomingCompareInstruction: "Você entrou no site com um código de álbum compartilhado que difere do seu progresso local. Compare os dados e escolha qual manter:",
+        incomingCompareLabelLocal: "Você (Local)",
+        incomingCompareLabelIncoming: "Recebido",
+        btnIncomingOverwrite: "Sobrescrever com o Recebido",
+        btnIncomingKeep: "Manter meu Álbum Local",
+        toastIncomingOverwriteSuccess: "Álbum sobrescrito com sucesso!",
+        toastIncomingKeepSuccess: "Álbum local mantido e álbum recebido descartado.",
+        yourCollectionLabel: "Sua Coleção",
+        userLabel: "Você"
     },
     it: {
         title: "Fifa World Cup 2026",
         subtitle: "TRACKER DI FIGURINE",
-        btnShare: "Copia Link Album",
+        btnShare: "Copia Codice di Condivisione",
         btnCompare: "Scambia",
         albumProgress: "Progresso dell'Album",
         statOwnedLabel: "Ce l'ho (Uniche)",
@@ -344,12 +372,12 @@ const translations = {
         step1Title: "Marcatura delle figurine",
         step1Desc: "Fai clic sul numero di qualsiasi figurina per cambiarne lo stato: Manca (grigio), Ce l'ho (verde 🟢) o Doppia (blu 🔵). Fai clic di nuovo per tornare a Manca.",
         step2Title: "Salvataggio automatico",
-        step2Desc: "I tuoi dati vengono salvati istantaneamente nel tuo browser (Local Storage) e nell'hash dell'URL. Puoi chiudere o ricaricare la pagina senza perdere nulla.",
+        step2Desc: "I tuoi dati vengono salvati istantaneamente nel tuo browser (Local Storage) e non sporcano l'URL. Puoi chiudere o ricaricare la pagina senza perdere nulla.",
         step3Title: "Scambio intelligente",
-        step3Desc: "Copia il tuo URL usando il pulsante 'Condividi'. Clicca sul pulsante 'Scambia' e incolla il link del tuo amico per vedere quali figurine potete scambiarvi.",
+        step3Desc: "Copia il codice dei tuoi progressi usando il pulsante 'Copia Codice'. Clicca sul pulsante 'Scambia' e incolla il codice del tuo amico per vedere quali figurine potete scambiarvi.",
         compareTitle: "Scambia con gli Amici",
-        compareInstruction: "Incolla qui il link del tracker del tuo amico per calcolare automaticamente quali figurine potete scambiarvi:",
-        friendLinkPlaceholder: "Link del tracker del tuo amico...",
+        compareInstruction: "Incolla qui il codice del tracker del tuo amico per calcolare automaticamente quali figurine potete scambiarvi:",
+        friendLinkPlaceholder: "Codice del tracker del tuo amico...",
         btnDoCompareText: "Confronta",
         friendGivesTitle: "Il tuo amico ti dà",
         friendGivesSubtitle: "Figurine che il tuo amico ha doppie (Stato 2) e a te mancano (Stato 0):",
@@ -362,8 +390,8 @@ const translations = {
         tabImport: "Importa",
         exportInstruction: "Copia questo codice di backup e conservalo in un luogo sicuro. Contiene tutti i tuoi progressi attuali:",
         btnCopyBackupText: "Copia Codice di Backup",
-        importInstruction: "Incolla qui il tuo codice di backup JSON o un link hash completo. Questo sovrascriverà il tuo stato attuale:",
-        importPlaceholder: "Incolla il codice JSON o il link hash qui...",
+        importInstruction: "Incolla qui il tuo codice di backup JSON o un codice hash completo. Questo sovrascriverà il tuo stato attuale:",
+        importPlaceholder: "Incolla il codice JSON o il codice hash qui...",
         importErrorMsgText: "Il codice fornito non è valido.",
         btnDoImportText: "Ripristina Dati",
         resetTitle: "Reinizializzare l'Album?",
@@ -371,13 +399,13 @@ const translations = {
         resetWarning2: "Questa azione non può essere annullata.",
         btnCancelResetText: "Annulla",
         btnConfirmResetText: "Sì, cancella tutto",
-        toastCopyShare: "Link di condivisione copiato negli appunti!",
+        toastCopyShare: "Codice di condivisione copiato negli appunti!",
         toastCopyBackup: "Codice di backup copiato!",
         toastImportSuccess: "Dati importati con successo!",
         toastResetSuccess: "Il progresso dell'album è stato reinizializzato.",
         noResultsText: "Nessuna squadra corrispondente trovata.",
         toastThemeChanged: "Tema cambiato!",
-        toastCopyShareError: "Impossibile copiare il link negli appunti.",
+        toastCopyShareError: "Impossibile copiare il codice negli appunti.",
         usernameLabel: "Album di:",
         usernamePlaceholder: "Nome...",
         lastUpdateLabel: "Aggiornato:",
@@ -391,15 +419,34 @@ const translations = {
         btnCopyCanvas: "Copia negli Appunti",
         toastCopyImageSuccess: "Immagine copiata negli appunti!",
         toastCopyImageError: "Impossibile copiare l'immagine automaticamente. Per favore scaricala.",
-        shareImageTooManyMissing: "Troppe figurine mancanti. Condividi il link dell'album per vedere l'elenco completo!",
+        shareImageTooManyMissing: "Troppe figurine mancanti. Condividi l'album per vedere l'elenco completo!",
         shareImageNoDuplicates: "Nessuna figurina doppia.",
         shareImageNoMissing: "Album completato! Nessuna figurina mancante.",
         localSecurityNotice: "Nota: A causa delle restrizioni di sicurezza dei file locali in questo browser, il download e la copia automatica potrebbero essere limitati. Tieni premuta l'immagine per salvarla.",
         toastIOSDownloadHint: "Su iPhone: tieni premuta l'immagine per salvarla nelle Foto 📷",
-        actionShareTitle: "Copia Link",
-        actionShareDesc: "Copia l'URL dei tuoi progressi da condividere con gli amici.",
+        actionShareTitle: "Copia Codice",
+        actionShareDesc: "Copia il codice dei tuoi progressi da condividere con gli amici.",
         actionCompareTitle: "Scambia",
-        actionCompareDesc: "Incolla il link di un amico per vedere quali figurine scambiare.",
+        actionCompareDesc: "Incolla il codice di un amico per vedere quali figurine scambiare.",
+        actionImageTitle: "Genera Immagine",
+        actionImageDesc: "Crea un riepilogo visivo dei tuoi progressi pronto da salvare.",
+        btnResetHeader: "Inizia Album Vuoto",
+        shareTradeImageTitle: "Immagine di Riepilogo dello Scambio",
+        shareTradeImageInstruction: "Ecco l'immagine con il riepilogo dello scambio. Fai clic con il pulsante destro o tieni premuto sul cellulare per salvare o copiare:",
+        btnCompareImage: "Genera Immagine di Scambio",
+        albumTypeLabel: "Lettura Locale",
+        incomingCompareTitle: "Confronta Album Ricevuto",
+        incomingCompareInstruction: "Sei entrato nel sito con un codice album condiviso che differisce dai tuoi progressi locali. Confronta i dati e scegli quale conservare:",
+        incomingCompareLabelLocal: "Tu (Locale)",
+        incomingCompareLabelIncoming: "Ricevuto",
+        btnIncomingOverwrite: "Sovrascrivi con Ricevuto",
+        btnIncomingKeep: "Mantieni il Mio Album Locale",
+        toastIncomingOverwriteSuccess: "Album sovrascritto con successo!",
+        toastIncomingKeepSuccess: "Album locale mantenuto e album ricevuto scartato.",
+        yourCollectionLabel: "Tua Colezione",
+        userLabel: "Tu"
+    }
+};pareDesc: "Incolla il link di un amico per vedere quali figurine scambiare.",
         actionImageTitle: "Genera Immagine",
         actionImageDesc: "Crea un riepilogo visivo dei tuoi progressi pronto da salvare.",
         btnResetHeader: "Inizia Album Vuoto",
@@ -481,8 +528,15 @@ const btnCloseShareTradeImage = document.getElementById('btn-close-share-trade-i
 const shareTradeCanvas = document.getElementById('share-trade-canvas');
 const shareTradeCanvasPreview = document.getElementById('share-trade-canvas-preview');
 
+const dlgIncomingCompare = document.getElementById('dlg-incoming-compare');
+const btnCloseIncomingCompare = document.getElementById('btn-close-incoming-compare');
+const btnIncomingOverwrite = document.getElementById('btn-incoming-overwrite');
+const btnIncomingKeep = document.getElementById('btn-incoming-keep');
+
 let username = '';
 let lastUpdate = 0;
+let pendingIncomingState = null;
+let pendingIncomingTimestamp = 0;
 let shareCanvasFinal = null; // cropped canvas for download/copy
 let shareTradeCanvasFinal = null;
 let comparedFriendState = null;
@@ -648,87 +702,122 @@ function decompressState(str) {
     return stateArray;
 }
 
+function calculateStats(stateArray) {
+    let ownedUnique = 0;
+    let missing = 0;
+    let duplicates = 0;
+    for (let i = 0; i < TOTAL_ITEMS; i++) {
+        if (stateArray[i] === 0) missing++;
+        else if (stateArray[i] === 1) ownedUnique++;
+        else if (stateArray[i] === 2) {
+            ownedUnique++;
+            duplicates++;
+        }
+    }
+    const percent = TOTAL_ITEMS > 0 ? ((ownedUnique / TOTAL_ITEMS) * 100).toFixed(1) : "0.0";
+    return {
+        percent: percent + "%",
+        owned: ownedUnique,
+        duplicates: duplicates
+    };
+}
+
+function showIncomingCompareDialog(localStateArray, incomingStateArray) {
+    const localStats = calculateStats(localStateArray);
+    const incomingStats = calculateStats(incomingStateArray);
+    
+    const incLocalPct = document.getElementById('inc-local-pct');
+    const incIncomingPct = document.getElementById('inc-incoming-pct');
+    const incLocalOwned = document.getElementById('inc-local-owned');
+    const incIncomingOwned = document.getElementById('inc-incoming-owned');
+    const incLocalDuplicates = document.getElementById('inc-local-duplicates');
+    const incIncomingDuplicates = document.getElementById('inc-incoming-duplicates');
+    
+    if (incLocalPct) incLocalPct.textContent = localStats.percent;
+    if (incIncomingPct) incIncomingPct.textContent = incomingStats.percent;
+    if (incLocalOwned) incLocalOwned.textContent = localStats.owned;
+    if (incIncomingOwned) incIncomingOwned.textContent = incomingStats.owned;
+    if (incLocalDuplicates) incLocalDuplicates.textContent = localStats.duplicates;
+    if (incIncomingDuplicates) incIncomingDuplicates.textContent = incomingStats.duplicates;
+    
+    if (dlgIncomingCompare) {
+        dlgIncomingCompare.showModal();
+    }
+}
+
 function loadState() {
     const hash = window.location.hash.substring(1);
     const parts = hash.split(/[?&]/);
     const stateHash = parts[0];
-    if (stateHash.length === 262 && /^[A-Za-z0-9\-_]{262}$/.test(stateHash)) {
-        state = decompressState(stateHash);
-        saveStateToLocalStorage();
-    } else {
-        const savedState = localStorage.getItem('sticker-tracker-state');
-        if (savedState && savedState.length === 262 && /^[A-Za-z0-9\-_]{262}$/.test(savedState)) {
-            state = decompressState(savedState);
-            updateURLHash();
-        } else {
-            initializeEmptyState();
-        }
-    }
-    let urlUsername = '';
-    let urlTimestamp = 0;
-    if (parts.length > 1) {
-        const qIndex = hash.indexOf('?');
-        const qStr = qIndex !== -1 ? hash.substring(qIndex + 1) : hash.substring(stateHash.length + 1);
-        const queryParams = new URLSearchParams(qStr);
-        urlUsername = queryParams.get('u') || '';
-        const tVal = queryParams.get('t');
-        if (tVal) {
-            const parsedT = parseInt(tVal, 10);
-            if (!isNaN(parsedT) && parsedT > 0) {
-                urlTimestamp = parsedT;
+    
+    const hasUrlHash = (stateHash.length === 262 && /^[A-Za-z0-9\-_]{262}$/.test(stateHash));
+    
+    const savedState = localStorage.getItem('sticker-tracker-state');
+    const hasLocalState = (savedState && savedState.length === 262 && /^[A-Za-z0-9\-_]{262}$/.test(savedState));
+    
+    if (hasUrlHash) {
+        const incomingState = decompressState(stateHash);
+        let incomingTimestamp = Date.now();
+        if (parts.length > 1) {
+            const qIndex = hash.indexOf('?');
+            const qStr = qIndex !== -1 ? hash.substring(qIndex + 1) : hash.substring(stateHash.length + 1);
+            const queryParams = new URLSearchParams(qStr);
+            const tVal = queryParams.get('t');
+            if (tVal) {
+                const parsedT = parseInt(tVal, 10);
+                if (!isNaN(parsedT) && parsedT > 0) {
+                    incomingTimestamp = parsedT;
+                }
             }
         }
-    }
-    if (urlUsername) {
-        username = urlUsername.substring(0, 15);
+        
+        if (!hasLocalState || savedState === stateHash) {
+            state = incomingState;
+            lastUpdate = incomingTimestamp;
+            saveStateToLocalStorage();
+            history.replaceState(null, null, ' ');
+        } else {
+            pendingIncomingState = incomingState;
+            pendingIncomingTimestamp = incomingTimestamp;
+            
+            state = decompressState(savedState);
+            const savedUpdate = localStorage.getItem('sticker-tracker-last-update');
+            lastUpdate = savedUpdate ? parseInt(savedUpdate, 10) || 0 : 0;
+            
+            showIncomingCompareDialog(state, incomingState);
+            history.replaceState(null, null, ' ');
+        }
     } else {
-        username = localStorage.getItem('sticker-tracker-username') || '';
+        if (hasLocalState) {
+            state = decompressState(savedState);
+            const savedUpdate = localStorage.getItem('sticker-tracker-last-update');
+            lastUpdate = savedUpdate ? parseInt(savedUpdate, 10) || 0 : 0;
+        } else {
+            state = new Array(TOTAL_ITEMS).fill(0);
+            lastUpdate = Date.now();
+            saveStateToLocalStorage();
+        }
     }
-    if (urlTimestamp > 0) {
-        lastUpdate = urlTimestamp;
-    } else {
-        const savedUpdate = localStorage.getItem('sticker-tracker-last-update');
-        lastUpdate = savedUpdate ? parseInt(savedUpdate, 10) || 0 : 0;
-    }
-    localStorage.setItem('sticker-tracker-username', username);
-    localStorage.setItem('sticker-tracker-last-update', lastUpdate);
-    updateURLHash();
 }
 
 function initializeEmptyState() {
     state = new Array(TOTAL_ITEMS).fill(0);
-    lastUpdate = 0;
-    username = '';
+    lastUpdate = Date.now();
     saveState();
 }
 
 function saveState() {
     lastUpdate = Date.now();
     updateLastUpdateDisplay();
-    updateURLHash();
     saveStateToLocalStorage();
 }
 
 function saveStateToLocalStorage() {
     localStorage.setItem('sticker-tracker-state', compressState(state));
-    localStorage.setItem('sticker-tracker-username', username);
     localStorage.setItem('sticker-tracker-last-update', lastUpdate);
 }
 
-function updateURLHash() {
-    let suffix = '';
-    const params = new URLSearchParams();
-    if (username) params.append('u', username);
-    if (lastUpdate > 0) params.append('t', lastUpdate);
-    const paramStr = params.toString();
-    if (paramStr) suffix = '?' + paramStr;
-    history.replaceState(null, null, '#' + compressState(state) + suffix);
-}
-
 function renderProfile() {
-    if (usernameInput) {
-        usernameInput.value = username;
-    }
     updateLastUpdateDisplay();
 }
 
@@ -1087,28 +1176,62 @@ function setupEventListeners() {
     btnCancelReset.addEventListener('click', () => dlgConfirmReset.close());
     btnConfirmReset.addEventListener('click', resetAlbum);
 
-    [dlgCompare, dlgExportImport, dlgConfirmReset].forEach(dialog => {
-        dialog.addEventListener('click', (e) => {
-            const rect = dialog.getBoundingClientRect();
-            if (e.clientX < rect.left || e.clientX > rect.right ||
-                e.clientY < rect.top || e.clientY > rect.bottom) {
-                dialog.close();
-            }
-        });
+    [dlgCompare, dlgExportImport, dlgConfirmReset, dlgIncomingCompare].forEach(dialog => {
+        if (dialog) {
+            dialog.addEventListener('click', (e) => {
+                const rect = dialog.getBoundingClientRect();
+                if (e.clientX < rect.left || e.clientX > rect.right ||
+                    e.clientY < rect.top || e.clientY > rect.bottom) {
+                    dialog.close();
+                }
+            });
+        }
     });
 
-    if (usernameInput) {
-        usernameInput.addEventListener('input', (e) => {
-            username = e.target.value.trim().substring(0, 15);
-            updateURLHash();
-            localStorage.setItem('sticker-tracker-username', username);
+    if (dlgIncomingCompare) {
+        dlgIncomingCompare.addEventListener('close', () => {
+            pendingIncomingState = null;
+            pendingIncomingTimestamp = 0;
         });
-        usernameInput.addEventListener('change', () => {
-            lastUpdate = Date.now();
-            updateLastUpdateDisplay();
-            updateURLHash();
-            saveStateToLocalStorage();
+    }
+
+    if (btnIncomingOverwrite) {
+        btnIncomingOverwrite.addEventListener('click', () => {
+            if (pendingIncomingState) {
+                state = pendingIncomingState;
+                lastUpdate = pendingIncomingTimestamp;
+                saveStateToLocalStorage();
+                
+                // Re-render whole UI with the loaded state
+                for (let teamIndex = 0; teamIndex < teams.length; teamIndex++) {
+                    updateTeamProgress(teamIndex);
+                    for (let col = 0; col < COLS; col++) {
+                        const idx = (teamIndex * COLS) + col;
+                        const stickerEl = document.getElementById(`sticker-${idx}`);
+                        if (stickerEl) {
+                            stickerEl.className = `sticker state-${state[idx]}`;
+                        }
+                    }
+                }
+                applyFilters();
+                updateDashboard();
+                updateLastUpdateDisplay();
+                
+                showToast(translations[activeLang].toastIncomingOverwriteSuccess);
+            }
+            if (dlgIncomingCompare) dlgIncomingCompare.close();
         });
+    }
+
+    const closeIncomingCompare = () => {
+        if (dlgIncomingCompare) dlgIncomingCompare.close();
+        showToast(translations[activeLang].toastIncomingKeepSuccess);
+    };
+    if (btnIncomingKeep) {
+        btnIncomingKeep.addEventListener('click', closeIncomingCompare);
+    }
+    if (btnCloseIncomingCompare) {
+        btnCloseIncomingCompare.addEventListener('click', closeIncomingCompare);
     }
 
     if (btnShareImage) {
@@ -1169,8 +1292,8 @@ function setActiveFilter(filter, button) {
 }
 
 function copyShareURL() {
-    const url = window.location.href;
-    navigator.clipboard.writeText(url).then(() => {
+    const shareCode = compressState(state);
+    navigator.clipboard.writeText(shareCode).then(() => {
         showToast(translations[activeLang].toastCopyShare);
     }).catch(() => {
         showToast(translations[activeLang].toastCopyShareError);
@@ -1202,7 +1325,6 @@ function importBackupData() {
     const input = importTextarea.value.trim();
     if (!input) return;
     let targetStateString = '';
-    let importedUsername = '';
     let importedTimestamp = 0;
     try {
         const parsed = JSON.parse(input);
@@ -1217,7 +1339,6 @@ function importBackupData() {
         if (parts.length > 1) {
             const qStr = hashCandidate.substring(targetStateString.length + 1);
             const queryParams = new URLSearchParams(qStr);
-            importedUsername = queryParams.get('u') || '';
             const tVal = queryParams.get('t');
             if (tVal) {
                 const parsedT = parseInt(tVal, 10);
@@ -1229,10 +1350,8 @@ function importBackupData() {
     }
     if (targetStateString.length === 262 && /^[A-Za-z0-9\-_]{262}$/.test(targetStateString)) {
         state = decompressState(targetStateString);
-        if (importedUsername) username = importedUsername.substring(0, 15);
         lastUpdate = importedTimestamp > 0 ? importedTimestamp : Date.now();
         saveStateToLocalStorage();
-        updateURLHash();
         updateLastUpdateDisplay();
         renderProfile();
         for (let i = 0; i < teams.length; i++) updateTeamProgress(i);
@@ -1251,11 +1370,8 @@ function importBackupData() {
 
 function resetAlbum() {
     state = new Array(TOTAL_ITEMS).fill(0);
-    username = '';
-    if (usernameInput) usernameInput.value = '';
-    lastUpdate = 0;
+    lastUpdate = Date.now();
     updateLastUpdateDisplay();
-    updateURLHash();
     saveStateToLocalStorage();
     for (let i = 0; i < teams.length; i++) updateTeamProgress(i);
     for (let i = 0; i < TOTAL_ITEMS; i++) {
@@ -1570,9 +1686,7 @@ function generateShareImage() {
     y += 22;
     drawRoundedRect(ctx, 60, y, 960, 112, 20, 'rgba(255,255,255,0.03)', 'rgba(255,255,255,0.08)');
 
-    const displayUsername = username ||
-        (activeLang==='es' ? 'Mi Tracker' : activeLang==='pt' ? 'Meu Tracker' :
-         activeLang==='it' ? 'Il mio Tracker' : 'My Tracker');
+    const displayUsername = (translations[activeLang].yourCollectionLabel || 'TU COLECCIÓN').toUpperCase();
     ctx.fillStyle = '#ffffff';
     ctx.font = 'bold 30px Outfit, sans-serif';
     ctx.fillText(displayUsername, 98, y + 46);
@@ -1712,8 +1826,7 @@ function generateShareImage() {
 
 // ─── HELPERS ──────────────────────────────────────────────────────────────────
 function _getFilename() {
-    const clean = username ? username.replace(/[^a-zA-Z0-9]/g,'_') : 'album';
-    return 'FWC2026_' + clean + '_progress.png';
+    return 'FWC2026_tu_progreso.png';
 }
 
 function _isIOS() {
@@ -1939,8 +2052,8 @@ function generateTradeImage() {
     y += 22;
     drawRoundedRect(ctx, 60, y, 960, 112, 20, 'rgba(255,255,255,0.03)', 'rgba(255,255,255,0.08)');
 
-    const name1 = username || (activeLang === 'es' ? 'Tú' : 'You');
-    const name2 = comparedFriendName || (activeLang === 'es' ? 'Tu amigo' : 'Your friend');
+    const name1 = translations[activeLang].userLabel || 'Tú';
+    const name2 = comparedFriendName || (activeLang === 'en' ? 'Friend' : (activeLang === 'pt' ? 'Amigo' : (activeLang === 'it' ? 'Amico' : 'Tu amigo')));
 
     ctx.fillStyle = '#ffffff';
     ctx.font = 'bold 30px Outfit, sans-serif';
