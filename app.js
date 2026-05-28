@@ -1341,6 +1341,20 @@ function setupEventListeners() {
             }
         });
     }
+
+    // Toggle header class on scroll
+    const appHeader = document.querySelector('.app-header');
+    if (appHeader) {
+        const handleScroll = () => {
+            if (window.scrollY > 20) {
+                appHeader.classList.add('scrolled');
+            } else {
+                appHeader.classList.remove('scrolled');
+            }
+        };
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        handleScroll();
+    }
 }
 
 function setActiveFilter(filter, button) {

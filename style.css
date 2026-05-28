@@ -150,7 +150,7 @@ body {
     position: relative;
     overflow-x: clip;
     line-height: 1.5;
-    transition: background-color 0.4s ease, color 0.4s ease;
+    transition: background-color 0.4s ease, color 0.4s ease, padding-top 0.3s ease;
 }
 
 html {
@@ -220,6 +220,7 @@ h1, h2, h3, h4, h5, h6 {
     left: 0;
     z-index: 100;
     width: 100%;
+    transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .header-container {
@@ -229,12 +230,14 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    transition: padding 0.3s ease, gap 0.3s ease;
 }
 
 .logo-area {
     display: flex;
     align-items: center;
     gap: 12px;
+    transition: gap 0.3s ease;
 }
 
 .logo-emoji {
@@ -242,6 +245,7 @@ h1, h2, h3, h4, h5, h6 {
     filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
     animation: rotateBall 10s linear infinite;
     display: inline-block;
+    transition: font-size 0.3s ease;
 }
 
 @keyframes rotateBall {
@@ -253,6 +257,7 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 20px;
     line-height: 1.1;
     color: var(--text-primary);
+    transition: font-size 0.3s ease;
 }
 
 .subtitle {
@@ -260,6 +265,41 @@ h1, h2, h3, h4, h5, h6 {
     letter-spacing: 0.15em;
     font-weight: 800;
     color: var(--text-muted);
+    transition: opacity 0.3s ease, max-height 0.3s ease, margin 0.3s ease;
+    opacity: 1;
+    max-height: 20px;
+}
+
+/* Scrolled Header general styles */
+.app-header.scrolled {
+    background: rgba(var(--bg-card-rgb), 0.92);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+    border-bottom-color: rgba(var(--primary-color-rgb), 0.2);
+}
+
+.app-header.scrolled .header-container {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.app-header.scrolled .logo-emoji {
+    font-size: 22px;
+}
+
+.app-header.scrolled .logo-area h1 {
+    font-size: 17px;
+}
+
+.app-header.scrolled .subtitle {
+    opacity: 0;
+    max-height: 0;
+    margin: 0;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.app-header.scrolled #btn-header-reset {
+    display: none !important;
 }
 
 .header-actions {
@@ -1341,6 +1381,26 @@ h1, h2, h3, h4, h5, h6 {
         justify-content: center;
         flex-wrap: wrap;
         gap: 8px;
+    }
+
+    /* Mobile Scrolled state details */
+    .app-header.scrolled .header-container {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0;
+        padding: 8px 16px;
+    }
+    .app-header.scrolled .logo-area {
+        flex-direction: row;
+        gap: 8px;
+    }
+    .app-header.scrolled .profile-container {
+        display: none !important;
+    }
+    .app-header.scrolled .header-actions {
+        width: auto;
+        justify-content: flex-end;
     }
 }
 
