@@ -1535,11 +1535,11 @@ function renderMyShareQr() {
         new QRious({
             element: myShareQr,
             value: fullURL,
-            size: 800,
+            size: 440,
             background: 'white',
             foreground: 'black',
-            level: 'L',
-            padding: 25
+            level: 'M',
+            padding: null
         });
     } catch (e) {
         console.error("Failed to render share QR code:", e);
@@ -1560,11 +1560,7 @@ function startScanning() {
     html5QrScannerInstance.start(
         { facingMode: "environment" },
         {
-            fps: 10,
-            qrbox: function(width, height) {
-                const size = Math.min(width, height) * 0.7;
-                return { width: size, height: size };
-            }
+            fps: 10
         },
         (qrCodeMessage) => {
             showToast(translations[activeLang].toastScanSuccess);
