@@ -254,18 +254,13 @@
                 
                 <div class="compare-share-section" style="margin-top: 16px; margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--border-card);">
                     <h4 style="margin-bottom: 8px; font-size: 14px; font-weight: 600;" data-i18n="compareOptionA">Opción A: Compartir mi progreso</h4>
-                    <div class="compare-btn-row">
-                        <button id="btn-share" class="btn btn-secondary btn-flex">
-                            <span data-i18n="btnShare">Copiar Código de Compartir</span>
-                        </button>
-                        <button id="btn-show-my-qr" class="btn btn-secondary" title="Mostrar mi código QR">
-                            <span data-i18n="btnShowMyQr">📱 QR</span>
-                        </button>
-                    </div>
-                    <div id="my-qr-drawer" class="my-qr-drawer" style="display: none;">
+                    <div id="my-qr-drawer" class="my-qr-drawer">
                         <canvas id="my-share-qr"></canvas>
                         <p class="drawer-desc" data-i18n="myQrInstruction">Pídele a tu amigo que escanee este QR desde su dispositivo</p>
                     </div>
+                    <button id="btn-share" class="btn btn-secondary btn-full" style="width: 100%; margin-top: 12px;">
+                        <span data-i18n="btnShare">Copiar Código de Compartir</span>
+                    </button>
                 </div>
                 
                 <div class="compare-paste-section">

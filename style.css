@@ -1728,8 +1728,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .qr-code-wrapper {
     background: white;
-    padding: 16px;
-    border-radius: 16px;
+    padding: 6px;
+    border-radius: 12px;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
     display: flex;
     justify-content: center;
@@ -1836,8 +1836,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .my-qr-drawer canvas {
     background: white;
-    padding: 10px;
-    border-radius: 12px;
+    padding: 4px;
+    border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.06);
     width: 150px;
     height: 150px;

@@ -1275,25 +1275,20 @@ function setupEventListeners() {
         if (compareValidationMsg) compareValidationMsg.style.display = 'none';
         compareResults.style.display = 'none';
         compareFriendMeta.style.display = 'none';
-        if (myQrDrawer) myQrDrawer.style.display = 'none';
         
         const friendGivesSpan = document.querySelector('[data-i18n="friendGivesTitle"]');
         const userGivesSpan = document.querySelector('[data-i18n="userGivesTitle"]');
         if (friendGivesSpan) friendGivesSpan.textContent = translations[activeLang].friendGivesTitle;
         if (userGivesSpan) userGivesSpan.textContent = translations[activeLang].userGivesTitle;
 
+        renderMyShareQr();
         dlgCompare.showModal();
     });
     btnCloseCompare.addEventListener('click', () => dlgCompare.close());
     dlgCompare.addEventListener('close', () => {
         stopScanning();
-        if (myQrDrawer) myQrDrawer.style.display = 'none';
     });
     btnDoCompare.addEventListener('click', compareStates);
-
-    if (btnShowMyQr) {
-        btnShowMyQr.addEventListener('click', toggleMyQrDrawer);
-    }
     if (btnScanFriendQr) {
         btnScanFriendQr.addEventListener('click', startScanning);
     }
@@ -1495,19 +1490,9 @@ function showExportPane() {
             size: 200,
             background: 'white',
             foreground: 'black',
-            level: 'H'
+            level: 'H',
+            margin: 0
         });
-    }
-}
-
-function toggleMyQrDrawer() {
-    if (!myQrDrawer) return;
-    const isVisible = myQrDrawer.style.display === 'flex';
-    if (isVisible) {
-        myQrDrawer.style.display = 'none';
-    } else {
-        myQrDrawer.style.display = 'flex';
-        renderMyShareQr();
     }
 }
 
@@ -1522,7 +1507,8 @@ function renderMyShareQr() {
         size: 150,
         background: 'white',
         foreground: 'black',
-        level: 'H'
+        level: 'H',
+        margin: 0
     });
 }
 
