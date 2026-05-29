@@ -1727,24 +1727,24 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .qr-code-wrapper {
-    background: white;
-    padding: 6px;
-    border-radius: 12px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: transform 0.2s ease;
 }
 
-.qr-code-wrapper:hover {
-    transform: scale(1.02);
-}
-
-.qr-code-wrapper canvas {
+.qr-code-wrapper img {
+    background: white;
+    padding: 12px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
     display: block;
     width: 200px;
     height: 200px;
+    transition: transform 0.2s ease;
+}
+
+.qr-code-wrapper img:hover {
+    transform: scale(1.03);
 }
 
 /* Warning Banner Styles */
@@ -1821,33 +1821,92 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
+/* Layout de columnas para Intercambio */
+.compare-grid-layout {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
+
+@media (max-width: 768px) {
+    .compare-grid-layout {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+}
+
+.compare-share-section, .compare-paste-section {
+    background: rgba(255, 255, 255, 0.015);
+    border: 1px solid var(--border-card);
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+
+[data-theme="light"] .compare-share-section,
+[data-theme="light"] .compare-paste-section {
+    background: rgba(0, 0, 0, 0.008);
+}
+
+.compare-share-section h4, .compare-paste-section h4 {
+    margin-top: 0;
+    margin-bottom: 16px;
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 1px solid var(--border-card);
+    padding-bottom: 8px;
+}
+
 /* Cajón del QR del usuario */
 .my-qr-drawer {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     padding: 16px;
-    background: rgba(var(--bg-card-rgb), 0.3);
-    border: 1px solid var(--border-card);
+    background: rgba(var(--bg-card-rgb), 0.15);
+    border: 1px dashed var(--border-card);
     border-radius: 12px;
-    margin-top: 12px;
+    margin-bottom: 16px;
+    flex-grow: 1;
     animation: slideDown 0.3s ease;
 }
 
-.my-qr-drawer canvas {
+.my-qr-drawer img {
     background: white;
-    padding: 4px;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    padding: 10px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
     width: 150px;
     height: 150px;
+    display: block;
+    transition: transform 0.2s ease;
+}
+
+.my-qr-drawer img:hover {
+    transform: scale(1.03);
 }
 
 .drawer-desc {
     font-size: 11px;
     color: var(--text-secondary);
-    margin-top: 8px;
+    margin-top: 10px;
     text-align: center;
+    line-height: 1.4;
+}
+
+.compare-actions-group-vertical {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
 }
 
 /* Contenedor del escáner de cámara */

@@ -1494,7 +1494,7 @@ function showExportPane() {
             new QRious({
                 element: exportQr,
                 value: fullURL,
-                size: 200,
+                size: 400,
                 background: 'white',
                 foreground: 'black',
                 level: 'H',
@@ -1516,7 +1516,7 @@ function renderMyShareQr() {
         new QRious({
             element: myShareQr,
             value: fullURL,
-            size: 150,
+            size: 300,
             background: 'white',
             foreground: 'black',
             level: 'H',

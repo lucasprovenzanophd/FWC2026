@@ -252,29 +252,32 @@
 
                 <p class="modal-instruction" data-i18n="compareIntro">Puedes copiar tu código para enviar, o escanear/pegar el código de tu amigo para calcular el intercambio:</p>
                 
-                <div class="compare-share-section" style="margin-top: 16px; margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--border-card);">
-                    <h4 style="margin-bottom: 8px; font-size: 14px; font-weight: 600;" data-i18n="compareOptionA">Opción A: Compartir mi progreso</h4>
-                    <div id="my-qr-drawer" class="my-qr-drawer">
-                        <canvas id="my-share-qr" width="150" height="150"></canvas>
-                        <p class="drawer-desc" data-i18n="myQrInstruction">Pídele a tu amigo que escanee este QR desde su dispositivo</p>
-                    </div>
-                    <button id="btn-share" class="btn btn-secondary btn-full" style="width: 100%; margin-top: 12px;">
-                        <span data-i18n="btnShare">Copiar Código de Compartir</span>
-                    </button>
-                </div>
-                
-                <div class="compare-paste-section">
-                    <h4 style="margin-bottom: 8px; font-size: 14px; font-weight: 600;" data-i18n="compareOptionB">Opción B: Comparar con amigo</h4>
-                    <div class="compare-actions-group">
-                        <button id="btn-scan-friend-qr" class="btn btn-primary btn-flex">
-                            <span data-i18n="btnScanQr">📷 Escanear QR</span>
-                        </button>
-                        <div class="compare-input-group">
-                            <input type="text" id="friend-link-input" data-i18n-placeholder="friendLinkPlaceholder" placeholder="Código o enlace de tu amigo..." aria-label="Código de tu amigo">
-                            <button id="btn-do-compare" class="btn btn-secondary" data-i18n="btnDoCompareText">Comparar</button>
+                <div class="compare-grid-layout">
+                    <div class="compare-share-section">
+                        <h4 data-i18n="compareOptionA">Opción A: Compartir mi progreso</h4>
+                        <div id="my-qr-drawer" class="my-qr-drawer">
+                            <img id="my-share-qr" alt="Código QR para compartir">
+                            <p class="drawer-desc" data-i18n="myQrInstruction">Pídele a tu amigo que escanee este QR desde su dispositivo</p>
                         </div>
+                        <button id="btn-share" class="btn btn-secondary btn-full" style="width: 100%; margin-top: auto;">
+                            <span data-i18n="btnShare">Copiar Código de Compartir</span>
+                        </button>
                     </div>
-                    <p id="compare-validation-msg" class="validation-error-msg" style="display: none; font-size: 12px; color: #ef4444; margin-top: 4px; margin-bottom: 16px;"></p>
+                    
+                    <div class="compare-paste-section">
+                        <h4 data-i18n="compareOptionB">Opción B: Comparar con amigo</h4>
+                        <div class="compare-actions-group-vertical">
+                            <button id="btn-scan-friend-qr" class="btn btn-primary btn-full">
+                                <span data-i18n="btnScanQr">📷 Escanear QR</span>
+                            </button>
+                            <p class="paste-label" data-i18n="compareInstruction" style="margin-top: 20px; margin-bottom: 8px; font-size: 13px; font-weight: 500; color: var(--text-secondary);">O pega el código de tu amigo:</p>
+                            <div class="compare-input-group">
+                                <input type="text" id="friend-link-input" data-i18n-placeholder="friendLinkPlaceholder" placeholder="Código o enlace de tu amigo..." aria-label="Código de tu amigo">
+                                <button id="btn-do-compare" class="btn btn-secondary" data-i18n="btnDoCompareText">Comparar</button>
+                            </div>
+                        </div>
+                        <p id="compare-validation-msg" class="validation-error-msg" style="display: none; font-size: 12px; color: #ef4444; margin-top: 8px; margin-bottom: 0;"></p>
+                    </div>
                 </div>
 
                 <div id="compare-friend-meta" class="compare-friend-meta" style="display: none;"></div>
@@ -322,7 +325,7 @@
                 <p class="modal-instruction" data-i18n="exportInstruction" style="text-align: center; margin-bottom: 16px;">Escanea este código QR con otro dispositivo para sincronizar tu álbum, o copia el enlace completo:</p>
                 <div class="qr-container">
                     <div class="qr-code-wrapper">
-                        <canvas id="export-qr" width="200" height="200"></canvas>
+                        <img id="export-qr" alt="Código QR de exportación">
                     </div>
                 </div>
                 <button id="btn-copy-url" class="btn btn-secondary btn-full" style="margin-top: 16px;">
