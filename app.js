@@ -1281,7 +1281,11 @@ function setupEventListeners() {
         if (friendGivesSpan) friendGivesSpan.textContent = translations[activeLang].friendGivesTitle;
         if (userGivesSpan) userGivesSpan.textContent = translations[activeLang].userGivesTitle;
 
-        renderMyShareQr();
+        try {
+            renderMyShareQr();
+        } catch (e) {
+            console.error("Error rendering share QR code:", e);
+        }
         dlgCompare.showModal();
     });
     btnCloseCompare.addEventListener('click', () => dlgCompare.close());
@@ -1471,7 +1475,8 @@ function copyShareURL() {
 
 function copySyncURL() {
     const shareCode = compressState(state);
-    const fullURL = `${window.location.origin}${window.location.pathname}#${shareCode}?t=${lastUpdate || Date.now()}`;
+    const baseURL = window.location.href.split('#')[0];
+    const fullURL = `${baseURL}#${shareCode}?t=${lastUpdate || Date.now()}`;
     navigator.clipboard.writeText(fullURL).then(() => {
         showToast(translations[activeLang].toastCopyUrlSuccess);
     }).catch(() => {
@@ -1480,36 +1485,46 @@ function copySyncURL() {
 }
 
 function showExportPane() {
-    const shareCode = compressState(state);
-    const fullURL = `${window.location.origin}${window.location.pathname}#${shareCode}?t=${lastUpdate || Date.now()}`;
-    
-    if (window.QRious) {
+    try {
+        const shareCode = compressState(state);
+        const baseURL = window.location.href.split('#')[0];
+        const fullURL = `${baseURL}#${shareCode}?t=${lastUpdate || Date.now()}`;
+        
+        if (window.QRious) {
+            new QRious({
+                element: exportQr,
+                value: fullURL,
+                size: 200,
+                background: 'white',
+                foreground: 'black',
+                level: 'H',
+                padding: 0
+            });
+        }
+    } catch (e) {
+        console.error("Failed to render export QR code:", e);
+    }
+}
+
+function renderMyShareQr() {
+    try {
+        if (!myShareQr || !window.QRious) return;
+        const shareCode = compressState(state);
+        const baseURL = window.location.href.split('#')[0];
+        const fullURL = `${baseURL}#${shareCode}?t=${lastUpdate || Date.now()}`;
+        
         new QRious({
-            element: exportQr,
+            element: myShareQr,
             value: fullURL,
-            size: 200,
+            size: 150,
             background: 'white',
             foreground: 'black',
             level: 'H',
             padding: 0
         });
+    } catch (e) {
+        console.error("Failed to render share QR code:", e);
     }
-}
-
-function renderMyShareQr() {
-    if (!myShareQr || !window.QRious) return;
-    const shareCode = compressState(state);
-    const fullURL = `${window.location.origin}${window.location.pathname}#${shareCode}?t=${lastUpdate || Date.now()}`;
-    
-    new QRious({
-        element: myShareQr,
-        value: fullURL,
-        size: 150,
-        background: 'white',
-        foreground: 'black',
-        level: 'H',
-        padding: 0
-    });
 }
 
 function startScanning() {
