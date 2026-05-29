@@ -671,7 +671,7 @@ function applyLanguage() {
         const team = teams.find(t => t.originalIndex === teamId);
         if (team) {
             const nameEl = card.querySelector('.team-name');
-            if (nameEl) nameEl.textContent = team.names[activeLang];
+            if (nameEl) nameEl.textContent = `${team.code} - ${team.names[activeLang]}`;
             
             const groupBadge = card.querySelector('.team-group-badge');
             if (groupBadge) {
@@ -679,7 +679,7 @@ function applyLanguage() {
                 const suffix = team.group.replace('Grupo ', '');
                 groupBadge.textContent = `${prefix} ${suffix}`;
             }
-            card.setAttribute('data-team-name-lower', team.names[activeLang].toLowerCase());
+            card.setAttribute('data-team-name-lower', `${team.code.toLowerCase()} - ${team.names[activeLang].toLowerCase()}`);
         }
     });
 }
@@ -979,7 +979,7 @@ function renderMatrix() {
     const fragment = document.createDocumentFragment();
 
     if (activeSort === 'alphabetical') {
-        const sortedTeams = [...teams].sort((a, b) => a.names[activeLang].localeCompare(b.names[activeLang], activeLang));
+        const sortedTeams = [...teams].sort((a, b) => a.code.localeCompare(b.code));
 
         const groupSection = document.createElement('div');
         groupSection.className = 'group-section';
