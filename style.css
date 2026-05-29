@@ -1821,92 +1821,146 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
-/* Layout de columnas para Intercambio */
-.compare-grid-layout {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 24px;
-    margin-top: 16px;
-    margin-bottom: 16px;
-}
-
-@media (max-width: 768px) {
-    .compare-grid-layout {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-}
-
-.compare-share-section, .compare-paste-section {
-    background: rgba(255, 255, 255, 0.015);
-    border: 1px solid var(--border-card);
-    border-radius: 16px;
-    padding: 20px;
+/* Segmented Tabs inside Modal */
+.modal-tabs {
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+    background: rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--border-card);
+    border-radius: 12px;
+    padding: 4px;
+    margin-bottom: 24px;
 }
 
-[data-theme="light"] .compare-share-section,
-[data-theme="light"] .compare-paste-section {
-    background: rgba(0, 0, 0, 0.008);
+[data-theme="light"] .modal-tabs {
+    background: rgba(0, 0, 0, 0.05);
 }
 
-.compare-share-section h4, .compare-paste-section h4 {
-    margin-top: 0;
-    margin-bottom: 16px;
-    font-size: 13px;
-    font-weight: 700;
+.modal-tab {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text-secondary);
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+    text-align: center;
+    font-family: inherit;
+}
+
+.modal-tab:hover {
     color: var(--text-primary);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    border-bottom: 1px solid var(--border-card);
-    padding-bottom: 8px;
 }
 
-/* Cajón del QR del usuario */
-.my-qr-drawer {
+.modal-tab.active {
+    background: var(--bg-card);
+    color: var(--primary-color);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Modal Panels */
+.modal-panel {
+    display: none;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-panel.active {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: 16px;
-    background: rgba(var(--bg-card-rgb), 0.15);
-    border: 1px dashed var(--border-card);
-    border-radius: 12px;
-    margin-bottom: 16px;
-    flex-grow: 1;
-    animation: slideDown 0.3s ease;
 }
 
-.my-qr-drawer img {
+/* Share Panel / QR Card */
+.qr-share-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.015);
+    border: 1px solid var(--border-card);
+    border-radius: 16px;
+    padding: 24px;
+    width: 100%;
+    max-width: 380px;
+    margin: 0 auto;
+}
+
+[data-theme="light"] .qr-share-card {
+    background: rgba(0, 0, 0, 0.008);
+}
+
+.qr-image-container {
     background: white;
     padding: 10px;
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-    width: 150px;
-    height: 150px;
-    display: block;
+    border-radius: 14px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    margin-bottom: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     transition: transform 0.2s ease;
 }
 
-.my-qr-drawer img:hover {
+.qr-image-container:hover {
     transform: scale(1.03);
 }
 
-.drawer-desc {
-    font-size: 11px;
-    color: var(--text-secondary);
-    margin-top: 10px;
-    text-align: center;
-    line-height: 1.4;
+.qr-image-container img {
+    display: block;
+    width: 160px;
+    height: 160px;
 }
 
-.compare-actions-group-vertical {
+.qr-card-instruction {
+    font-size: 12px;
+    color: var(--text-secondary);
+    text-align: center;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Receive Panel / Input Card */
+.compare-receive-card {
+    background: rgba(255, 255, 255, 0.015);
+    border: 1px solid var(--border-card);
+    border-radius: 16px;
+    padding: 24px;
+    width: 100%;
+    max-width: 440px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    height: 100%;
+}
+
+[data-theme="light"] .compare-receive-card {
+    background: rgba(0, 0, 0, 0.008);
+}
+
+.separator-text {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 20px 0;
+}
+
+.separator-text::before, .separator-text::after {
+    content: '';
+    flex: 1;
+    border-bottom: 1px solid var(--border-card);
+}
+
+.separator-text:not(:empty)::before {
+    margin-right: 1em;
+}
+
+.separator-text:not(:empty)::after {
+    margin-left: 1em;
 }
 
 /* Contenedor del escáner de cámara */

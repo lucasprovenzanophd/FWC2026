@@ -88,6 +88,9 @@ const translations = {
         compareShareInstruction: "Copiar mi código de compartir:",
         friendLinkPlaceholder: "Código o enlace de tu amigo...",
         btnDoCompareText: "Comparar",
+        compareTabShare: "Mi código QR",
+        compareTabReceive: "Comparar con amigo",
+        separatorOr: "o ingresa el código manualmente",
         friendGivesTitle: "Tu amigo te da",
         friendGivesSubtitle: "Figuritas que tu amigo tiene repetidas (State 2) y a ti te faltan (State 0):",
         userGivesTitle: "Tú le das a tu amigo",
@@ -198,6 +201,9 @@ const translations = {
         compareShareInstruction: "Copy my share code:",
         friendLinkPlaceholder: "Friend's code or link...",
         btnDoCompareText: "Compare",
+        compareTabShare: "My QR Code",
+        compareTabReceive: "Compare with Friend",
+        separatorOr: "or enter code manually",
         friendGivesTitle: "Your friend gives you",
         friendGivesSubtitle: "Stickers your friend has duplicated (State 2) and you are missing (State 0):",
         userGivesTitle: "You give your friend",
@@ -309,6 +315,9 @@ const translations = {
         compareValidationMsg: "O código não parece ser válido.",
         friendLinkPlaceholder: "Código ou link do seu amigo...",
         btnDoCompareText: "Comparar",
+        compareTabShare: "Meu Código QR",
+        compareTabReceive: "Comparar com Amigo",
+        separatorOr: "ou insira o código manualmente",
         friendGivesTitle: "Seu amigo te dá",
         friendGivesSubtitle: "Figurinhas que seu amigo tem repetidas (State 2) e você está precisando (State 0):",
         userGivesTitle: "Você dá ao seu amigo",
@@ -419,6 +428,9 @@ const translations = {
         compareShareInstruction: "Copia il mio codice di condivisione:",
         friendLinkPlaceholder: "Codice o link del tuo amico...",
         btnDoCompareText: "Confronta",
+        compareTabShare: "Il mio codice QR",
+        compareTabReceive: "Confronta con Amico",
+        separatorOr: "o inserisci il codice manualmente",
         friendGivesTitle: "Il tuo amico ti dà",
         friendGivesSubtitle: "Figurine che il tuo amico ha doppie (Stato 2) e a te mancano (Stato 0):",
         userGivesTitle: "Tu dai al tuo amico",
@@ -1269,6 +1281,11 @@ function setupEventListeners() {
 
     btnShare.addEventListener('click', copyShareURL);
 
+    const tabShare = document.getElementById('tab-compare-share');
+    const tabReceive = document.getElementById('tab-compare-receive');
+    const panelShare = document.getElementById('panel-compare-share');
+    const panelReceive = document.getElementById('panel-compare-receive');
+
     btnCompare.addEventListener('click', () => {
         friendLinkInput.value = '';
         friendLinkInput.classList.remove('is-invalid', 'is-valid');
@@ -1281,6 +1298,13 @@ function setupEventListeners() {
         if (friendGivesSpan) friendGivesSpan.textContent = translations[activeLang].friendGivesTitle;
         if (userGivesSpan) userGivesSpan.textContent = translations[activeLang].userGivesTitle;
 
+        if (tabShare && tabReceive && panelShare && panelReceive) {
+            tabShare.classList.add('active');
+            tabReceive.classList.remove('active');
+            panelShare.classList.add('active');
+            panelReceive.classList.remove('active');
+        }
+
         try {
             renderMyShareQr();
         } catch (e) {
@@ -1288,9 +1312,31 @@ function setupEventListeners() {
         }
         dlgCompare.showModal();
     });
+    
+    if (tabShare && tabReceive && panelShare && panelReceive) {
+        tabShare.addEventListener('click', () => {
+            tabShare.classList.add('active');
+            tabReceive.classList.remove('active');
+            panelShare.classList.add('active');
+            panelReceive.classList.remove('active');
+        });
+        tabReceive.addEventListener('click', () => {
+            tabReceive.classList.add('active');
+            tabShare.classList.remove('active');
+            panelReceive.classList.add('active');
+            panelShare.classList.remove('active');
+        });
+    }
+
     btnCloseCompare.addEventListener('click', () => dlgCompare.close());
     dlgCompare.addEventListener('close', () => {
         stopScanning();
+        if (tabShare && tabReceive && panelShare && panelReceive) {
+            tabShare.classList.add('active');
+            tabReceive.classList.remove('active');
+            panelShare.classList.add('active');
+            panelReceive.classList.remove('active');
+        }
     });
     btnDoCompare.addEventListener('click', compareStates);
     if (btnScanFriendQr) {
