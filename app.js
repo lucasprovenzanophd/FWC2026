@@ -540,7 +540,6 @@ const btnDownloadCanvas = document.getElementById('btn-download-canvas');
 const btnCopyCanvas = document.getElementById('btn-copy-canvas');
 const shareCanvas = document.getElementById('share-canvas');
 const shareCanvasPreview = document.getElementById('share-canvas-preview');
-const btnHeaderReset = document.getElementById('btn-header-reset');
 const btnCompareImage = document.getElementById('btn-compare-image');
 const dlgShareTradeImage = document.getElementById('dlg-share-trade-image');
 const btnCloseShareTradeImage = document.getElementById('btn-close-share-trade-image');
@@ -1319,13 +1318,6 @@ function setupEventListeners() {
         });
     }
 
-    const dynamicHeaderReset = document.getElementById('btn-header-reset');
-    if (dynamicHeaderReset) {
-        dynamicHeaderReset.addEventListener('click', (e) => {
-            e.preventDefault();
-            dlgConfirmReset.showModal();
-        });
-    }
     if (btnCompareImage) {
         btnCompareImage.addEventListener('click', openShareTradeImageModal);
     }
