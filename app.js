@@ -597,6 +597,7 @@ const myShareQr = document.getElementById('my-share-qr');
 const btnScanFriendQr = document.getElementById('btn-scan-friend-qr');
 const qrScannerContainer = document.getElementById('qr-scanner-container');
 const btnStopScanner = document.getElementById('btn-stop-scanner');
+const qrVideoEl = document.getElementById('qr-video');
 const btnShowImageGenerator = document.getElementById('btn-show-image-generator');
 const dlgShareImage = document.getElementById('dlg-share-image');
 const btnCloseShareImage = document.getElementById('btn-close-share-image');
@@ -624,7 +625,9 @@ let shareTradeCanvasFinal = null;
 let comparedFriendState = null;
 let comparedFriendName = '';
 let comparedFriendTimestamp = 0;
-let html5QrScannerInstance = null;
+let html5QrScannerInstance = null; // kept for legacy cleanup
+let nativeScannerStream = null;
+let nativeScannerRafId = null;
 
 const selectSort = document.getElementById('select-sort');
 let activeSort = getStorageItem('sticker-tracker-sort', 'group');
@@ -1528,18 +1531,17 @@ function showExportPane() {
 function renderMyShareQr() {
     try {
         if (!myShareQr || !window.QRious) return;
+        // Encode ONLY the hash (262 chars) — not the full URL — to keep QR sparse and easy to scan
         const shareCode = compressState(state);
-        const baseURL = window.location.href.split('#')[0];
-        const fullURL = `${baseURL}#${shareCode}?t=${lastUpdate || Date.now()}`;
         
         new QRious({
             element: myShareQr,
-            value: fullURL,
+            value: shareCode,
             size: 440,
             background: 'white',
             foreground: 'black',
-            level: 'M',
-            padding: null
+            level: 'L',   // Lowest error correction = smallest, most scannable QR
+            padding: 0
         });
     } catch (e) {
         console.error("Failed to render share QR code:", e);
@@ -1547,61 +1549,83 @@ function renderMyShareQr() {
 }
 
 function startScanning() {
-    if (!qrScannerContainer || !window.Html5Qrcode) return;
+    if (!qrScannerContainer || !qrVideoEl) return;
     
-    // Stop any existing scanning first
-    if (html5QrScannerInstance) {
-        stopScanning();
-    }
+    // Stop any previous scan
+    stopScanning();
     
     qrScannerContainer.style.display = 'block';
-    html5QrScannerInstance = new Html5Qrcode("qr-reader");
     
-    html5QrScannerInstance.start(
-        { facingMode: "environment" },
-        {
-            fps: 10
-        },
-        (qrCodeMessage) => {
-            showToast(translations[activeLang].toastScanSuccess);
-            
-            if (friendLinkInput) {
-                friendLinkInput.value = qrCodeMessage;
-                const event = new Event('input', { bubbles: true });
-                friendLinkInput.dispatchEvent(event);
-            }
-            
-            stopScanning();
-            compareStates();
-        },
-        (errorMessage) => {
-            // ignore scan frame errors
+    // Use BarcodeDetector (native browser API) if available; else fallback msg
+    if (!('BarcodeDetector' in window)) {
+        showToast('Tu navegador no soporta escaneo nativo. Pega el código manualmente.');
+        qrScannerContainer.style.display = 'none';
+        return;
+    }
+    
+    const detector = new BarcodeDetector({ formats: ['qr_code'] });
+    
+    navigator.mediaDevices.getUserMedia({
+        video: { facingMode: 'environment', width: { ideal: 1280 }, height: { ideal: 720 } }
+    }).then(stream => {
+        nativeScannerStream = stream;
+        qrVideoEl.srcObject = stream;
+        qrVideoEl.play();
+        
+        function scanFrame() {
+            if (!nativeScannerStream) return; // stopped
+            detector.detect(qrVideoEl).then(barcodes => {
+                if (barcodes.length > 0) {
+                    const raw = barcodes[0].rawValue;
+                    stopScanning();
+                    
+                    // Accept: bare 262-char hash OR a full URL containing the hash
+                    let hashPart = raw;
+                    if (raw.includes('#')) hashPart = raw.split('#')[1];
+                    // Strip any query string
+                    hashPart = hashPart.split(/[?&]/)[0];
+                    
+                    if (friendLinkInput) {
+                        friendLinkInput.value = hashPart;
+                        friendLinkInput.dispatchEvent(new Event('input', { bubbles: true }));
+                    }
+                    showToast(translations[activeLang].toastScanSuccess);
+                    compareStates();
+                } else {
+                    nativeScannerRafId = requestAnimationFrame(scanFrame);
+                }
+            }).catch(() => {
+                nativeScannerRafId = requestAnimationFrame(scanFrame);
+            });
         }
-    ).catch(err => {
-        console.error("Camera access error:", err);
+        
+        // Give video time to start before first detect
+        qrVideoEl.addEventListener('loadedmetadata', () => {
+            nativeScannerRafId = requestAnimationFrame(scanFrame);
+        }, { once: true });
+        
+    }).catch(err => {
+        console.error('Camera access error:', err);
         showToast(translations[activeLang].toastCameraError);
         qrScannerContainer.style.display = 'none';
-        html5QrScannerInstance = null;
     });
 }
 
 function stopScanning() {
+    if (nativeScannerRafId) {
+        cancelAnimationFrame(nativeScannerRafId);
+        nativeScannerRafId = null;
+    }
+    if (nativeScannerStream) {
+        nativeScannerStream.getTracks().forEach(t => t.stop());
+        nativeScannerStream = null;
+    }
+    if (qrVideoEl) {
+        qrVideoEl.srcObject = null;
+    }
+    // Legacy cleanup
     if (html5QrScannerInstance) {
-        try {
-            if (html5QrScannerInstance.isScanning) {
-                html5QrScannerInstance.stop().then(() => {
-                    if (qrScannerContainer) qrScannerContainer.style.display = 'none';
-                    html5QrScannerInstance = null;
-                }).catch(err => {
-                    console.error("Error stopping scanner:", err);
-                    if (qrScannerContainer) qrScannerContainer.style.display = 'none';
-                    html5QrScannerInstance = null;
-                });
-                return;
-            }
-        } catch (e) {
-            console.error(e);
-        }
+        try { html5QrScannerInstance.stop().catch(() => {}); } catch(e) {}
         html5QrScannerInstance = null;
     }
     if (qrScannerContainer) qrScannerContainer.style.display = 'none';

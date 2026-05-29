@@ -246,7 +246,7 @@
                         <h3 data-i18n="scannerTitle">Escaneando QR de Amigo</h3>
                         <button id="btn-stop-scanner" class="btn btn-secondary btn-sm" data-i18n="btnCancel">Cancelar</button>
                     </div>
-                    <div id="qr-reader"></div>
+                    <video id="qr-video" autoplay playsinline muted style="width:100%; border-radius:12px; max-height:280px; object-fit:cover;"></video>
                     <p class="scanner-instruction" data-i18n="scannerInstruction">Apunta con la cámara al código QR de tu amigo</p>
                 </div>
 
@@ -256,7 +256,7 @@
                         <h4 style="text-align: center; margin-top: 0; margin-bottom: 16px; font-size: 14px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;" data-i18n="visualCompareSection">Escanear Código QR</h4>
                         
                         <div class="qr-image-container" style="background: white; padding: 12px; border-radius: 12px; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin: 0 auto 16px auto; width: fit-content;">
-                            <img id="my-share-qr" alt="Código QR para compartir" style="display: block; width: 220px; height: 220px; border-radius: 8px;">
+                            <canvas id="my-share-qr" style="display: block; width: 220px; height: 220px; border-radius: 8px;"></canvas>
                         </div>
                         
                         <button id="btn-scan-friend-qr" class="btn btn-primary btn-full" style="width: 100%;">
