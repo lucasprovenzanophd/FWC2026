@@ -149,7 +149,9 @@ const translations = {
         toastIncomingOverwriteSuccess: "¡Álbum sobrescrito con éxito!",
         toastIncomingKeepSuccess: "Has conservado tu progreso local.",
         sortGroup: "Por Grupo",
-        sortAlphabetical: "Alfabético"
+        sortAlphabetical: "Alfabético",
+        storageWarningTitle: "El progreso no se guardará automáticamente",
+        storageWarningDesc: "Tu navegador tiene desactivado el guardado de datos (puede ser por bloqueo de cookies o por estar en modo privado/incógnito). Para no perder tus figuritas al cerrar la página, te sugerimos abrir la página en modo normal. Mientras tanto, puedes usar la opción 'Exportar Colección' abajo para copiar y guardar tu enlace de avance."
     },
     en: {
         title: "Fifa World Cup 2026",
@@ -249,7 +251,9 @@ const translations = {
         toastIncomingOverwriteSuccess: "Album overwritten successfully!",
         toastIncomingKeepSuccess: "You kept your local progress.",
         sortGroup: "By Group",
-        sortAlphabetical: "Alphabetical"
+        sortAlphabetical: "Alphabetical",
+        storageWarningTitle: "Progress won't be saved automatically",
+        storageWarningDesc: "Your browser has disabled saving data (this might be due to blocked cookies or private/incognito browsing). To avoid losing your stickers when you close the page, we suggest opening the page in normal mode. In the meantime, you can use the 'Export Collection' button below to copy and save your progress link."
     },
     pt: {
         title: "Fifa World Cup 2026",
@@ -350,7 +354,9 @@ const translations = {
         toastIncomingOverwriteSuccess: "Álbum sobrescrito com sucesso!",
         toastIncomingKeepSuccess: "Você manteve seu progresso local.",
         sortGroup: "Por Grupo",
-        sortAlphabetical: "Alfabético"
+        sortAlphabetical: "Alfabético",
+        storageWarningTitle: "O progresso não será salvo automaticamente",
+        storageWarningDesc: "Seu navegador desativou o salvamento de dados (pode ser devido a cookies bloqueados ou navegação privada/anônima). Para evitar perder suas figurinhas ao fechar a página, sugerimos abrir a página no modo normal. Enquanto isso, você pode usar a opção 'Exportar Coleção' abaixo para copiar e salvar seu link de progresso."
     },
     it: {
         title: "Fifa World Cup 2026",
@@ -450,9 +456,44 @@ const translations = {
         toastIncomingOverwriteSuccess: "Album sovrascritto con lo stato ricevuto!",
         toastIncomingKeepSuccess: "Hai conservato i tuoi progressi locali.",
         sortGroup: "Per Gruppo",
-        sortAlphabetical: "Alfabetico"
+        sortAlphabetical: "Alfabetico",
+        storageWarningTitle: "I progressi non verranno salvati automaticamente",
+        storageWarningDesc: "Il tuo browser ha disattivato il salvataggio dei dati (potrebbe essere dovuto ai cookie bloccati o alla navigazione privata/in incognito). Per evitare di perdere le tue figurine quando chiudi la pagina, ti suggeriamo di aprire la pagina in modalità normale. Nel frattempo, puoi usare l'opzione 'Esporta Collezione' in basso per copiare e salvare il link dei tuoi progressi."
     }
 };
+
+function isLocalStorageAvailable() {
+    try {
+        const testKey = '__storage_test__';
+        localStorage.setItem(testKey, testKey);
+        localStorage.removeItem(testKey);
+        return true;
+    } catch (e) {
+        return false;
+    }
+}
+const storageAvailable = isLocalStorageAvailable();
+
+function getStorageItem(key, fallback = null) {
+    if (storageAvailable) {
+        try {
+            return localStorage.getItem(key) || fallback;
+        } catch (e) {
+            return fallback;
+        }
+    }
+    return fallback;
+}
+
+function setStorageItem(key, value) {
+    if (storageAvailable) {
+        try {
+            localStorage.setItem(key, value);
+            return true;
+        } catch (e) {}
+    }
+    return false;
+}
 
 const COLS = 20;
 const TOTAL_ITEMS = teams.length * COLS;
@@ -535,9 +576,17 @@ let comparedFriendName = '';
 let comparedFriendTimestamp = 0;
 
 const selectSort = document.getElementById('select-sort');
-let activeSort = localStorage.getItem('sticker-tracker-sort') || 'group';
+let activeSort = getStorageItem('sticker-tracker-sort', 'group');
 
 function init() {
+    // Check if local storage is blocked/disabled
+    if (!storageAvailable) {
+        const warningBanner = document.getElementById('storage-warning');
+        if (warningBanner) {
+            warningBanner.style.display = 'flex';
+        }
+    }
+
     // Offset body for fixed header
     const appHeader = document.querySelector('.app-header');
     if (appHeader) {
@@ -564,7 +613,7 @@ function init() {
 }
 
 function setupTheme() {
-    const savedTheme = localStorage.getItem("color-scheme");
+    const savedTheme = getStorageItem("color-scheme");
     if (savedTheme) {
         setTheme(savedTheme);
     } else {
@@ -572,7 +621,7 @@ function setupTheme() {
         setTheme(systemPrefersDark ? 'dark' : 'light');
     }
     window.matchMedia("(prefers-color-scheme: dark)").addEventListener('change', e => {
-        if (!localStorage.getItem("color-scheme")) {
+        if (!getStorageItem("color-scheme")) {
             setTheme(e.matches ? 'dark' : 'light');
         }
     });
@@ -581,7 +630,7 @@ function setupTheme() {
 function setTheme(theme) {
     document.querySelector('meta[name="color-scheme"]').content = theme;
     document.documentElement.setAttribute('data-theme', theme);
-    localStorage.setItem("color-scheme", theme);
+    setStorageItem("color-scheme", theme);
 }
 
 function toggleTheme() {
@@ -592,7 +641,7 @@ function toggleTheme() {
 }
 
 function setupLanguage() {
-    const savedLang = localStorage.getItem('sticker-tracker-lang');
+    const savedLang = getStorageItem('sticker-tracker-lang');
     if (savedLang && ['es', 'en', 'pt', 'it'].includes(savedLang)) {
         activeLang = savedLang;
     } else {
@@ -760,7 +809,7 @@ function loadState() {
     
     const hasUrlHash = (stateHash.length === 262 && /^[A-Za-z0-9\-_]{262}$/.test(stateHash));
     
-    const savedState = localStorage.getItem('sticker-tracker-state');
+    const savedState = getStorageItem('sticker-tracker-state');
     const hasLocalState = (savedState && savedState.length === 262 && /^[A-Za-z0-9\-_]{262}$/.test(savedState));
     
     if (hasUrlHash) {
@@ -789,7 +838,7 @@ function loadState() {
             pendingIncomingTimestamp = incomingTimestamp;
             
             state = decompressState(savedState);
-            const savedUpdate = localStorage.getItem('sticker-tracker-last-update');
+            const savedUpdate = getStorageItem('sticker-tracker-last-update');
             lastUpdate = savedUpdate ? parseInt(savedUpdate, 10) || 0 : 0;
             
             showIncomingCompareDialog(state, incomingState);
@@ -798,7 +847,7 @@ function loadState() {
     } else {
         if (hasLocalState) {
             state = decompressState(savedState);
-            const savedUpdate = localStorage.getItem('sticker-tracker-last-update');
+            const savedUpdate = getStorageItem('sticker-tracker-last-update');
             lastUpdate = savedUpdate ? parseInt(savedUpdate, 10) || 0 : 0;
         } else {
             state = new Array(TOTAL_ITEMS).fill(0);
@@ -821,8 +870,8 @@ function saveState() {
 }
 
 function saveStateToLocalStorage() {
-    localStorage.setItem('sticker-tracker-state', compressState(state));
-    localStorage.setItem('sticker-tracker-last-update', lastUpdate);
+    setStorageItem('sticker-tracker-state', compressState(state));
+    setStorageItem('sticker-tracker-last-update', lastUpdate);
 }
 
 function renderProfile() {
@@ -1122,7 +1171,7 @@ function setupEventListeners() {
 
     selectLang.addEventListener('change', (e) => {
         activeLang = e.target.value;
-        localStorage.setItem('sticker-tracker-lang', activeLang);
+        setStorageItem('sticker-tracker-lang', activeLang);
         renderMatrix();
         applyFilters();
         updateLastUpdateDisplay();
@@ -1131,7 +1180,7 @@ function setupEventListeners() {
     if (selectSort) {
         selectSort.addEventListener('change', (e) => {
             activeSort = e.target.value;
-            localStorage.setItem('sticker-tracker-sort', activeSort);
+            setStorageItem('sticker-tracker-sort', activeSort);
             renderMatrix();
             applyFilters();
         });

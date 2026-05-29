@@ -17,13 +17,13 @@
     <link rel="stylesheet" href="style.css">
     <meta name="color-scheme" content="light dark">
     <script>
-        {
+        try {
             const theme = localStorage.getItem("color-scheme");
             if (theme) {
                 document.querySelector('meta[name="color-scheme"]').content = theme;
                 document.documentElement.setAttribute('data-theme', theme);
             }
-        }
+        } catch (e) {}
     </script>
 </head>
 <body>
@@ -61,6 +61,14 @@
     </header>
 
     <main class="container">
+        
+        <div id="storage-warning" class="warning-banner" style="display: none;">
+            <span class="warning-icon">⚠️</span>
+            <div class="warning-text">
+                <h3 data-i18n="storageWarningTitle">El progreso no se guardará automáticamente</h3>
+                <p data-i18n="storageWarningDesc">Tu navegador tiene desactivado el guardado de datos (puede ser por el modo incógnito o bloqueo de cookies). Para no perder tus figuritas, abre la página en modo normal o usa "Exportar Colección" para guardar tu enlace.</p>
+            </div>
+        </div>
         
         <section id="instructions-card" class="instructions-section glass-card">
             <div class="instructions-header">

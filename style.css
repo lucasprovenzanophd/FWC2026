@@ -1747,3 +1747,50 @@ h1, h2, h3, h4, h5, h6 {
     height: 200px;
 }
 
+/* Warning Banner Styles */
+.warning-banner {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    background: rgba(245, 158, 11, 0.15);
+    border: 1px solid rgba(245, 158, 11, 0.35);
+    border-radius: 16px;
+    padding: 16px 20px;
+    margin-bottom: 24px;
+    color: #b45309;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    animation: fadeIn 0.4s ease;
+}
+
+[data-theme="dark"] .warning-banner {
+    background: rgba(245, 158, 11, 0.08);
+    border: 1px solid rgba(245, 158, 11, 0.25);
+    color: #fbbf24;
+}
+
+.warning-icon {
+    font-size: 24px;
+    line-height: 1;
+}
+
+.warning-text h3 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 4px;
+    font-family: 'Outfit', sans-serif;
+}
+
+.warning-text p {
+    font-size: 13px;
+    margin: 0;
+    line-height: 1.5;
+    opacity: 0.9;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
