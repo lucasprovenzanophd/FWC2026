@@ -1281,11 +1281,6 @@ function setupEventListeners() {
 
     btnShare.addEventListener('click', copyShareURL);
 
-    const tabShare = document.getElementById('tab-compare-share');
-    const tabReceive = document.getElementById('tab-compare-receive');
-    const panelShare = document.getElementById('panel-compare-share');
-    const panelReceive = document.getElementById('panel-compare-receive');
-
     btnCompare.addEventListener('click', () => {
         friendLinkInput.value = '';
         friendLinkInput.classList.remove('is-invalid', 'is-valid');
@@ -1298,13 +1293,6 @@ function setupEventListeners() {
         if (friendGivesSpan) friendGivesSpan.textContent = translations[activeLang].friendGivesTitle;
         if (userGivesSpan) userGivesSpan.textContent = translations[activeLang].userGivesTitle;
 
-        if (tabShare && tabReceive && panelShare && panelReceive) {
-            tabShare.classList.add('active');
-            tabReceive.classList.remove('active');
-            panelShare.classList.add('active');
-            panelReceive.classList.remove('active');
-        }
-
         try {
             renderMyShareQr();
         } catch (e) {
@@ -1312,21 +1300,6 @@ function setupEventListeners() {
         }
         dlgCompare.showModal();
     });
-    
-    if (tabShare && tabReceive && panelShare && panelReceive) {
-        tabShare.addEventListener('click', () => {
-            tabShare.classList.add('active');
-            tabReceive.classList.remove('active');
-            panelShare.classList.add('active');
-            panelReceive.classList.remove('active');
-        });
-        tabReceive.addEventListener('click', () => {
-            tabReceive.classList.add('active');
-            tabShare.classList.remove('active');
-            panelReceive.classList.add('active');
-            panelShare.classList.remove('active');
-        });
-    }
 
     btnCloseCompare.addEventListener('click', () => dlgCompare.close());
     dlgCompare.addEventListener('close', () => {
@@ -1562,11 +1535,11 @@ function renderMyShareQr() {
         new QRious({
             element: myShareQr,
             value: fullURL,
-            size: 300,
+            size: 350,
             background: 'white',
             foreground: 'black',
             level: 'H',
-            padding: 0
+            padding: null
         });
     } catch (e) {
         console.error("Failed to render share QR code:", e);
