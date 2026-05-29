@@ -1549,66 +1549,105 @@ function renderMyShareQr() {
 }
 
 function startScanning() {
-    if (!qrScannerContainer || !qrVideoEl) return;
+    if (!qrScannerContainer || !qrVideoEl) {
+        console.error('Scanner elements not found', { qrScannerContainer, qrVideoEl });
+        return;
+    }
     
-    // Stop any previous scan
+    // Stop any previous scan session first
     stopScanning();
     
     qrScannerContainer.style.display = 'block';
     
-    // Use BarcodeDetector (native browser API) if available; else fallback msg
-    if (!('BarcodeDetector' in window)) {
-        showToast('Tu navegador no soporta escaneo nativo. Pega el código manualmente.');
-        qrScannerContainer.style.display = 'none';
-        return;
-    }
+    const scanCanvas = document.getElementById('qr-scan-canvas');
+    const useNative = ('BarcodeDetector' in window);
     
-    const detector = new BarcodeDetector({ formats: ['qr_code'] });
+    let detector = null;
+    if (useNative) {
+        try { detector = new BarcodeDetector({ formats: ['qr_code'] }); }
+        catch(e) { /* fallback to jsQR */ }
+    }
     
     navigator.mediaDevices.getUserMedia({
         video: { facingMode: 'environment', width: { ideal: 1280 }, height: { ideal: 720 } }
     }).then(stream => {
         nativeScannerStream = stream;
         qrVideoEl.srcObject = stream;
-        qrVideoEl.play();
         
-        function scanFrame() {
-            if (!nativeScannerStream) return; // stopped
-            detector.detect(qrVideoEl).then(barcodes => {
-                if (barcodes.length > 0) {
-                    const raw = barcodes[0].rawValue;
-                    stopScanning();
-                    
-                    // Accept: bare 262-char hash OR a full URL containing the hash
-                    let hashPart = raw;
-                    if (raw.includes('#')) hashPart = raw.split('#')[1];
-                    // Strip any query string
-                    hashPart = hashPart.split(/[?&]/)[0];
-                    
-                    if (friendLinkInput) {
-                        friendLinkInput.value = hashPart;
-                        friendLinkInput.dispatchEvent(new Event('input', { bubbles: true }));
+        function onVideoReady() {
+            function scanFrame() {
+                if (!nativeScannerStream) return; // scanner was stopped
+                
+                if (detector) {
+                    // Path A: BarcodeDetector (Chrome/Edge/Safari 17+)
+                    detector.detect(qrVideoEl).then(barcodes => {
+                        if (barcodes.length > 0) {
+                            handleQrResult(barcodes[0].rawValue);
+                        } else {
+                            nativeScannerRafId = requestAnimationFrame(scanFrame);
+                        }
+                    }).catch(() => {
+                        nativeScannerRafId = requestAnimationFrame(scanFrame);
+                    });
+                } else if (window.jsQR && scanCanvas) {
+                    // Path B: jsQR fallback (all browsers including Safari < 17 and Firefox)
+                    const w = qrVideoEl.videoWidth;
+                    const h = qrVideoEl.videoHeight;
+                    if (w > 0 && h > 0) {
+                        scanCanvas.width = w;
+                        scanCanvas.height = h;
+                        const ctx = scanCanvas.getContext('2d');
+                        ctx.drawImage(qrVideoEl, 0, 0, w, h);
+                        const imageData = ctx.getImageData(0, 0, w, h);
+                        const code = jsQR(imageData.data, w, h, { inversionAttempts: 'dontInvert' });
+                        if (code) {
+                            handleQrResult(code.data);
+                            return;
+                        }
                     }
-                    showToast(translations[activeLang].toastScanSuccess);
-                    compareStates();
-                } else {
                     nativeScannerRafId = requestAnimationFrame(scanFrame);
+                } else {
+                    // No decoder available
+                    stopScanning();
+                    showToast('Escaneo no disponible en este navegador. Pegá el código manualmente.');
                 }
-            }).catch(() => {
-                nativeScannerRafId = requestAnimationFrame(scanFrame);
-            });
+            }
+            nativeScannerRafId = requestAnimationFrame(scanFrame);
         }
         
-        // Give video time to start before first detect
-        qrVideoEl.addEventListener('loadedmetadata', () => {
-            nativeScannerRafId = requestAnimationFrame(scanFrame);
-        }, { once: true });
+        // Safari requires interaction before play() works in some cases
+        qrVideoEl.onloadedmetadata = () => {
+            qrVideoEl.play().then(onVideoReady).catch(e => {
+                console.error('Video play error:', e);
+                onVideoReady(); // try anyway
+            });
+        };
+        // Trigger if metadata already loaded
+        if (qrVideoEl.readyState >= 1) {
+            qrVideoEl.play().then(onVideoReady).catch(() => onVideoReady());
+        }
         
     }).catch(err => {
         console.error('Camera access error:', err);
         showToast(translations[activeLang].toastCameraError);
         qrScannerContainer.style.display = 'none';
     });
+}
+
+function handleQrResult(raw) {
+    stopScanning();
+    // Accept: bare 262-char hash OR a full URL containing the hash after '#'
+    let hashPart = raw.trim();
+    if (hashPart.includes('#')) hashPart = hashPart.split('#')[1];
+    // Strip any query string
+    hashPart = hashPart.split(/[?&]/)[0].trim();
+    
+    if (friendLinkInput) {
+        friendLinkInput.value = hashPart;
+        friendLinkInput.dispatchEvent(new Event('input', { bubbles: true }));
+    }
+    showToast(translations[activeLang].toastScanSuccess);
+    compareStates();
 }
 
 function stopScanning() {

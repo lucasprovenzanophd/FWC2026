@@ -247,6 +247,7 @@
                         <button id="btn-stop-scanner" class="btn btn-secondary btn-sm" data-i18n="btnCancel">Cancelar</button>
                     </div>
                     <video id="qr-video" autoplay playsinline muted style="width:100%; border-radius:12px; max-height:280px; object-fit:cover;"></video>
+                    <canvas id="qr-scan-canvas" style="display:none;"></canvas>
                     <p class="scanner-instruction" data-i18n="scannerInstruction">Apunta con la cámara al código QR de tu amigo</p>
                 </div>
 
@@ -424,7 +425,7 @@
     <div id="toast" class="toast" role="alert" aria-live="polite"></div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5-qrcode/2.3.8/html5-qrcode.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
