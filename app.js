@@ -1535,7 +1535,7 @@ function renderMyShareQr() {
         new QRious({
             element: myShareQr,
             value: fullURL,
-            size: 350,
+            size: 220,
             background: 'white',
             foreground: 'black',
             level: 'H',

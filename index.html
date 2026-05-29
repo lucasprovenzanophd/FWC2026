@@ -251,33 +251,29 @@
                 </div>
 
                 <div id="compare-unified-card" class="unified-compare-card">
-                    <!-- QR para que me escaneen -->
-                    <div class="qr-share-card" style="margin-bottom: 16px;">
-                        <div class="qr-image-container" style="background: white; padding: 12px; border-radius: 12px; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin: 0 auto; width: fit-content;">
-                            <img id="my-share-qr" alt="Código QR para compartir" style="display: block; max-width: 100%; height: auto; border-radius: 8px;">
+                    <!-- Sección Visual: Código QR y Escáner -->
+                    <div class="compare-section visual-section" style="background: rgba(var(--bg-card-rgb), 0.3); padding: 20px; border-radius: 16px; border: 1px solid var(--border-card); margin-bottom: 20px;">
+                        <h4 style="text-align: center; margin-top: 0; margin-bottom: 16px; font-size: 14px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;" data-i18n="visualCompareSection">Escanear Código QR</h4>
+                        
+                        <div class="qr-image-container" style="background: white; padding: 12px; border-radius: 12px; display: flex; justify-content: center; align-items: center; box-shadow: 0 4px 12px rgba(0,0,0,0.05); margin: 0 auto 16px auto; width: fit-content;">
+                            <img id="my-share-qr" alt="Código QR para compartir" style="display: block; width: 220px; height: 220px; border-radius: 8px;">
                         </div>
-                    </div>
-                    
-                    <!-- Boton para copiar -->
-                    <button id="btn-share" class="btn btn-secondary btn-full" style="width: 100%; margin-bottom: 16px;">
-                        <span data-i18n="btnShare">Copiar Código de Compartir</span>
-                    </button>
-                    
-                    <hr style="border: 0; height: 1px; background: var(--border-color); margin: 20px 0; opacity: 0.5;">
-                    
-                    <div class="compare-receive-card">
-                        <!-- Escanear QR amigo -->
-                        <button id="btn-scan-friend-qr" class="btn btn-primary btn-full" style="width: 100%; margin-bottom: 16px;">
+                        
+                        <button id="btn-scan-friend-qr" class="btn btn-primary btn-full" style="width: 100%;">
                             <span data-i18n="btnScanQr">📷 Escanear QR de un Amigo</span>
                         </button>
+                    </div>
+                    
+                    <!-- Sección de Texto: Link y Código -->
+                    <div class="compare-section text-section" style="background: rgba(var(--bg-card-rgb), 0.3); padding: 20px; border-radius: 16px; border: 1px solid var(--border-card);">
+                        <h4 style="text-align: center; margin-top: 0; margin-bottom: 16px; font-size: 14px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;" data-i18n="textCompareSection">O usar Enlaces</h4>
                         
-                        <div class="separator-text" style="margin-bottom: 16px;">
-                            <span data-i18n="separatorOr">o ingresa el código manualmente</span>
-                        </div>
+                        <button id="btn-share" class="btn btn-secondary btn-full" style="width: 100%; margin-bottom: 16px;">
+                            <span data-i18n="btnShare">Copiar mi Código de Compartir</span>
+                        </button>
                         
-                        <!-- Input y Comparar -->
                         <div class="compare-input-group" style="display: flex; flex-direction: column; gap: 12px;">
-                            <input type="text" id="friend-link-input" data-i18n-placeholder="friendLinkPlaceholder" placeholder="Código o enlace de tu amigo..." aria-label="Código de tu amigo">
+                            <input type="text" id="friend-link-input" class="search-input" data-i18n-placeholder="friendLinkPlaceholder" placeholder="Pega el código de tu amigo..." aria-label="Código de tu amigo" style="width: 100%; height: 44px; padding: 0 16px; border-radius: 12px; border: 1px solid var(--border-card); background-color: var(--btn-secondary-bg); color: var(--text-primary); font-size: 14px; outline: none; box-sizing: border-box;">
                             <button id="btn-do-compare" class="btn btn-primary" data-i18n="btnDoCompareText" style="width: 100%;">Generar lista de cambios</button>
                         </div>
                         

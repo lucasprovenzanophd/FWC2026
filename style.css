@@ -1908,8 +1908,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .qr-image-container img {
     display: block;
-    width: 160px;
-    height: 160px;
+    max-width: 100%;
+    height: auto;
 }
 
 .qr-card-instruction {
