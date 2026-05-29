@@ -1491,7 +1491,7 @@ function showExportPane() {
             background: 'white',
             foreground: 'black',
             level: 'H',
-            margin: 0
+            padding: 0
         });
     }
 }
@@ -1508,7 +1508,7 @@ function renderMyShareQr() {
         background: 'white',
         foreground: 'black',
         level: 'H',
-        margin: 0
+        padding: 0
     });
 }
 
