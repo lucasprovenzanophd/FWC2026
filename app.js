@@ -69,7 +69,7 @@ const translations = {
         tabEh: "Grupos E - H",
         tabIl: "Grupos I - L",
         tabFwc: "Especial (FWC)",
-        btnExportImport: "Respaldar / Importar",
+        btnExportImport: "Exportar Colección",
         btnReset: "Reiniciar Álbum",
         footerText: "Diseñado con tecnología estática. Se ejecuta completamente en tu navegador.",
         footerAuthor: "Creado por",
@@ -94,23 +94,16 @@ const translations = {
         userGivesSubtitle: "Figuritas que tú tienes repetidas (State 2) y a tu amigo le faltan (State 0):",
         compareNoMatches: "Ninguna figurita coincide para este caso.",
         compareInvalidLink: "El enlace o código del amigo no es válido.",
-        exportImportTitle: "Respaldar e Importar Datos",
-        tabExport: "Exportar",
-        tabImport: "Importar",
-        exportInstruction: "Copia este código de respaldo y guárdalo en un lugar seguro. Contiene todo tu progreso actual:",
-        btnCopyBackupText: "Copiar Código de Respaldo",
-        importInstruction: "Pega aquí tu código de respaldo JSON o un código hash completo. Esto sobrescribirá tu estado actual:",
-        importPlaceholder: "Pega el código JSON o código hash aquí...",
-        importErrorMsgText: "El código proporcionado no es válido.",
-        btnDoImportText: "Restaurar Datos",
+        exportImportTitle: "Exportar Colección",
+        exportInstruction: "Escanea este código QR con otro dispositivo para sincronizar tu álbum, o copia el enlace completo:",
+        btnCopyUrlText: "Copiar Enlace del Álbum",
         resetTitle: "¿Reiniciar Álbum?",
         resetWarning1: "Esta acción borrará todo tu progreso actual y marcará todas las figuritas como faltantes.",
         resetWarning2: "Esta acción no se puede deshacer.",
         btnCancelResetText: "Cancelar",
         btnConfirmResetText: "Sí, borrar todo",
         toastCopyShare: "¡Código de compartir copiado al portapapeles!",
-        toastCopyBackup: "¡Código de respaldo copiado!",
-        toastImportSuccess: "¡Datos importados con éxito!",
+        toastCopyUrlSuccess: "¡Enlace del álbum copiado al portapapeles!",
         toastResetSuccess: "El progreso del álbum ha sido reiniciado.",
         noResultsText: "No se encontraron selecciones coincidentes.",
         toastThemeChanged: "¡Tema cambiado!",
@@ -176,7 +169,7 @@ const translations = {
         tabEh: "Groups E - H",
         tabIl: "Groups I - L",
         tabFwc: "Special (FWC)",
-        btnExportImport: "Backup / Import",
+        btnExportImport: "Export Collection",
         btnReset: "Reset Album",
         footerText: "Designed with static technology. Runs entirely in your browser.",
         footerAuthor: "Created by",
@@ -201,23 +194,16 @@ const translations = {
         userGivesSubtitle: "Stickers you have duplicated (State 2) and your friend is missing (State 0):",
         compareNoMatches: "No stickers match for this case.",
         compareInvalidLink: "Friend's link or code is invalid.",
-        exportImportTitle: "Backup and Import Data",
-        tabExport: "Export",
-        tabImport: "Import",
-        exportInstruction: "Copy this backup code and save it in a safe place. It contains all your current progress:",
-        btnCopyBackupText: "Copy Backup Code",
-        importInstruction: "Paste your JSON backup code or a full hash code here. This will overwrite your current state:",
-        importPlaceholder: "Paste JSON code or hash code here...",
-        importErrorMsgText: "The code provided is invalid.",
-        btnDoImportText: "Restore Data",
+        exportImportTitle: "Export Collection",
+        exportInstruction: "Scan this QR code with another device to sync your album, or copy the complete link:",
+        btnCopyUrlText: "Copy Album Link",
         resetTitle: "Reset Album?",
         resetWarning1: "This action will clear all your current progress and mark all stickers as missing.",
         resetWarning2: "This action cannot be undone.",
         btnCancelResetText: "Cancel",
         btnConfirmResetText: "Yes, delete all",
         toastCopyShare: "Share code copied to clipboard!",
-        toastCopyBackup: "Backup code copied!",
-        toastImportSuccess: "Data imported successfully!",
+        toastCopyUrlSuccess: "Album link copied to clipboard!",
         toastResetSuccess: "Album progress has been reset.",
         noResultsText: "No matching teams found.",
         toastThemeChanged: "Theme changed!",
@@ -283,7 +269,7 @@ const translations = {
         tabEh: "Grupos E - H",
         tabIl: "Grupos I - L",
         tabFwc: "Especial (FWC)",
-        btnExportImport: "Backup / Importar",
+        btnExportImport: "Exportar Coleção",
         btnReset: "Reiniciar Álbum",
         footerText: "Desenvolvido com tecnologia estática. Executado totalmente no seu navegador.",
         footerAuthor: "Criado por",
@@ -309,23 +295,16 @@ const translations = {
         userGivesSubtitle: "Figurinhas que você tem repetidas (State 2) e seu amigo está precisando (State 0):",
         compareNoMatches: "Nenhuma figurinha coincide para este caso.",
         compareInvalidLink: "O link ou código do amigo não é válido.",
-        exportImportTitle: "Backup e Importar Dati",
-        tabExport: "Exportar",
-        tabImport: "Importar",
-        exportInstruction: "Copie este código de backup e salve em um local seguro. Ele contém todo o seu progresso atual:",
-        btnCopyBackupText: "Copiar Código de Backup",
-        importInstruction: "Cole aqui o seu código de backup JSON ou código hash completo. Isso substituirá o seu estado atual:",
-        importPlaceholder: "Cole o código JSON ou código hash aqui...",
-        importErrorMsgText: "O código fornecido não é válido.",
-        btnDoImportText: "Restaurar Dados",
+        exportImportTitle: "Exportar Coleção",
+        exportInstruction: "Escaneie este código QR com outro dispositivo para sincronizar seu álbum, ou copie o link completo:",
+        btnCopyUrlText: "Copiar Link do Álbum",
         resetTitle: "Reiniciar Álbum?",
         resetWarning1: "Esta ação apagará todo o seu progresso atual e marcará todas las figurinhas como faltando.",
         resetWarning2: "Esta ação não pode ser desfeita.",
         btnCancelResetText: "Cancelar",
         btnConfirmResetText: "Sim, apagar tudo",
         toastCopyShare: "Código de compartilhamento copiado!",
-        toastCopyBackup: "Código de backup copiado!",
-        toastImportSuccess: "Dados importados com sucesso!",
+        toastCopyUrlSuccess: "Link do álbum copiado!",
         toastResetSuccess: "O progresso do álbum foi reiniciado.",
         noResultsText: "Nenhuma seleção correspondente encontrada.",
         toastThemeChanged: "Tema alterado!",
@@ -391,7 +370,7 @@ const translations = {
         tabEh: "Gruppi E - H",
         tabIl: "Gruppi I - L",
         tabFwc: "Speciale (FWC)",
-        btnExportImport: "Backup / Importa",
+        btnExportImport: "Esporta Collezione",
         btnReset: "Reinizializza Album",
         footerText: "Progettato con tecnologia statica. Eseguito interamente nel tuo browser.",
         footerAuthor: "Creato da",
@@ -416,23 +395,16 @@ const translations = {
         userGivesSubtitle: "Figurine che tu hai doppie (Stato 2) e al tuo amico mancano (Stato 0):",
         compareNoMatches: "Nessuna figurina corrisponde in questo caso.",
         compareInvalidLink: "Il link o il codice dell'amico non è valido.",
-        exportImportTitle: "Backup e Importa Dati",
-        tabExport: "Esporta",
-        tabImport: "Importa",
-        exportInstruction: "Copia questo codice di backup e conservalo in un luogo sicuro. Contiene tutti i tuoi progressi attuali:",
-        btnCopyBackupText: "Copia Codice di Backup",
-        importInstruction: "Incolla qui il tuo codice di backup JSON o un codice hash completo. Questo sovrascriverà il tuo stato attuale:",
-        importPlaceholder: "Incolla il codice JSON o il codice hash qui...",
-        importErrorMsgText: "Il codice fornito non è valido.",
-        btnDoImportText: "Ripristina Dati",
+        exportImportTitle: "Esporta Collezione",
+        exportInstruction: "Scansiona questo codice QR con un altro dispositivo per sincronizzare il tuo album, o copia il link completo:",
+        btnCopyUrlText: "Copia Link dell'Album",
         resetTitle: "Reinizializzare l'Album?",
         resetWarning1: "Questa azione cancellerà tutti i tuoi progressi attuali e segnerà tutte le figurine come mancanti.",
         resetWarning2: "Questa azione non può essere annullata.",
         btnCancelResetText: "Annulla",
         btnConfirmResetText: "Sì, cancella tutto",
         toastCopyShare: "Codice di condivisione copiato negli appunti!",
-        toastCopyBackup: "Codice di backup copiato!",
-        toastImportSuccess: "Dati importati con successo!",
+        toastCopyUrlSuccess: "Link dell'album copiato negli appunti!",
         toastResetSuccess: "Il progresso dell'album è stato reinizializzato.",
         noResultsText: "Nessuna squadra corrispondente trovata.",
         toastThemeChanged: "Tema cambiato!",
@@ -525,15 +497,8 @@ const listFriendsDuplicates = document.getElementById('list-friends-duplicates')
 const listUserDuplicates = document.getElementById('list-user-duplicates');
 const countFriendsDuplicates = document.getElementById('count-friends-duplicates');
 const countUserDuplicates = document.getElementById('count-user-duplicates');
-const btnTabExport = document.getElementById('btn-tab-export');
-const btnTabImport = document.getElementById('btn-tab-import');
-const exportPane = document.getElementById('export-pane');
-const importPane = document.getElementById('import-pane');
-const exportTextarea = document.getElementById('export-textarea');
-const importTextarea = document.getElementById('import-textarea');
-const importErrorMsg = document.getElementById('import-error-msg');
-const btnCopyBackup = document.getElementById('btn-copy-backup');
-const btnDoImport = document.getElementById('btn-do-import');
+const btnCopyUrl = document.getElementById('btn-copy-url');
+const exportQr = document.getElementById('export-qr');
 const btnConfirmReset = document.getElementById('btn-confirm-reset');
 const toast = document.getElementById('toast');
 const usernameInput = document.getElementById('username-input');
@@ -1262,21 +1227,13 @@ function setupEventListeners() {
     });
 
     btnExportImport.addEventListener('click', () => {
-        exportTextarea.value = JSON.stringify({
-            version: '2026-v1',
-            timestamp: Date.now(),
-            state: compressState(state)
-        }, null, 2);
-        importTextarea.value = '';
-        importErrorMsg.style.display = 'none';
         showExportPane();
         dlgExportImport.showModal();
     });
     btnCloseExport.addEventListener('click', () => dlgExportImport.close());
-    btnTabExport.addEventListener('click', showExportPane);
-    btnTabImport.addEventListener('click', showImportPane);
-    btnCopyBackup.addEventListener('click', copyBackupText);
-    btnDoImport.addEventListener('click', importBackupData);
+    if (btnCopyUrl) {
+        btnCopyUrl.addEventListener('click', copySyncURL);
+    }
 
     btnReset.addEventListener('click', () => dlgConfirmReset.showModal());
     btnCloseResetDlg.addEventListener('click', () => dlgConfirmReset.close());
@@ -1414,71 +1371,29 @@ function copyShareURL() {
     });
 }
 
-function copyBackupText() {
-    exportTextarea.select();
-    navigator.clipboard.writeText(exportTextarea.value).then(() => {
-        showToast(translations[activeLang].toastCopyBackup);
+function copySyncURL() {
+    const shareCode = compressState(state);
+    const fullURL = `${window.location.origin}${window.location.pathname}#${shareCode}?t=${lastUpdate || Date.now()}`;
+    navigator.clipboard.writeText(fullURL).then(() => {
+        showToast(translations[activeLang].toastCopyUrlSuccess);
+    }).catch(() => {
+        showToast(translations[activeLang].toastCopyShareError);
     });
 }
 
 function showExportPane() {
-    btnTabExport.classList.add('active');
-    btnTabImport.classList.remove('active');
-    exportPane.style.display = 'block';
-    importPane.style.display = 'none';
-}
-
-function showImportPane() {
-    btnTabExport.classList.remove('active');
-    btnTabImport.classList.add('active');
-    exportPane.style.display = 'none';
-    importPane.style.display = 'block';
-}
-
-function importBackupData() {
-    const input = importTextarea.value.trim();
-    if (!input) return;
-    let targetStateString = '';
-    let importedTimestamp = 0;
-    try {
-        const parsed = JSON.parse(input);
-        if (parsed && typeof parsed.state === 'string') {
-            targetStateString = parsed.state;
-        }
-    } catch(e) {
-        let hashCandidate = input;
-        if (input.includes('#')) hashCandidate = input.split('#')[1];
-        const parts = hashCandidate.split(/[?&]/);
-        targetStateString = parts[0];
-        if (parts.length > 1) {
-            const qStr = hashCandidate.substring(targetStateString.length + 1);
-            const queryParams = new URLSearchParams(qStr);
-            const tVal = queryParams.get('t');
-            if (tVal) {
-                const parsedT = parseInt(tVal, 10);
-                if (!isNaN(parsedT) && parsedT > 0) {
-                    importedTimestamp = parsedT;
-                }
-            }
-        }
-    }
-    if (targetStateString.length === 262 && /^[A-Za-z0-9\-_]{262}$/.test(targetStateString)) {
-        state = decompressState(targetStateString);
-        lastUpdate = importedTimestamp > 0 ? importedTimestamp : Date.now();
-        saveStateToLocalStorage();
-        updateLastUpdateDisplay();
-        renderProfile();
-        for (let i = 0; i < teams.length; i++) updateTeamProgress(i);
-        for (let i = 0; i < TOTAL_ITEMS; i++) {
-            const el = document.getElementById(`sticker-${i}`);
-            if (el) el.className = `sticker state-${state[i]}`;
-        }
-        applyFilters();
-        updateDashboard();
-        dlgExportImport.close();
-        showToast(translations[activeLang].toastImportSuccess);
-    } else {
-        importErrorMsg.style.display = 'block';
+    const shareCode = compressState(state);
+    const fullURL = `${window.location.origin}${window.location.pathname}#${shareCode}?t=${lastUpdate || Date.now()}`;
+    
+    if (window.QRious) {
+        new QRious({
+            element: exportQr,
+            value: fullURL,
+            size: 200,
+            background: 'white',
+            foreground: 'black',
+            level: 'H'
+        });
     }
 }
 

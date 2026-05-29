@@ -288,27 +288,19 @@
     <dialog id="dlg-export-import" class="glass-modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 data-i18n="exportImportTitle">Respaldar e Importar Datos</h2>
+                <h2 data-i18n="exportImportTitle">Exportar Colección</h2>
                 <button id="btn-close-export" class="btn-close-modal" aria-label="Cerrar modal">&times;</button>
             </div>
             <div class="modal-body">
-                <div class="modal-tab-headers">
-                    <button id="btn-tab-export" class="modal-tab-btn active" data-i18n="tabExport">Exportar</button>
-                    <button id="btn-tab-import" class="modal-tab-btn" data-i18n="tabImport">Importar</button>
+                <p class="modal-instruction" data-i18n="exportInstruction" style="text-align: center; margin-bottom: 16px;">Escanea este código QR con otro dispositivo para sincronizar tu álbum, o copia el enlace completo:</p>
+                <div class="qr-container">
+                    <div class="qr-code-wrapper">
+                        <canvas id="export-qr"></canvas>
+                    </div>
                 </div>
-                
-                <div id="export-pane" class="modal-pane">
-                    <p class="modal-instruction" data-i18n="exportInstruction">Copia este código de respaldo y guárdalo en un lugar seguro. Contiene todo tu progreso actual:</p>
-                    <textarea id="export-textarea" readonly aria-label="Código de exportación de datos"></textarea>
-                    <button id="btn-copy-backup" class="btn btn-secondary btn-full" data-i18n="btnCopyBackupText">Copiar Código de Respaldo</button>
-                </div>
-                
-                <div id="import-pane" class="modal-pane" style="display: none;">
-                    <p class="modal-instruction text-warning" data-i18n="importInstruction">Pega aquí tu código de respaldo JSON o un enlace hash completo. Esto sobrescribirá tu estado actual:</p>
-                    <textarea id="import-textarea" data-i18n-placeholder="importPlaceholder" placeholder="Pega el código JSON o enlace hash aquí..." aria-label="Código de importación de datos"></textarea>
-                    <div id="import-error-msg" class="error-msg" style="display: none;" data-i18n="importErrorMsgText">El código proporcionado no es válido.</div>
-                    <button id="btn-do-import" class="btn btn-primary btn-full" data-i18n="btnDoImportText">Restaurar Datos</button>
-                </div>
+                <button id="btn-copy-url" class="btn btn-secondary btn-full" style="margin-top: 16px;">
+                    <span data-i18n="btnCopyUrlText">Copiar Enlace del Álbum</span>
+                </button>
             </div>
         </div>
     </dialog>
@@ -400,6 +392,7 @@
 
     <div id="toast" class="toast" role="alert" aria-live="polite"></div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrious/4.0.2/qrious.min.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
