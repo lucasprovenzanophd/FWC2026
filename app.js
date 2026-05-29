@@ -154,7 +154,9 @@ const translations = {
         btnIncomingOverwrite: "Sobrescribir con el Enlace",
         btnIncomingKeep: "Mantener mi Álbum Local",
         toastIncomingOverwriteSuccess: "¡Álbum sobrescrito con éxito!",
-        toastIncomingKeepSuccess: "Has conservado tu progreso local."
+        toastIncomingKeepSuccess: "Has conservado tu progreso local.",
+        sortGroup: "Por Grupo",
+        sortAlphabetical: "Alfabético"
     },
     en: {
         title: "Fifa World Cup 2026",
@@ -259,7 +261,9 @@ const translations = {
         btnIncomingOverwrite: "Overwrite with Link",
         btnIncomingKeep: "Keep My Local Album",
         toastIncomingOverwriteSuccess: "Album overwritten successfully!",
-        toastIncomingKeepSuccess: "You kept your local progress."
+        toastIncomingKeepSuccess: "You kept your local progress.",
+        sortGroup: "By Group",
+        sortAlphabetical: "Alphabetical"
     },
     pt: {
         title: "Fifa World Cup 2026",
@@ -365,7 +369,9 @@ const translations = {
         btnIncomingOverwrite: "Sobrescrever com o Link",
         btnIncomingKeep: "Manter meu Álbum Local",
         toastIncomingOverwriteSuccess: "Álbum sobrescrito com sucesso!",
-        toastIncomingKeepSuccess: "Você manteve seu progresso local."
+        toastIncomingKeepSuccess: "Você manteve seu progresso local.",
+        sortGroup: "Por Grupo",
+        sortAlphabetical: "Alfabético"
     },
     it: {
         title: "Fifa World Cup 2026",
@@ -470,7 +476,9 @@ const translations = {
         btnIncomingOverwrite: "Sovrascrivi con il Link",
         btnIncomingKeep: "Mantieni il mio Album Locale",
         toastIncomingOverwriteSuccess: "Album sovrascritto con lo stato ricevuto!",
-        toastIncomingKeepSuccess: "Hai conservato i tuoi progressi locali."
+        toastIncomingKeepSuccess: "Hai conservato i tuoi progressi locali.",
+        sortGroup: "Per Gruppo",
+        sortAlphabetical: "Alfabetico"
     }
 };
 
@@ -561,6 +569,9 @@ let comparedFriendState = null;
 let comparedFriendName = '';
 let comparedFriendTimestamp = 0;
 
+const selectSort = document.getElementById('select-sort');
+let activeSort = localStorage.getItem('sticker-tracker-sort') || 'group';
+
 function init() {
     // Offset body for fixed header
     const appHeader = document.querySelector('.app-header');
@@ -570,6 +581,10 @@ function init() {
         };
         setHeaderOffset();
         new ResizeObserver(setHeaderOffset).observe(appHeader);
+    }
+
+    if (selectSort) {
+        selectSort.value = activeSort;
     }
 
     setupTheme();
@@ -879,111 +894,136 @@ function getGroupsForActiveTab() {
     }
 }
 
+function createTeamCard(team) {
+    const teamCard = document.createElement('div');
+    teamCard.className = 'team-card';
+    teamCard.setAttribute('data-team-id', team.originalIndex);
+    teamCard.setAttribute('data-team-group', team.group);
+
+    const teamRow = document.createElement('div');
+    teamRow.className = 'team-row';
+
+    const teamHeader = document.createElement('div');
+    teamHeader.className = 'team-header';
+
+    const teamIdentity = document.createElement('div');
+    teamIdentity.className = 'team-identity';
+
+    const teamFlag = document.createElement('span');
+    teamFlag.className = 'team-flag';
+    teamFlag.textContent = team.emoji;
+    teamIdentity.appendChild(teamFlag);
+
+    const teamName = document.createElement('span');
+    teamName.className = 'team-name';
+    teamIdentity.appendChild(teamName);
+
+    const teamGroupBadge = document.createElement('span');
+    teamGroupBadge.className = 'team-group-badge';
+    teamIdentity.appendChild(teamGroupBadge);
+
+    teamHeader.appendChild(teamIdentity);
+
+    const teamProgressArea = document.createElement('div');
+    teamProgressArea.className = 'team-progress-area';
+
+    const teamMiniBar = document.createElement('div');
+    teamMiniBar.className = 'team-progress-mini-bar';
+    
+    const teamMiniFill = document.createElement('div');
+    teamMiniFill.className = 'team-progress-mini-fill';
+    teamMiniFill.id = `team-mini-fill-${team.originalIndex}`;
+    teamMiniBar.appendChild(teamMiniFill);
+    teamProgressArea.appendChild(teamMiniBar);
+
+    const teamProgressText = document.createElement('span');
+    teamProgressText.className = 'team-progress-text';
+    teamProgressText.id = `team-progress-text-${team.originalIndex}`;
+    teamProgressText.textContent = '0/20';
+    teamProgressArea.appendChild(teamProgressText);
+
+    teamHeader.appendChild(teamProgressArea);
+    teamRow.appendChild(teamHeader);
+
+    const stickersContainer = document.createElement('div');
+    stickersContainer.className = 'stickers-container';
+
+    let teamOwnedCount = 0;
+    for (let col = 0; col < COLS; col++) {
+        const index = (team.originalIndex * COLS) + col;
+        const stickerNum = col + 1;
+        const stickerState = state[index];
+
+        if (stickerState > 0) teamOwnedCount++;
+
+        const stickerEl = document.createElement('div');
+        stickerEl.className = `sticker state-${stickerState}`;
+        stickerEl.textContent = stickerNum;
+        stickerEl.setAttribute('data-index', index);
+        stickerEl.id = `sticker-${index}`;
+        stickerEl.addEventListener('click', () => handleStickerClick(index, stickerEl, team.originalIndex));
+        stickersContainer.appendChild(stickerEl);
+    }
+
+    const percent = (teamOwnedCount / COLS) * 100;
+    teamMiniFill.style.width = `${percent}%`;
+    teamProgressText.textContent = `${teamOwnedCount}/${COLS}`;
+
+    teamRow.appendChild(stickersContainer);
+    teamCard.appendChild(teamRow);
+    return teamCard;
+}
+
 function renderMatrix() {
     matrixContainer.innerHTML = '';
     const fragment = document.createDocumentFragment();
-    const groupNames = ['Grupo A', 'Grupo B', 'Grupo C', 'Grupo D', 'Grupo E', 'Grupo F', 'Grupo G', 'Grupo H', 'Grupo I', 'Grupo J', 'Grupo K', 'Grupo L', 'Especial'];
-    
-    groupNames.forEach(groupName => {
-        const groupTeams = teams.filter(t => t.group === groupName);
-        if (groupTeams.length === 0) return;
+
+    if (activeSort === 'alphabetical') {
+        const sortedTeams = [...teams].sort((a, b) => a.names[activeLang].localeCompare(b.names[activeLang], activeLang));
 
         const groupSection = document.createElement('div');
         groupSection.className = 'group-section';
-        groupSection.setAttribute('data-group-name', groupName);
-        groupSection.style.marginBottom = '24px';
-
-        const groupTitle = document.createElement('h3');
-        groupSection.appendChild(groupTitle);
+        groupSection.setAttribute('data-group-name', 'all');
 
         const groupGrid = document.createElement('div');
         groupGrid.className = 'matrix-grid';
 
-        groupTeams.forEach(team => {
-            const teamCard = document.createElement('div');
-            teamCard.className = 'team-card';
-            teamCard.setAttribute('data-team-id', team.originalIndex);
-            teamCard.setAttribute('data-team-group', team.group);
-
-            const teamRow = document.createElement('div');
-            teamRow.className = 'team-row';
-
-            const teamHeader = document.createElement('div');
-            teamHeader.className = 'team-header';
-
-            const teamIdentity = document.createElement('div');
-            teamIdentity.className = 'team-identity';
-
-            const teamFlag = document.createElement('span');
-            teamFlag.className = 'team-flag';
-            teamFlag.textContent = team.emoji;
-            teamIdentity.appendChild(teamFlag);
-
-            const teamName = document.createElement('span');
-            teamName.className = 'team-name';
-            teamIdentity.appendChild(teamName);
-
-            const teamGroupBadge = document.createElement('span');
-            teamGroupBadge.className = 'team-group-badge';
-            teamIdentity.appendChild(teamGroupBadge);
-
-            teamHeader.appendChild(teamIdentity);
-
-            const teamProgressArea = document.createElement('div');
-            teamProgressArea.className = 'team-progress-area';
-
-            const teamMiniBar = document.createElement('div');
-            teamMiniBar.className = 'team-progress-mini-bar';
-            
-            const teamMiniFill = document.createElement('div');
-            teamMiniFill.className = 'team-progress-mini-fill';
-            teamMiniFill.id = `team-mini-fill-${team.originalIndex}`;
-            teamMiniBar.appendChild(teamMiniFill);
-            teamProgressArea.appendChild(teamMiniBar);
-
-            const teamProgressText = document.createElement('span');
-            teamProgressText.className = 'team-progress-text';
-            teamProgressText.id = `team-progress-text-${team.originalIndex}`;
-            teamProgressText.textContent = '0/20';
-            teamProgressArea.appendChild(teamProgressText);
-
-            teamHeader.appendChild(teamProgressArea);
-            teamRow.appendChild(teamHeader);
-
-            const stickersContainer = document.createElement('div');
-            stickersContainer.className = 'stickers-container';
-
-            let teamOwnedCount = 0;
-            for (let col = 0; col < COLS; col++) {
-                const index = (team.originalIndex * COLS) + col;
-                const stickerNum = col + 1;
-                const stickerState = state[index];
-
-                if (stickerState > 0) teamOwnedCount++;
-
-                const stickerEl = document.createElement('div');
-                stickerEl.className = `sticker state-${stickerState}`;
-                stickerEl.textContent = stickerNum;
-                stickerEl.setAttribute('data-index', index);
-                stickerEl.id = `sticker-${index}`;
-                stickerEl.addEventListener('click', () => handleStickerClick(index, stickerEl, team.originalIndex));
-                stickersContainer.appendChild(stickerEl);
-            }
-
-            const percent = (teamOwnedCount / COLS) * 100;
-            teamMiniFill.style.width = `${percent}%`;
-            teamProgressText.textContent = `${teamOwnedCount}/${COLS}`;
-
-            teamRow.appendChild(stickersContainer);
-            teamCard.appendChild(teamRow);
+        sortedTeams.forEach(team => {
+            const teamCard = createTeamCard(team);
             groupGrid.appendChild(teamCard);
         });
 
         groupSection.appendChild(groupGrid);
         fragment.appendChild(groupSection);
-    });
+    } else {
+        const groupNames = ['Grupo A', 'Grupo B', 'Grupo C', 'Grupo D', 'Grupo E', 'Grupo F', 'Grupo G', 'Grupo H', 'Grupo I', 'Grupo J', 'Grupo K', 'Grupo L', 'Especial'];
+        
+        groupNames.forEach(groupName => {
+            const groupTeams = teams.filter(t => t.group === groupName);
+            if (groupTeams.length === 0) return;
+
+            const groupSection = document.createElement('div');
+            groupSection.className = 'group-section';
+            groupSection.setAttribute('data-group-name', groupName);
+
+            const groupTitle = document.createElement('h3');
+            groupSection.appendChild(groupTitle);
+
+            const groupGrid = document.createElement('div');
+            groupGrid.className = 'matrix-grid';
+
+            groupTeams.forEach(team => {
+                const teamCard = createTeamCard(team);
+                groupGrid.appendChild(teamCard);
+            });
+
+            groupSection.appendChild(groupGrid);
+            fragment.appendChild(groupSection);
+        });
+    }
 
     matrixContainer.appendChild(fragment);
+    applyLanguage();
 }
 
 function applyFilters() {
@@ -1118,10 +1158,19 @@ function setupEventListeners() {
     selectLang.addEventListener('change', (e) => {
         activeLang = e.target.value;
         localStorage.setItem('sticker-tracker-lang', activeLang);
-        applyLanguage();
+        renderMatrix();
         applyFilters();
         updateLastUpdateDisplay();
     });
+
+    if (selectSort) {
+        selectSort.addEventListener('change', (e) => {
+            activeSort = e.target.value;
+            localStorage.setItem('sticker-tracker-sort', activeSort);
+            renderMatrix();
+            applyFilters();
+        });
+    }
 
     groupTabs.forEach(tab => {
         tab.addEventListener('click', () => {
