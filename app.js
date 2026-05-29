@@ -1535,11 +1535,11 @@ function renderMyShareQr() {
         new QRious({
             element: myShareQr,
             value: fullURL,
-            size: 220,
+            size: 800,
             background: 'white',
             foreground: 'black',
-            level: 'H',
-            padding: null
+            level: 'L',
+            padding: 25
         });
     } catch (e) {
         console.error("Failed to render share QR code:", e);
