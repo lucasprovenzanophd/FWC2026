@@ -1789,6 +1789,122 @@ h1, h2, h3, h4, h5, h6 {
     opacity: 0.9;
 }
 
+/* Estilos adicionales para Intercambio con QR y Escáner */
+.compare-btn-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.btn-flex {
+    flex: 1;
+}
+
+.compare-actions-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+@media (min-width: 640px) {
+    .compare-actions-group {
+        flex-direction: row;
+        align-items: center;
+    }
+    .compare-actions-group > button {
+        flex: 1;
+    }
+    .compare-actions-group > .compare-input-group {
+        flex: 1.5;
+        margin-bottom: 0 !important;
+    }
+}
+
+/* Cajón del QR del usuario */
+.my-qr-drawer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 16px;
+    background: rgba(var(--bg-card-rgb), 0.3);
+    border: 1px solid var(--border-card);
+    border-radius: 12px;
+    margin-top: 12px;
+    animation: slideDown 0.3s ease;
+}
+
+.my-qr-drawer canvas {
+    background: white;
+    padding: 10px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+    width: 150px;
+    height: 150px;
+}
+
+.drawer-desc {
+    font-size: 11px;
+    color: var(--text-secondary);
+    margin-top: 8px;
+    text-align: center;
+}
+
+/* Contenedor del escáner de cámara */
+.qr-scanner-container {
+    background: rgba(var(--bg-card-rgb), 0.85);
+    border: 1px solid var(--border-card);
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 20px;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: var(--shadow-main);
+    animation: fadeIn 0.4s ease;
+}
+
+.scanner-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.scanner-header h3 {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+/* Visor de cámara */
+#qr-reader {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #000;
+    border: 1px solid var(--border-card);
+    aspect-ratio: 4 / 3;
+}
+
+/* Asegurar que el elemento de video se renderice correctamente en html5-qrcode */
+#qr-reader video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    border-radius: 12px;
+}
+
+.scanner-instruction {
+    font-size: 12px;
+    text-align: center;
+    margin-top: 10px;
+    color: var(--text-secondary);
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }

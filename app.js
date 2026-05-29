@@ -151,7 +151,15 @@ const translations = {
         sortGroup: "Por Grupo",
         sortAlphabetical: "Alfabético",
         storageWarningTitle: "El progreso no se guardará automáticamente",
-        storageWarningDesc: "Tu navegador tiene desactivado el guardado de datos (puede ser por bloqueo de cookies o por estar en modo privado/incógnito). Para no perder tus figuritas al cerrar la página, te sugerimos abrir la página en modo normal. Mientras tanto, puedes usar la opción 'Exportar Colección' abajo para copiar y guardar tu enlace de avance."
+        storageWarningDesc: "Tu navegador tiene desactivado el guardado de datos (puede ser por bloqueo de cookies o por estar en modo privado/incógnito). Para no perder tus figuritas al cerrar la página, te sugerimos abrir la página en modo normal. Mientras tanto, puedes usar la opción 'Exportar Colección' abajo para copiar y guardar tu enlace de avance.",
+        btnScanQr: "📷 Escanear QR",
+        btnShowMyQr: "📱 QR",
+        myQrInstruction: "Pídele a tu amigo que escanee este QR desde su dispositivo",
+        scannerTitle: "Escaneando QR de Amigo",
+        scannerInstruction: "Apunta con la cámara al código QR de tu amigo",
+        toastCameraError: "No se pudo acceder a la cámara. Por favor, otorga los permisos necesarios.",
+        toastScanSuccess: "¡Código QR escaneado con éxito!",
+        btnCancel: "Cancelar"
     },
     en: {
         title: "Fifa World Cup 2026",
@@ -253,7 +261,15 @@ const translations = {
         sortGroup: "By Group",
         sortAlphabetical: "Alphabetical",
         storageWarningTitle: "Progress won't be saved automatically",
-        storageWarningDesc: "Your browser has disabled saving data (this might be due to blocked cookies or private/incognito browsing). To avoid losing your stickers when you close the page, we suggest opening the page in normal mode. In the meantime, you can use the 'Export Collection' button below to copy and save your progress link."
+        storageWarningDesc: "Your browser has disabled saving data (this might be due to blocked cookies or private/incognito browsing). To avoid losing your stickers when you close the page, we suggest opening the page in normal mode. In the meantime, you can use the 'Export Collection' button below to copy and save your progress link.",
+        btnScanQr: "📷 Scan QR",
+        btnShowMyQr: "📱 QR",
+        myQrInstruction: "Ask your friend to scan this QR from their device",
+        scannerTitle: "Scanning Friend's QR",
+        scannerInstruction: "Point your camera at your friend's QR code",
+        toastCameraError: "Could not access the camera. Please grant the necessary permissions.",
+        toastScanSuccess: "QR code scanned successfully!",
+        btnCancel: "Cancel"
     },
     pt: {
         title: "Fifa World Cup 2026",
@@ -356,7 +372,15 @@ const translations = {
         sortGroup: "Por Grupo",
         sortAlphabetical: "Alfabético",
         storageWarningTitle: "O progresso não será salvo automaticamente",
-        storageWarningDesc: "Seu navegador desativou o salvamento de dados (pode ser devido a cookies bloqueados ou navegação privada/anônima). Para evitar perder suas figurinhas ao fechar a página, sugerimos abrir a página no modo normal. Enquanto isso, você pode usar a opção 'Exportar Coleção' abaixo para copiar e salvar seu link de progresso."
+        storageWarningDesc: "Seu navegador desativou o salvamento de dados (pode ser devido a cookies bloqueados ou navegação privada/anônima). Para evitar perder suas figurinhas ao fechar a página, sugerimos abrir a página no modo normal. Enquanto isso, você pode usar a opção 'Exportar Coleção' abaixo para copiar e salvar seu link de progresso.",
+        btnScanQr: "📷 Escanear QR",
+        btnShowMyQr: "📱 QR",
+        myQrInstruction: "Peça ao seu amigo para escanear este QR no dispositivo dele",
+        scannerTitle: "Escaneando QR do Amigo",
+        scannerInstruction: "Aponte a câmera para o código QR do seu amigo",
+        toastCameraError: "Não foi possível acessar a câmera. Por favor, conceda as permissões necessárias.",
+        toastScanSuccess: "Código QR escaneado com sucesso!",
+        btnCancel: "Cancelar"
     },
     it: {
         title: "Fifa World Cup 2026",
@@ -458,7 +482,15 @@ const translations = {
         sortGroup: "Per Gruppo",
         sortAlphabetical: "Alfabetico",
         storageWarningTitle: "I progressi non verranno salvati automaticamente",
-        storageWarningDesc: "Il tuo browser ha disattivato il salvataggio dei dati (potrebbe essere dovuto ai cookie bloccati o alla navigazione privata/in incognito). Per evitare di perdere le tue figurine quando chiudi la pagina, ti suggeriamo di aprire la pagina in modalità normale. Nel frattempo, puoi usare l'opzione 'Esporta Collezione' in basso per copiare e salvare il link dei tuoi progressi."
+        storageWarningDesc: "Il tuo browser ha disattivato il salvataggio dei dati (potrebbe essere dovuto ai cookie bloccati o alla navigazione privata/in incognito). Per evitare di perdere le tue figurine quando chiudi la pagina, ti suggeriamo di aprire la pagina in modalità normale. Nel frattempo, puoi usare l'opzione 'Esporta Collezione' in basso per copiare e salvare il link dei tuoi progressi.",
+        btnScanQr: "📷 Scansiona QR",
+        btnShowMyQr: "📱 QR",
+        myQrInstruction: "Chiedi al tuo amico di scansionare questo QR dal suo dispositivo",
+        scannerTitle: "Scansione del QR dell'Amico",
+        scannerInstruction: "Inquadra con la fotocamera il codice QR del tuo amigo",
+        toastCameraError: "Impossibile accedere alla fotocamera. Per favore, concedi i permessi necessari.",
+        toastScanSuccess: "Codice QR scansionato con successo!",
+        btnCancel: "Annulla"
     }
 };
 
@@ -547,6 +579,12 @@ const lastUpdateValue = document.getElementById('last-update-value');
 const compareFriendMeta = document.getElementById('compare-friend-meta');
 const compareValidationMsg = document.getElementById('compare-validation-msg');
 const btnShareImage = document.getElementById('btn-share-image-dashboard');
+const btnShowMyQr = document.getElementById('btn-show-my-qr');
+const myQrDrawer = document.getElementById('my-qr-drawer');
+const myShareQr = document.getElementById('my-share-qr');
+const btnScanFriendQr = document.getElementById('btn-scan-friend-qr');
+const qrScannerContainer = document.getElementById('qr-scanner-container');
+const btnStopScanner = document.getElementById('btn-stop-scanner');
 const btnShowImageGenerator = document.getElementById('btn-show-image-generator');
 const dlgShareImage = document.getElementById('dlg-share-image');
 const btnCloseShareImage = document.getElementById('btn-close-share-image');
@@ -574,6 +612,7 @@ let shareTradeCanvasFinal = null;
 let comparedFriendState = null;
 let comparedFriendName = '';
 let comparedFriendTimestamp = 0;
+let html5QrScannerInstance = null;
 
 const selectSort = document.getElementById('select-sort');
 let activeSort = getStorageItem('sticker-tracker-sort', 'group');
@@ -1236,6 +1275,7 @@ function setupEventListeners() {
         if (compareValidationMsg) compareValidationMsg.style.display = 'none';
         compareResults.style.display = 'none';
         compareFriendMeta.style.display = 'none';
+        if (myQrDrawer) myQrDrawer.style.display = 'none';
         
         const friendGivesSpan = document.querySelector('[data-i18n="friendGivesTitle"]');
         const userGivesSpan = document.querySelector('[data-i18n="userGivesTitle"]');
@@ -1245,7 +1285,21 @@ function setupEventListeners() {
         dlgCompare.showModal();
     });
     btnCloseCompare.addEventListener('click', () => dlgCompare.close());
+    dlgCompare.addEventListener('close', () => {
+        stopScanning();
+        if (myQrDrawer) myQrDrawer.style.display = 'none';
+    });
     btnDoCompare.addEventListener('click', compareStates);
+
+    if (btnShowMyQr) {
+        btnShowMyQr.addEventListener('click', toggleMyQrDrawer);
+    }
+    if (btnScanFriendQr) {
+        btnScanFriendQr.addEventListener('click', startScanning);
+    }
+    if (btnStopScanner) {
+        btnStopScanner.addEventListener('click', stopScanning);
+    }
 
     friendLinkInput.addEventListener('input', () => {
         const value = friendLinkInput.value.trim();
@@ -1444,6 +1498,97 @@ function showExportPane() {
             level: 'H'
         });
     }
+}
+
+function toggleMyQrDrawer() {
+    if (!myQrDrawer) return;
+    const isVisible = myQrDrawer.style.display === 'flex';
+    if (isVisible) {
+        myQrDrawer.style.display = 'none';
+    } else {
+        myQrDrawer.style.display = 'flex';
+        renderMyShareQr();
+    }
+}
+
+function renderMyShareQr() {
+    if (!myShareQr || !window.QRious) return;
+    const shareCode = compressState(state);
+    const fullURL = `${window.location.origin}${window.location.pathname}#${shareCode}?t=${lastUpdate || Date.now()}`;
+    
+    new QRious({
+        element: myShareQr,
+        value: fullURL,
+        size: 150,
+        background: 'white',
+        foreground: 'black',
+        level: 'H'
+    });
+}
+
+function startScanning() {
+    if (!qrScannerContainer || !window.Html5Qrcode) return;
+    
+    // Stop any existing scanning first
+    if (html5QrScannerInstance) {
+        stopScanning();
+    }
+    
+    qrScannerContainer.style.display = 'block';
+    html5QrScannerInstance = new Html5Qrcode("qr-reader");
+    
+    html5QrScannerInstance.start(
+        { facingMode: "environment" },
+        {
+            fps: 10,
+            qrbox: function(width, height) {
+                const size = Math.min(width, height) * 0.7;
+                return { width: size, height: size };
+            }
+        },
+        (qrCodeMessage) => {
+            showToast(translations[activeLang].toastScanSuccess);
+            
+            if (friendLinkInput) {
+                friendLinkInput.value = qrCodeMessage;
+                const event = new Event('input', { bubbles: true });
+                friendLinkInput.dispatchEvent(event);
+            }
+            
+            stopScanning();
+            compareStates();
+        },
+        (errorMessage) => {
+            // ignore scan frame errors
+        }
+    ).catch(err => {
+        console.error("Camera access error:", err);
+        showToast(translations[activeLang].toastCameraError);
+        qrScannerContainer.style.display = 'none';
+        html5QrScannerInstance = null;
+    });
+}
+
+function stopScanning() {
+    if (html5QrScannerInstance) {
+        try {
+            if (html5QrScannerInstance.isScanning) {
+                html5QrScannerInstance.stop().then(() => {
+                    if (qrScannerContainer) qrScannerContainer.style.display = 'none';
+                    html5QrScannerInstance = null;
+                }).catch(err => {
+                    console.error("Error stopping scanner:", err);
+                    if (qrScannerContainer) qrScannerContainer.style.display = 'none';
+                    html5QrScannerInstance = null;
+                });
+                return;
+            }
+        } catch (e) {
+            console.error(e);
+        }
+        html5QrScannerInstance = null;
+    }
+    if (qrScannerContainer) qrScannerContainer.style.display = 'none';
 }
 
 function resetAlbum() {
